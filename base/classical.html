@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>古典主义 · 光与影的永恒</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --dark-bg: #1a1512;
+  --dark-surface: #241e1a;
+  --cream: #e8ddd0;
+  --cream-light: #f0e8dd;
+  --gold: #b8944a;
+  --gold-glow: rgba(184, 148, 74, 0.15);
+  --warm-light: #d4c8b8;
+  --muted: #9a8e80;
+  --highlight: #c8a060;
+  --shadow: 0 6px 48px rgba(0, 0, 0, 0.3);
+  --slide-w: min(1100px, 92vw);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--dark-bg);
+  color: var(--cream);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.deck {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  height: 100vh;
+}
+
+.slide {
+  min-width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dramatic lighting overlay */
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(200, 160, 96, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 70%, rgba(232, 221, 208, 0.03) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* Subtle vignette */
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.slideInner {
+  position: relative;
+  z-index: 1;
+  width: var(--slide-w);
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+/* Cover */
+.cover {
+  text-align: center;
+}
+
+.cover .goldLine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+
+.cover .goldLine .bar {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+
+.cover .goldLine .bar:last-child {
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.cover .goldLine .center {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
+.cover h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(48px, 9vw, 100px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+}
+
+.cover h1 .gold {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.cover .subtitle {
+  margin-top: 16px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(16px, 2.2vw, 24px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--warm-light);
+}
+
+.cover .goldLineBottom {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 36px;
+}
+
+.cover .goldLineBottom span {
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.4;
+}
+
+.cover .meta {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cover .meta span {
+  display: inline-block;
+  padding: 0 12px;
+  border-left: 1px solid rgba(154, 142, 128, 0.3);
+}
+
+.cover .meta span:first-child {
+  border-left: 0;
+}
+
+/* Content */
+.content {
+  text-align: left;
+}
+
+.content h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(34px, 5vw, 50px);
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  color: var(--cream);
+}
+
+.content h2 .accent {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.content p {
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.8;
+  color: var(--warm-light);
+  max-width: 680px;
+  margin-bottom: 14px;
+}
+
+.content .leadText {
+  font-size: clamp(17px, 1.8vw, 20px);
+  line-height: 1.75;
+  color: var(--cream-light);
+  font-weight: 400;
+}
+
+/* Highlight box */
+.highlightBox {
+  padding: 20px 24px;
+  margin: 16px 0;
+  border-left: 2px solid var(--gold);
+  background: rgba(184, 148, 74, 0.06);
+}
+
+.highlightBox p {
+  font-size: clamp(15px, 1.4vw, 17px);
+  color: var(--cream-light);
+  margin-bottom: 0;
+}
+
+/* Two column */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 12px;
+}
+
+.twoCol .card {
+  padding: 20px;
+  background: rgba(36, 30, 26, 0.6);
+  border: 1px solid rgba(184, 148, 74, 0.1);
+}
+
+.twoCol .card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--gold);
+}
+
+.twoCol .card p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+/* Chiaroscuro comparison */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.comparison .panel {
+  padding: 24px;
+  text-align: center;
+  background: rgba(36, 30, 26, 0.4);
+}
+
+.comparison .panel.light {
+  background: rgba(232, 221, 208, 0.06);
+  border: 1px solid rgba(232, 221, 208, 0.1);
+}
+
+.comparison .panel.dark {
+  background: rgba(20, 16, 12, 0.6);
+  border: 1px solid rgba(26, 21, 18, 0.3);
+}
+
+.comparison .panel h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.comparison .panel p {
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Masters grid */
+.masters {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.masters .master {
+  padding: 16px;
+  border-bottom: 1px solid rgba(184, 148, 74, 0.1);
+}
+
+.masters .master .name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.masters .master .era {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.masters .master p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Quote */
+.quote {
+  text-align: center;
+}
+
+.quote blockquote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(26px, 4vw, 44px);
+  line-height: 1.35;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--cream);
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.quote blockquote::before {
+  content: '"';
+  display: block;
+  font-size: 72px;
+  line-height: 0.4;
+  color: var(--gold);
+  opacity: 0.3;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.quote cite {
+  display: block;
+  margin-top: 24px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-style: normal;
+  color: var(--muted);
+}
+
+/* Page number */
+.pageNum {
+  position: absolute;
+  bottom: 28px;
+  right: 40px;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  z-index: 2;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 100;
+  background: rgba(26, 21, 18, 0.88);
+  backdrop-filter: blur(12px);
+  padding: 7px 18px;
+  border: 1px solid rgba(184, 148, 74, 0.15);
+  box-shadow: var(--shadow);
+}
+
+.nav button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--cream);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-size: 15px;
+}
+
+.nav button:hover {
+  background: rgba(184, 148, 74, 0.1);
+}
+
+.nav .dots {
+  display: flex;
+  gap: 5px;
+}
+
+.nav .dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(232, 221, 208, 0.15);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.nav .dots span.active {
+  background: var(--gold);
+  width: 20px;
+  border-radius: 1px;
+}
+
+.nav .slideLabel {
+  font-size: 11px;
+  color: var(--muted);
+  min-width: 50px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .slide { padding: 24px; }
+  .twoCol { grid-template-columns: 1fr; gap: 20px; }
+  .masters { grid-template-columns: 1fr; }
+  .comparison { grid-template-columns: 1fr; }
+  .pageNum { right: 24px; bottom: 80px; }
+  .nav { bottom: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- Slide 1: Cover -->
+<section class="slide cover">
+  <div class="slideInner">
+    <div class="goldLine">
+      <span class="bar"></span>
+      <span class="center"></span>
+      <span class="bar"></span>
+    </div>
+    <h1>光与影的<span class="gold">永恒</span></h1>
+    <p class="subtitle">古典主义绘画 · 从文艺复兴到巴洛克</p>
+    <div class="goldLineBottom">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <p class="meta">
+      <span>Renaissance &amp; Baroque</span>
+      <span>14–17 世纪</span>
+      <span>明暗之诗</span>
+    </p>
+  </div>
+  <span class="pageNum">01 / 06</span>
+</section>
+
+<!-- Slide 2: Classical Art -->
+<section class="slide content">
+  <div class="slideInner">
+    <h2>古典<span class="accent">艺术</span>的精髓</h2>
+    <p class="leadText">古典主义绘画追求的是理想化的美、严谨的构图和对光影的极致掌控。从文艺复兴到巴洛克，艺术家们以科学的视角和宗教的虔诚，创造了西方艺术史上最辉煌的篇章。</p>
+    <p>文艺复兴时期，透视法和人体解剖学的发现让绘画获得了前所未有的真实感。而巴洛克艺术家则将这种真实推向戏剧性的高潮——用强烈的明暗对比和动态构图来调动观者的情感。</p>
+    <div class="highlightBox">
+      <p><strong>明暗法（Chiaroscuro）</strong> —— 意大利语"明—暗"，通过强烈的光影对比塑造体积感和戏剧性氛围，是古典绘画最具标志性的技法之一。</p>
+    </div>
+  </div>
+  <span class="pageNum">02 / 06</span>
+</section>
+
+<!-- Slide 3: Masters -->
+<section class="slide content">
+  <div class="slideInner">
+    <h2>古典 <span class="accent">巨匠</span></h2>
+    <div class="masters">
+      <div class="master">
+        <div class="name">列奥纳多·达·芬奇</div>
+        <div class="era">文艺复兴 · 1452–1519</div>
+        <p>将科学与艺术完美融合的旷世奇才。他的"渐隐法"（sfumato）创造了蒙娜丽莎神秘的微笑，精确的人体解剖研究让画面具有无与伦比的生命力。</p>
+      </div>
+      <div class="master">
+        <div class="name">米开朗基罗</div>
+        <div class="era">文艺复兴 · 1475–1564</div>
+        <p>雕塑家出身的绘画大师，西斯廷教堂天顶画是人类艺术的巅峰之一。他笔下的人体充满雕塑般的体积感和磅礴的力量感。</p>
+      </div>
+      <div class="master">
+        <div class="name">伦勃朗</div>
+        <div class="era">巴洛克 · 1606–1669</div>
+        <p>明暗法的大师，用光线塑造灵魂。他的自画像系列横跨一生，从青年意气到晚年沧桑，每一幅都是对人类内心的深刻洞察。</p>
+      </div>
+      <div class="master">
+        <div class="name">卡拉瓦乔</div>
+        <div class="era">巴洛克 · 1571–1610</div>
+        <p>用"酒窖光线法"革新了欧洲绘画——在漆黑背景中让一束强光照亮人物，创造出极致的戏剧性和真实感。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">03 / 06</span>
+</section>
+
+<!-- Slide 4: Chiaroscuro -->
+<section class="slide content">
+  <div class="slideInner">
+    <h2>明暗 <span class="accent">对比</span></h2>
+    <div class="comparison">
+      <div class="panel light">
+        <h4>渐隐法 · Sfumato</h4>
+        <p>达·芬奇开创的技法，通过多层极薄的半透明颜料叠加，创造出烟雾般的柔和过渡。轮廓消失在阴影中，如同人物被包裹在空气中。</p>
+      </div>
+      <div class="panel dark">
+        <h4>酒窖光线 · Tenebrism</h4>
+        <p>卡拉瓦乔式的极端明暗法——背景完全陷入黑暗，主体被一束集中的光照亮，画面犹如舞台上的戏剧瞬间，情感张力达到顶峰。</p>
+      </div>
+    </div>
+    <p style="margin-top:18px;font-size:14px;color:var(--muted);">
+      从达·芬奇的《岩间圣母》到伦勃朗的《夜巡》，明暗法从柔和的过渡演变为戏剧性的冲击，但始终以光为画笔，以影为舞台。
+    </p>
+  </div>
+  <span class="pageNum">04 / 06</span>
+</section>
+
+<!-- Slide 5: Key Works -->
+<section class="slide content">
+  <div class="slideInner">
+    <h2>传世 <span class="accent">经典</span></h2>
+    <div class="twoCol">
+      <div class="card">
+        <h3>蒙娜丽莎</h3>
+        <p>达·芬奇 · 1503–1519 · 卢浮宫</p>
+        <p style="font-size:13px;margin-top:6px;">世界上最著名的画作。渐隐法、神秘的微笑、金字塔构图——它是文艺复兴人文精神的终极象征。</p>
+      </div>
+      <div class="card">
+        <h3>夜巡</h3>
+        <p>伦勃朗 · 1642 · 荷兰国立博物馆</p>
+        <p style="font-size:13px;margin-top:6px;">巴洛克群像画的巅峰。伦勃朗用光线的明暗排布制造了动态的叙事感，打破了传统团体肖像的呆板布局。</p>
+      </div>
+      <div class="card">
+        <h3>创造亚当</h3>
+        <p>米开朗基罗 · 1512 · 西斯廷教堂</p>
+        <p style="font-size:13px;margin-top:6px;">上帝之手触碰亚当之手的瞬间成为艺术史上最经典的画面之一，完美体现了文艺复兴的人文主义精神。</p>
+      </div>
+      <div class="card">
+        <h3>以马忤斯的晚餐</h3>
+        <p>卡拉瓦乔 · 1601 · 伦敦国家美术馆</p>
+        <p style="font-size:13px;margin-top:6px;">一束光从黑暗的左上角切入，照亮了基督的面容和门徒惊愕的表情——酒窖光线的教科书级示范。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">05 / 06</span>
+</section>
+
+<!-- Slide 6: Quote -->
+<section class="slide quote">
+  <div class="slideInner">
+    <blockquote>
+      绘画是无声的诗，而光是它最动听的音符。
+      <cite>—— 伦勃朗·范·莱因</cite>
+    </blockquote>
+    <p style="margin-top:32px;color:var(--muted);font-size:14px;letter-spacing:0.04em;">
+      古典主义 · 光与影塑造的永恒之美
+    </p>
+  </div>
+  <span class="pageNum">06 / 06</span>
+</section>
+
+</div>
+
+<nav class="nav" id="nav">
+  <button onclick="prevSlide()" aria-label="上一页">&#8592;</button>
+  <span class="slideLabel" id="slideLabel">1 / 6</span>
+  <div class="dots" id="dots"></div>
+  <button onclick="nextSlide()" aria-label="下一页">&#8594;</button>
+</nav>
+
+<script>
+const deck = document.getElementById('deck');
+const slides = deck.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+const dotsContainer = document.getElementById('dots');
+const slideLabel = document.getElementById('slideLabel');
+
+for (let i = 0; i < total; i++) {
+  const dot = document.createElement('span');
+  dot.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(dot);
+}
+
+function update() {
+  deck.style.transform = `translateX(-${current * 100}vw)`;
+  dotsContainer.querySelectorAll('span').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+  slideLabel.textContent = `${current + 1} / ${total}`;
+}
+
+function goTo(n) {
+  current = Math.max(0, Math.min(n, total - 1));
+  update();
+}
+
+function nextSlide() { goTo(current + 1); }
+function prevSlide() { goTo(current - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+});
+
+update();
+</script>
+</body>
+</html>

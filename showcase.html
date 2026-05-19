@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Awesome Business Templates · 205 套艺术风格模板说明书</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1d1a16; --muted: #6d675f; --paper: #f6f0e6;
+  --paper-deep: #e8ddce; --line: rgba(41,35,26,0.16);
+  --red: #a83b2d; --green: #2f6f5e; --blue: #355c7d;
+  --shadow: 0 18px 60px rgba(54,43,26,0.14);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', 'Noto Serif SC', sans-serif;
+  background: var(--paper); color: var(--ink);
+  background-image:
+    linear-gradient(rgba(29,26,22,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29,26,22,0.025) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+a { color: inherit; }
+
+/* Navigation */
+.topNav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(246,240,230,0.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line); padding: 0 28px;
+  display: flex; align-items: center; gap: 24px; height: 56px;
+}
+.topNav .logo { font-family: 'DM Serif Display',Georgia,serif; font-size: 18px; font-weight: 400; white-space: nowrap; }
+.topNav .logo span { color: var(--red); }
+.topNav .navLinks { display: flex; gap: 16px; margin-left: auto; overflow-x: auto; }
+.topNav .navLinks a { font-size: 12px; font-family: ui-monospace,monospace; text-decoration: none; color: var(--muted); white-space: nowrap; transition: color 0.2s; }
+.topNav .navLinks a:hover { color: var(--ink); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+
+/* Hero */
+.hero {
+  padding: 120px 0 80px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 60%, rgba(168,59,45,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 40%, rgba(53,92,125,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero .badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border: 1px solid var(--line);
+  background: rgba(255,250,241,0.6);
+  font-size: 12px; font-family: ui-monospace,monospace;
+  margin-bottom: 24px;
+}
+.hero .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); display: inline-block; }
+.hero h1 {
+  font-family: 'DM Serif Display',Georgia,serif;
+  font-size: clamp(48px, 8vw, 88px); font-weight: 400; line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+.hero h1 em { font-style: italic; color: var(--red); }
+.hero .subtitle {
+  margin-top: 16px; font-size: clamp(18px, 2vw, 24px);
+  color: var(--muted); line-height: 1.5; max-width: 680px; margin-left: auto; margin-right: auto;
+}
+.hero .stats {
+  display: flex; justify-content: center; gap: 48px; margin-top: 48px; flex-wrap: wrap;
+}
+.hero .stats .stat { text-align: center; }
+.hero .stats .stat .num { font-family: 'DM Serif Display',Georgia,serif; font-size: 42px; font-weight: 400; line-height: 1; color: var(--ink); }
+.hero .stats .stat .label { font-size: 12px; color: var(--muted); margin-top: 6px; font-family: ui-monospace,monospace; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* Section */
+.section { padding: 72px 0; border-top: 1px solid var(--line); }
+.sectionHead { margin-bottom: 40px; }
+.sectionHead .eyebrow { color: var(--red); font-size: 11px; font-family: ui-monospace,monospace; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.sectionHead h2 { font-family: 'DM Serif Display',Georgia,serif; font-size: clamp(32px, 4vw, 44px); font-weight: 400; margin-top: 6px; line-height: 1.08; }
+.sectionHead p { color: var(--muted); font-size: 15px; margin-top: 10px; line-height: 1.6; max-width: 600px; }
+
+/* Gallery Grid */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.galleryCard {
+  border: 1px solid var(--line); background: rgba(255,250,241,0.68);
+  overflow: hidden; transition: box-shadow 0.25s; cursor: default;
+}
+.galleryCard:hover { box-shadow: var(--shadow); }
+.galleryCard .preview {
+  height: 160px; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.galleryCard .preview .name { position: relative; z-index: 1; font-size: 13px; text-align: center; padding: 8px; }
+.galleryCard .info { padding: 14px; display: grid; gap: 8px; }
+.galleryCard .info h3 { font-size: 17px; font-weight: 500; line-height: 1.15; }
+.galleryCard .info .meta { color: var(--muted); font-size: 12px; font-family: ui-monospace,monospace; }
+.galleryCard .info .desc { color: var(--muted); font-size: 13px; line-height: 1.5; }
+.galleryCard .info .tags { display: flex; flex-wrap: wrap; gap: 3px; }
+.galleryCard .info .tags span {
+  display: inline-block; padding: 2px 6px; font-size: 10px; font-family: ui-monospace,monospace;
+  border: 1px solid var(--line); background: rgba(255,250,241,0.4);
+}
+
+/* Preview color themes */
+.pr-light { background: linear-gradient(135deg,#f8f6f4,#e8e6e4); color: #2a2a2a; }
+.pr-dark { background: linear-gradient(135deg,#1a1512,#2a2420); color: #e8ddd0; }
+.pr-warm { background: linear-gradient(135deg,#fce4d6,#f5d0c0); color: #2c2420; }
+.pr-cool { background: linear-gradient(135deg,#d4e5f7,#b8d4e8); color: #1a2a3a; }
+.pr-vibrant { background: linear-gradient(135deg,#ffe0b0,#f0c0d0); color: #2a1a2a; }
+.pr-neutral { background: linear-gradient(135deg,#ece8e0,#e4e0d8); color: #2a2a22; }
+.pr-mono { background: linear-gradient(135deg,#d0cec8,#b8b6b0); color: #1a1a1a; }
+.pr-pastel { background: linear-gradient(135deg,#fce8f0,#e8f0f8); color: #3a2a3a; }
+.pr-earth { background: linear-gradient(135deg,#d4c8b0,#c8b8a0); color: #2a2218; }
+.pr-jewel { background: linear-gradient(135deg,#2a4a4a,#3a2a4a); color: #e8e0d8; }
+
+/* Tag Dimensions */
+.dimensions { display: grid; gap: 28px; }
+.dimGroup { }
+.dimGroup h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; font-family: ui-monospace,monospace; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.dimTags { display: flex; flex-wrap: wrap; gap: 6px; }
+.dimTags .tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 11px; border: 1px solid var(--line);
+  background: rgba(255,250,241,0.6); font-size: 12px;
+}
+.dimTags .tag .example { color: var(--muted); font-size: 10px; font-family: ui-monospace,monospace; }
+.dimTags .tag.tag-mood { border-color: var(--blue); }
+.dimTags .tag.tag-color { border-color: var(--green); }
+.dimTags .tag.tag-use { border-color: #8a7a5a; }
+
+/* Movement Table */
+.movementGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.movementCard {
+  padding: 16px; border: 1px solid var(--line);
+  background: rgba(255,250,241,0.6);
+  display: grid; gap: 6px;
+}
+.movementCard .mvName { font-size: 16px; font-weight: 500; }
+.movementCard .mvEn { font-size: 11px; font-family: ui-monospace,monospace; color: var(--muted); }
+.movementCard .mvMeta { font-size: 12px; color: var(--muted); }
+.movementCard .mvCount { font-size: 20px; font-family: 'DM Serif Display',Georgia,serif; color: var(--red); }
+
+/* Code */
+.codeBlock {
+  background: #1d1a16; color: #e8ddd0; padding: 20px; font-size: 13px;
+  line-height: 1.6; font-family: ui-monospace,monospace; overflow-x: auto;
+  border-radius: 2px; margin: 12px 0;
+}
+.codeBlock .comment { color: #6a7a6a; }
+.codeBlock .keyword { color: #e8a040; }
+.codeBlock .string { color: #7ab8a0; }
+.codeBlock .fn { color: #8ab4d8; }
+
+/* Steps */
+.steps { display: grid; gap: 24px; counter-reset: step; }
+.step { display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start; }
+.step .num {
+  width: 48px; height: 48px; border: 1px solid var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display',Georgia,serif; font-size: 22px; font-weight: 400;
+  background: rgba(255,250,241,0.6);
+}
+.step .content h4 { font-size: 17px; font-weight: 500; margin-bottom: 4px; }
+.step .content p { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+/* Features */
+.features { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.feature {
+  padding: 24px; border: 1px solid var(--line);
+  background: rgba(255,250,241,0.5); text-align: center;
+}
+.feature .icon { font-size: 36px; margin-bottom: 10px; }
+.feature h4 { font-size: 16px; font-weight: 500; margin-bottom: 6px; }
+.feature p { color: var(--muted); font-size: 13px; line-height: 1.5; }
+
+/* Footer */
+.footer {
+  padding: 40px 0; border-top: 1px solid var(--line);
+  text-align: center; color: var(--muted); font-size: 13px;
+}
+.footer a { color: var(--blue); }
+.footer .githubLink {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 24px; border: 1px solid var(--ink); background: var(--ink);
+  color: var(--paper); text-decoration: none; font-size: 14px;
+  margin-top: 20px; font-family: ui-monospace,monospace;
+}
+.footer .githubLink:hover { background: #3a3228; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 16px; }
+  .topNav { padding: 0 16px; gap: 12px; }
+  .topNav .logo { font-size: 15px; }
+  .hero { padding: 100px 0 48px; }
+  .hero .stats { gap: 24px; }
+  .gallery { grid-template-columns: 1fr; }
+  .movementGrid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topNav">
+  <div class="logo">Awesome<span>.</span>Business<span>.</span>Templates</div>
+  <div class="navLinks">
+    <a href="#overview">概览</a>
+    <a href="#gallery">流派画廊</a>
+    <a href="#tags">标签体系</a>
+    <a href="#matcher">智能匹配</a>
+    <a href="#usage">使用方式</a>
+    <a href="https://github.com/chenxing3060/awesome-business-templates" target="_blank">GitHub</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- Hero -->
+<section class="hero">
+  <div class="badge"><span class="dot"></span> v1.0 · 2026 年发布</div>
+  <h1>205 套<br>艺术风格<em>模板库</em></h1>
+  <p class="subtitle">覆盖 23 种艺术流派 · 8 维标签体系 · 内置 AI 智能匹配引擎<br>每套模板均为自包含 HTML，键盘导航，响应式设计，开箱即用</p>
+  <div class="stats">
+    <div class="stat"><div class="num">205</div><div class="label">模板总数</div></div>
+    <div class="stat"><div class="num">28</div><div class="label">基座风格</div></div>
+    <div class="stat"><div class="num">23</div><div class="label">艺术流派</div></div>
+    <div class="stat"><div class="num">8</div><div class="label">标签维度</div></div>
+  </div>
+</section>
+
+<!-- Overview -->
+<section class="section" id="overview">
+  <div class="sectionHead">
+    <p class="eyebrow">Overview</p>
+    <h2>一套模板，无限可能</h2>
+    <p>从古典到现代，从东方到西方，从极简到奢华——无论你需要什么风格的演示文稿，这里都有一套为你准备好的模板。</p>
+  </div>
+  <div class="features">
+    <div class="feature">
+      <div class="icon">🎨</div>
+      <h4>205 套即用模板</h4>
+      <p>覆盖 23 种艺术流派，每种包含多个情绪与色彩变体</p>
+    </div>
+    <div class="feature">
+      <div class="icon">📦</div>
+      <h4>零外部依赖</h4>
+      <p>自包含 HTML，无需构建工具，浏览器打开即用</p>
+    </div>
+    <div class="feature">
+      <div class="icon">⌨️</div>
+      <h4>全键盘导航</h4>
+      <p>← → 翻页，底部导航条，完美的演示体验</p>
+    </div>
+    <div class="feature">
+      <div class="icon">📱</div>
+      <h4>响应式设计</h4>
+      <p>桌面、平板、手机——任何设备上完美呈现</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🤖</div>
+      <h4>AI 智能匹配</h4>
+      <p>输入内容描述，自动推荐最合适的模板风格</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🏷️</div>
+      <h4>8 维标签体系</h4>
+      <p>情绪、流派、色彩、场景、正式度等多维度筛选</p>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="section" id="gallery">
+  <div class="sectionHead">
+    <p class="eyebrow">Gallery</p>
+    <h2>流派画廊</h2>
+    <p>28 个基座模板预览，每个都是一种独立的视觉语言</p>
+  </div>
+  <div class="gallery">
+    <div class="galleryCard"><div class="preview pr-warm"><span class="name">印象派</span></div><div class="info"><h3>印象派</h3><div class="meta">Impressionism · 10 模板</div><div class="desc">柔光渐变、可见笔触、暖色调。莫奈、雷诺阿的光色革命。</div><div class="tags"><span>宁静</span><span>浪漫</span><span>暖调</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-neutral"><span class="name">东方美学</span></div><div class="info"><h3>东方美学</h3><div class="meta">Oriental · 10 模板</div><div class="desc">水墨留白、宣纸质感。吴冠中、齐白石的东方视觉语言。</div><div class="tags"><span>沉思</span><span>宁静</span><span>墨色</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-warm"><span class="name">新艺术</span></div><div class="info"><h3>新艺术</h3><div class="meta">Art Nouveau · 10 模板</div><div class="desc">流动曲线、金色调。穆夏的华丽装饰美学。</div><div class="tags"><span>奢华</span><span>优雅</span><span>金色</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-dark"><span class="name">古典主义</span></div><div class="info"><h3>古典主义</h3><div class="meta">Classical · 10 模板</div><div class="desc">深色戏剧背景、明暗对比强烈。伦勃朗的光影世界。</div><div class="tags"><span>戏剧</span><span>学术</span><span>深色</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-light"><span class="name">现代主义</span></div><div class="info"><h3>现代主义</h3><div class="meta">Modernism · 10 模板</div><div class="desc">简洁几何、大胆色块。马蒂斯到毕加索的现代革命。</div><div class="tags"><span>大胆</span><span>简约</span><span>鲜艳</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-vibrant"><span class="name">波普艺术</span></div><div class="info"><h3>波普艺术</h3><div class="meta">Pop Art · 10 模板</div><div class="desc">鲜艳原色、漫画风格。安迪·沃霍尔的流行帝国。</div><div class="tags"><span>愉悦</span><span>大胆</span><span>鲜艳</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-warm"><span class="name">超现实主义</span></div><div class="info"><h3>超现实主义</h3><div class="meta">Surrealism · 10 模板</div><div class="desc">梦幻荒诞、错位时空。达利的融化时钟。</div><div class="tags"><span>神秘</span><span>梦幻</span><span>暖调</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-light"><span class="name">抽象表现</span></div><div class="info"><h3>抽象表现主义</h3><div class="meta">Abstract Expressionism · 10 模板</div><div class="desc">大色块、自由笔触。波洛克到罗斯科的抽象世界。</div><div class="tags"><span>活力</span><span>沉思</span><span>鲜艳</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-dark"><span class="name">巴洛克</span></div><div class="info"><h3>巴洛克</h3><div class="meta">Baroque · 5 模板</div><div class="desc">金色辉煌、动感构图。贝尔尼尼的华丽戏剧。</div><div class="tags"><span>戏剧</span><span>奢华</span><span>金色</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-cool"><span class="name">浪漫主义</span></div><div class="info"><h3>浪漫主义</h3><div class="meta">Romanticism · 5 模板</div><div class="desc">壮丽自然、崇高情感。弗里德里希的孤月云海。</div><div class="tags"><span>戏剧</span><span>沉思</span><span>冷调</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-earth"><span class="name">写实主义</span></div><div class="info"><h3>写实主义</h3><div class="meta">Realism · 4 模板</div><div class="desc">质朴真实、泥土气息。库尔贝到米勒的朴素美学。</div><div class="tags"><span>质朴</span><span>宁静</span><span>大地</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-vibrant"><span class="name">野兽派</span></div><div class="info"><h3>野兽派</h3><div class="meta">Fauvism · 3 模板</div><div class="desc">狂野色彩、简化造型。马蒂斯的色彩革命。</div><div class="tags"><span>活力</span><span>大胆</span><span>鲜艳</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-light"><span class="name">极简主义</span></div><div class="info"><h3>极简主义</h3><div class="meta">Minimalism · 3 模板</div><div class="desc">大量留白、极致简约。少即是多的哲学。</div><div class="tags"><span>极简</span><span>优雅</span><span>中性</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-warm"><span class="name">立体主义</span></div><div class="info"><h3>立体主义</h3><div class="meta">Cubism · 4 模板</div><div class="desc">几何碎片、多面视角。毕加索的解构世界。</div><div class="tags"><span>大胆</span><span>学术</span><span>暖调</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-warm"><span class="name">表现主义</span></div><div class="info"><h3>表现主义</h3><div class="meta">Expressionism · 6 模板</div><div class="desc">扭曲情感、粗犷笔触。蒙克到席勒的内心世界。</div><div class="tags"><span>戏剧</span><span>活力</span><span>暖调</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-pastel"><span class="name">洛可可</span></div><div class="info"><h3>洛可可</h3><div class="meta">Rococo · 3 模板</div><div class="desc">粉彩柔美、轻快浪漫。布歇的甜美闺房。</div><div class="tags"><span>愉悦</span><span>浪漫</span><span>粉彩</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-pastel"><span class="name">象征主义</span></div><div class="info"><h3>象征主义</h3><div class="meta">Symbolism · 3 模板</div><div class="desc">神秘诗意、梦幻朦胧。雷东的梦境花卉。</div><div class="tags"><span>神秘</span><span>梦幻</span><span>粉紫</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-vibrant"><span class="name">后印象派</span></div><div class="info"><h3>后印象派</h3><div class="meta">Post-Impressionism · 5 模板</div><div class="desc">强烈个人风格。梵高的星月、高更的塔希提。</div><div class="tags"><span>戏剧</span><span>愉悦</span><span>鲜艳</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-warm"><span class="name">文艺复兴</span></div><div class="info"><h3>文艺复兴</h3><div class="meta">Renaissance · 3 模板</div><div class="desc">古典庄严、透视法则。达芬奇到米开朗基罗。</div><div class="tags"><span>学术</span><span>戏剧</span><span>赭石</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-cool"><span class="name">当代艺术</span></div><div class="info"><h3>当代艺术</h3><div class="meta">Contemporary · 4 模板</div><div class="desc">混搭实验、多元表达。基弗到昆斯的当代图景。</div><div class="tags"><span>沉思</span><span>趣味</span><span>冷调</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-light"><span class="name">包豪斯</span></div><div class="info"><h3>包豪斯</h3><div class="meta">Bauhaus · 5 模板</div><div class="desc">红黄蓝几何、功能主义。包豪斯 100 年设计革命。</div><div class="tags"><span>学术</span><span>大胆</span><span>鲜艳</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-earth"><span class="name">稚拙派</span></div><div class="info"><h3>稚拙派</h3><div class="meta">Naive Art · 3 模板</div><div class="desc">天真童趣、原始感。卢梭的丛林梦。</div><div class="tags"><span>趣味</span><span>神秘</span><span>自然</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-mono"><span class="name">街头艺术</span></div><div class="info"><h3>街头艺术</h3><div class="meta">Street Art · 3 模板</div><div class="desc">涂鸦粗犷、城市能量。班克斯的社会讽刺。</div><div class="tags"><span>大胆</span><span>活力</span><span>黑白</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-vibrant"><span class="name">平面插画</span></div><div class="info"><h3>平面插画</h3><div class="meta">Graphic · 6 模板</div><div class="desc">时尚扁平、多色块。现代插画与设计运动。</div><div class="tags"><span>趣味</span><span>大胆</span><span>鲜艳</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-dark"><span class="name">数字科技</span></div><div class="info"><h3>数字科技</h3><div class="meta">Digital · 4 模板</div><div class="desc">霓虹赛博、发光效果。未来数字美学。</div><div class="tags"><span>未来</span><span>活力</span><span>霓虹</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-warm"><span class="name">复古怀旧</span></div><div class="info"><h3>复古怀旧</h3><div class="meta">Vintage · 3 模板</div><div class="desc">褪色时光、旧纸质感。时光中的经典回响。</div><div class="tags"><span>怀旧</span><span>优雅</span><span>复古</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-neutral"><span class="name">和风禅意</span></div><div class="info"><h3>和风禅意</h3><div class="meta">Japanese · 3 模板</div><div class="desc">空寂留白、枯山水。禅意与自然的对话。</div><div class="tags"><span>宁静</span><span>极简</span><span>中性</span></div></div></div>
+    <div class="galleryCard"><div class="preview pr-dark"><span class="name">奢华高端</span></div><div class="info"><h3>奢华高端</h3><div class="meta">Luxury · 2 模板</div><div class="desc">金黑丝绒、精致光芒。顶级奢华视觉语言。</div><div class="tags"><span>奢华</span><span>优雅</span><span>金色</span></div></div></div>
+  </div>
+</section>
+
+<!-- Tag Dimensions -->
+<section class="section" id="tags">
+  <div class="sectionHead">
+    <p class="eyebrow">Tag System</p>
+    <h2>多维度标签体系</h2>
+    <p>每套模板携带 8 个维度的标签，实现精确的风格匹配</p>
+  </div>
+  <div class="dimensions">
+    <div class="dimGroup">
+      <h3>🎨 colorScheme · 色彩基调（10 种）</h3>
+      <div class="dimTags">
+        <span class="tag" style="background:#f8f6f4;border-color:#ccc;"><span style="display:inline-block;width:12px;height:12px;background:linear-gradient(135deg,#f8f6f4,#e8e6e4);border:1px solid #ddd;"></span> light <span class="example">浅色</span></span>
+        <span class="tag" style="background:#1a1512;color:#e8ddd0;"><span style="display:inline-block;width:12px;height:12px;background:#1a1512;border:1px solid #555;"></span> dark <span class="example" style="color:#8a7a6a;">深色</span></span>
+        <span class="tag" style="background:#fce4d6;"><span style="display:inline-block;width:12px;height:12px;background:#f5d0c0;border:1px solid #d4a8a0;"></span> warm <span class="example">暖调</span></span>
+        <span class="tag" style="background:#d4e5f7;"><span style="display:inline-block;width:12px;height:12px;background:#b8d4e8;border:1px solid #8ab4d8;"></span> cool <span class="example">冷调</span></span>
+        <span class="tag" style="background:#ffe0b0;"><span style="display:inline-block;width:12px;height:12px;background:#f0c0d0;border:1px solid #d4a0b0;"></span> vibrant <span class="example">鲜艳</span></span>
+        <span class="tag" style="background:#ece8e0;"><span style="display:inline-block;width:12px;height:12px;background:#e4e0d8;border:1px solid #d0c8c0;"></span> neutral <span class="example">中性</span></span>
+        <span class="tag" style="background:#d0cec8;"><span style="display:inline-block;width:12px;height:12px;background:#b8b6b0;border:1px solid #a0a0a0;"></span> monochrome <span class="example">黑白</span></span>
+        <span class="tag" style="background:#fce8f0;"><span style="display:inline-block;width:12px;height:12px;background:#e8d8f0;border:1px solid #d0c0d8;"></span> pastel <span class="example">粉彩</span></span>
+        <span class="tag" style="background:#d4c8b0;"><span style="display:inline-block;width:12px;height:12px;background:#c8b8a0;border:1px solid #b0a48a;"></span> earth <span class="example">大地</span></span>
+        <span class="tag" style="background:#2a4a4a;color:#e8e0d8;"><span style="display:inline-block;width:12px;height:12px;background:#2a4a4a;border:1px solid #4a6a6a;"></span> jewel <span class="example" style="color:#8a9a9a;">宝石</span></span>
+      </div>
+    </div>
+    <div class="dimGroup">
+      <h3>💭 mood · 情绪氛围（17 种）</h3>
+      <div class="dimTags">
+        <span class="tag tag-mood">serene 宁静</span><span class="tag tag-mood">dramatic 戏剧</span><span class="tag tag-mood">playful 活泼</span>
+        <span class="tag tag-mood">elegant 优雅</span><span class="tag tag-mood">rustic 质朴</span><span class="tag tag-mood">futuristic 未来</span>
+        <span class="tag tag-mood">romantic 浪漫</span><span class="tag tag-mood">minimal 极简</span><span class="tag tag-mood">bold 大胆</span>
+        <span class="tag tag-mood">academic 学术</span><span class="tag tag-mood">mystical 神秘</span><span class="tag tag-mood">nostalgic 怀旧</span>
+        <span class="tag tag-mood">energetic 活力</span><span class="tag tag-mood">peaceful 平和</span><span class="tag tag-mood">luxurious 奢华</span>
+        <span class="tag tag-mood">whimsical 奇幻</span><span class="tag tag-mood">contemplative 沉思</span>
+      </div>
+    </div>
+    <div class="dimGroup">
+      <h3>📋 useCase · 适用场景（15 种）</h3>
+      <div class="dimTags">
+        <span class="tag tag-use">presentation 演示</span><span class="tag tag-use">portfolio 作品集</span><span class="tag tag-use">gallery 画廊</span>
+        <span class="tag tag-use">blog 博客</span><span class="tag tag-use">poster 海报</span><span class="tag tag-use">resume 简历</span>
+        <span class="tag tag-use">pitch 路演</span><span class="tag tag-use">report 报告</span><span class="tag tag-use">invitation 邀请</span>
+        <span class="tag tag-use">catalog 目录</span><span class="tag tag-use">slideshow 幻灯</span><span class="tag tag-use">moodboard 情绪板</span>
+        <span class="tag tag-use">lookbook 画册</span><span class="tag tag-use">manifesto 宣言</span><span class="tag tag-use">yearbook 年鉴</span>
+      </div>
+    </div>
+    <div class="dimGroup">
+      <h3>🔤 fontStyle · 字体风格</h3>
+      <div class="dimTags">
+        <span class="tag">serif</span><span class="tag">sans-serif</span><span class="tag">display</span>
+        <span class="tag">monospace</span><span class="tag">handwritten</span><span class="tag">geometric</span>
+      </div>
+    </div>
+    <div class="dimGroup">
+      <h3>📊 formality · 正式度 &amp; density · 密度</h3>
+      <div class="dimTags">
+        <span class="tag" style="border-color:var(--red);">high 正式</span>
+        <span class="tag" style="border-color:#8a7a5a;">medium 适中</span>
+        <span class="tag" style="border-color:var(--green);">low 轻松</span>
+        <span class="tag" style="background:#e8e0d8;">sparse 稀疏</span>
+        <span class="tag" style="background:#d8d0c8;">medium 中等</span>
+        <span class="tag" style="background:#c8c0b8;">dense 密集</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Matcher -->
+<section class="section" id="matcher">
+  <div class="sectionHead">
+    <p class="eyebrow">AI Matcher</p>
+    <h2>智能模板匹配引擎</h2>
+    <p>输入一段文字，引擎自动分析情绪、流派、场景，从 205 套模板中推荐最合适的 Top 20</p>
+  </div>
+  <div class="features" style="margin-bottom:24px;">
+    <div class="feature" style="text-align:left;">
+      <h4>文本自动分析</h4>
+      <p>内置中英文关键词库，自动识别 17 种情绪、23 种流派、15 种场景、10 种色彩</p>
+    </div>
+    <div class="feature" style="text-align:left;">
+      <h4>加权评分系统</h4>
+      <p>8 个维度加权匹配，情绪和流派权重最高（各 0.20），权重可自定义</p>
+    </div>
+    <div class="feature" style="text-align:left;">
+      <h4>多环境支持</h4>
+      <p>同时支持浏览器和 Node.js 环境，UMD 模块格式</p>
+    </div>
+  </div>
+  <div class="codeBlock">
+    <span class="comment">// Node.js 使用示例</span><br>
+    <span class="keyword">const</span> data = <span class="fn">require</span>(<span class="string">'./templates.json'</span>);<br>
+    <span class="keyword">const</span> TemplateMatcher = <span class="fn">require</span>(<span class="string">'./template-matcher.js'</span>);<br>
+    <span class="keyword">const</span> matcher = <span class="keyword">new</span> TemplateMatcher(data);<br><br>
+    <span class="comment">// 智能推荐</span><br>
+    <span class="keyword">const</span> result = matcher.<span class="fn">recommend</span>({<br>
+    &nbsp;&nbsp;text: <span class="string">"一场关于春天花卉的摄影展，温暖浪漫的氛围"</span>,<br>
+    &nbsp;&nbsp;useCase: <span class="string">"gallery"</span><br>
+    });<br>
+    <span class="fn">console</span>.log(result.results); <span class="comment">// Top 20</span>
+  </div>
+  <div class="codeBlock" style="margin-top:12px;">
+    <span class="comment">// 浏览器中使用（详见 index.html）</span><br>
+    &lt;script src=<span class="string">"template-matcher.js"</span>&gt;&lt;/script&gt;<br>
+    &lt;script&gt;<br>
+    &nbsp;&nbsp;<span class="keyword">const</span> matcher = <span class="keyword">new</span> TemplateMatcher(templatesData);<br>
+    &nbsp;&nbsp;<span class="keyword">const</span> filtered = matcher.<span class="fn">filter</span>({<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;mood: <span class="string">"peaceful"</span>,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;colorScheme: <span class="string">"pastel"</span><br>
+    &nbsp;&nbsp;});<br>
+    &lt;/script&gt;
+  </div>
+</section>
+
+<!-- Usage -->
+<section class="section" id="usage">
+  <div class="sectionHead">
+    <p class="eyebrow">How to Use</p>
+    <h2>快速上手</h2>
+    <p>三步走：浏览 → 筛选 → 打开使用</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="num">1</div>
+      <div class="content">
+        <h4>浏览所有模板</h4>
+        <p>打开 <code>index.html</code>，浏览全部 205 套模板。支持按流派、情绪、色彩、场景多维度筛选，也可使用关键词搜索。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <div class="content">
+        <h4>智能匹配</h4>
+        <p>在智能匹配面板中输入内容描述（如"一场春天的花展，温暖浪漫"），引擎自动推荐 Top 20 最合适模板。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <div class="content">
+        <h4>打开使用</h4>
+        <p>点击任意模板卡片即可在浏览器中打开对应的基座模板。键盘 ← → 翻页，直接替换内容即可。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer class="footer">
+  <p>基于 <a href="https://github.com/joeseesun/qiaomu-artist-style" target="_blank">qiaomu-artist-style</a> 项目扩展</p>
+  <p style="margin-top:4px;">205 套艺术风格模板 · 23 种流派 · 28 个基座风格</p>
+  <a class="githubLink" href="https://github.com/chenxing3060/awesome-business-templates" target="_blank">
+    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+    View on GitHub
+  </a>
+  <p style="margin-top:16px;font-size:11px;">MIT License · Made with ❤️</p>
+</footer>
+
+</body>
+</html>

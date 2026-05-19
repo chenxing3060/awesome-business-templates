@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>浪漫主义 · 情感与自然</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #e8e6e0;
+  --bg-deep: #ddd8d0;
+  --blue: #4a7a9a;
+  --blue-dark: #3a6080;
+  --blue-light: #6a9aba;
+  --orange: #d08840;
+  --orange-light: #e8a860;
+  --dark: #2a2622;
+  --muted: #7a7268;
+  --cream: #f0ece6;
+  --shadow: 0 4px 40px rgba(42, 38, 34, 0.1);
+  --slide-w: min(1100px, 92vw);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.deck {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  height: 100vh;
+}
+
+.slide {
+  min-width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cloud gradient overlay */
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(74, 122, 154, 0.04) 0%, transparent 40%),
+    radial-gradient(ellipse at 70% 80%, rgba(208, 136, 64, 0.03) 0%, transparent 35%),
+    radial-gradient(ellipse at 50% 50%, rgba(232, 230, 224, 0.5) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Mountain silhouette */
+.mountainSil {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.04;
+}
+
+.mountainSil.one {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background:
+    polygon(0% 100%, 10% 60%, 25% 75%, 35% 40%, 50% 55%, 65% 25%, 75% 45%, 90% 30%, 100% 50%, 100% 100%);
+  clip-path: polygon(0% 100%, 10% 60%, 25% 75%, 35% 40%, 50% 55%, 65% 25%, 75% 45%, 90% 30%, 100% 50%, 100% 100%);
+  background: linear-gradient(180deg, transparent, var(--blue));
+}
+
+.mountainSil.two {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  clip-path: polygon(0% 100%, 20% 70%, 40% 80%, 55% 50%, 70% 65%, 85% 45%, 100% 60%, 100% 100%);
+  background: linear-gradient(180deg, transparent, var(--orange));
+  opacity: 0.025;
+}
+
+/* Flowing lines */
+.flowLine {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.03;
+}
+
+.flowLine.h {
+  top: 30%;
+  left: -5%;
+  width: 110%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue), var(--orange), transparent);
+}
+
+.flowLine.v {
+  right: 10%;
+  top: -10%;
+  width: 1px;
+  height: 120%;
+  background: linear-gradient(180deg, transparent, var(--blue), transparent);
+}
+
+/* Cloud shapes */
+.cloudShape {
+  position: absolute;
+  pointer-events: none;
+  font-size: 80px;
+  opacity: 0.025;
+  color: var(--blue);
+}
+
+.cloudShape.c1 {
+  top: 8%;
+  right: 10%;
+  transform: rotate(5deg);
+}
+
+.cloudShape.c2 {
+  bottom: 15%;
+  left: 8%;
+  font-size: 60px;
+  opacity: 0.02;
+  color: var(--orange);
+}
+
+.slideInner {
+  position: relative;
+  z-index: 1;
+  width: var(--slide-w);
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+/* Cover */
+.cover {
+  text-align: center;
+}
+
+.cover .horizonLine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.cover .horizonLine .bar {
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue));
+}
+
+.cover .horizonLine .bar:last-child {
+  background: linear-gradient(90deg, var(--orange), transparent);
+}
+
+.cover .horizonLine .sun {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--orange);
+  opacity: 0.5;
+}
+
+.cover h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(52px, 10vw, 110px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--dark);
+}
+
+.cover h1 .blue {
+  color: var(--blue);
+  font-weight: 700;
+  font-style: italic;
+}
+
+.cover h1 .light {
+  font-weight: 400;
+  font-style: italic;
+  display: block;
+  margin-top: 4px;
+  font-size: 0.5em;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.cover .subtitle {
+  margin-top: 16px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(18px, 2.4vw, 26px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.cover .lineRow {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 40px;
+}
+
+.cover .lineRow span {
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--blue);
+  opacity: 0.15;
+}
+
+.cover .lineRow span:nth-child(2) { background: var(--orange); opacity: 0.2; }
+.cover .lineRow span:nth-child(3) { background: var(--blue); opacity: 0.1; }
+.cover .lineRow span:nth-child(4) { background: var(--orange); opacity: 0.25; }
+.cover .lineRow span:nth-child(5) { background: var(--blue); opacity: 0.12; }
+
+/* Content */
+.content {
+  text-align: left;
+}
+
+.content h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  color: var(--dark);
+}
+
+.content h2 .accent {
+  color: var(--blue);
+  font-style: italic;
+}
+
+.content .leadText {
+  font-size: clamp(17px, 1.8vw, 21px);
+  line-height: 1.75;
+  color: var(--dark);
+  font-weight: 400;
+  font-family: 'Playfair Display', Georgia, serif;
+  margin-bottom: 14px;
+}
+
+.content p {
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 680px;
+  margin-bottom: 14px;
+}
+
+/* Wave divider */
+.waveDivider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 20px 0;
+  color: var(--blue);
+  font-size: 16px;
+  opacity: 0.25;
+}
+
+.waveDivider .seg {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--blue), transparent);
+}
+
+/* Two column */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.twoCol .card {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(74, 122, 154, 0.08);
+}
+
+.twoCol .card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--blue-dark);
+}
+
+.twoCol .card p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+/* Quote card */
+.quoteCard {
+  padding: 24px 28px;
+  margin: 16px 0;
+  background: rgba(74, 122, 154, 0.04);
+  border: 1px solid rgba(74, 122, 154, 0.08);
+  position: relative;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  color: var(--blue-dark);
+}
+
+/* Artists */
+.artistList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.artistList .person {
+  padding: 20px;
+  border-bottom: 1px solid rgba(74, 122, 154, 0.08);
+}
+
+.artistList .person .name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 2px;
+}
+
+.artistList .person .era {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.artistList .person p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Works grid */
+.workGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.workGrid .frame {
+  aspect-ratio: 4/3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.workGrid .frame:nth-child(1) {
+  background: linear-gradient(135deg, #d8dce0, #c8d0d8);
+  border: 1px solid rgba(74, 122, 154, 0.1);
+}
+
+.workGrid .frame:nth-child(2) {
+  background: linear-gradient(135deg, #e0d8c8, #f0e0c8);
+  border: 1px solid rgba(208, 136, 64, 0.1);
+}
+
+.workGrid .frame .title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.workGrid .frame .meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.workGrid .frame .desc {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* Quote */
+.quote {
+  text-align: center;
+}
+
+.quote .romQuote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 4.2vw, 48px);
+  line-height: 1.35;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--dark);
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.quote .romQuote::before {
+  content: '\201C';
+  display: block;
+  font-size: 80px;
+  line-height: 0.3;
+  color: var(--blue);
+  opacity: 0.2;
+  margin-bottom: 16px;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.quote cite {
+  display: block;
+  margin-top: 24px;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  color: var(--muted);
+}
+
+/* Page number */
+.pageNum {
+  position: absolute;
+  bottom: 28px;
+  right: 40px;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  z-index: 2;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 100;
+  background: rgba(232, 230, 224, 0.88);
+  backdrop-filter: blur(12px);
+  padding: 7px 18px;
+  border: 1px solid rgba(74, 122, 154, 0.1);
+  box-shadow: var(--shadow);
+}
+
+.nav button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-size: 15px;
+}
+
+.nav button:hover {
+  background: rgba(74, 122, 154, 0.08);
+}
+
+.nav .dots {
+  display: flex;
+  gap: 5px;
+}
+
+.nav .dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(42, 38, 34, 0.12);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.nav .dots span.active {
+  background: var(--blue);
+  width: 20px;
+  border-radius: 1px;
+}
+
+.nav .slideLabel {
+  font-size: 11px;
+  color: var(--muted);
+  min-width: 50px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .slide { padding: 24px; }
+  .twoCol { grid-template-columns: 1fr; gap: 16px; }
+  .artistList { grid-template-columns: 1fr; }
+  .workGrid { grid-template-columns: 1fr; }
+  .pageNum { right: 24px; bottom: 80px; }
+  .nav { bottom: 16px; }
+  .mountainSil { display: none; }
+  .flowLine { display: none; }
+  .cloudShape { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- Slide 1: Cover -->
+<section class="slide cover">
+  <div class="mountainSil one"></div>
+  <div class="mountainSil two"></div>
+  <div class="flowLine h"></div>
+  <div class="flowLine v"></div>
+  <div class="cloudShape c1">&#9729;</div>
+  <div class="cloudShape c2">&#9729;</div>
+  <div class="slideInner">
+    <div class="horizonLine">
+      <span class="bar"></span>
+      <span class="sun"></span>
+      <span class="bar"></span>
+    </div>
+    <h1><span class="blue">浪漫</span>主义<br><span class="light">Romanticism</span></h1>
+    <p class="subtitle">德拉克洛瓦的自由之魂 · 弗里德里希的雾海漫游者</p>
+    <div class="lineRow">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+  <span class="pageNum">01 / 06</span>
+</section>
+
+<!-- Slide 2: What is Romanticism -->
+<section class="slide content">
+  <div class="mountainSil one"></div>
+  <div class="flowLine h"></div>
+  <div class="cloudShape c2">&#9729;</div>
+  <div class="slideInner">
+    <h2>浪漫主义 <span class="accent">核心</span></h2>
+    <p class="leadText">浪漫主义是 18 世纪末至 19 世纪中叶席卷欧洲的一场深刻的文化运动。它强调情感、直觉和想象力的至高地位，反对古典主义的理性束缚和新古典主义的教条规范。</p>
+    <p>浪漫主义艺术家将目光投向自然——不是宁静优美的田园风光，而是狂暴的海洋、险峻的山峰、迷蒙的云雾和壮丽的星空。他们在宏大而充满张力的自然景观中寻找与人类情感共鸣的视觉语言。</p>
+    <div class="waveDivider">
+      <span class="seg"></span>
+      <span>~</span>
+      <span class="seg"></span>
+    </div>
+    <p>个人的主观体验成为艺术的核心主题——孤独、忧郁、渴望、狂喜、恐惧——这些此前被忽略的情感领域在浪漫主义作品中得到了前所未有的表达。</p>
+  </div>
+  <span class="pageNum">02 / 06</span>
+</section>
+
+<!-- Slide 3: Masters -->
+<section class="slide content">
+  <div class="mountainSil two"></div>
+  <div class="flowLine v"></div>
+  <div class="cloudShape c1">&#9729;</div>
+  <div class="slideInner">
+    <h2>浪漫主义 <span class="accent">巨匠</span></h2>
+    <div class="artistList">
+      <div class="person">
+        <div class="name">欧仁·德拉克洛瓦</div>
+        <div class="era">Eugène Delacroix · 1798–1863</div>
+        <p>浪漫主义绘画的旗手。他大胆的用色、奔放的笔触和戏剧性的构图，深刻影响了后来的印象派。代表作《自由引导人民》《萨达纳帕鲁斯之死》。</p>
+      </div>
+      <div class="person">
+        <div class="name">卡斯帕·大卫·弗里德里希</div>
+        <div class="era">Caspar David Friedrich · 1774–1840</div>
+        <p>德国浪漫主义的灵魂画师。他笔下的雾海、山峦和月光下的修道院废墟，充满了对无限与永恒的沉思。代表作《雾海漫游者》《冰海》。</p>
+      </div>
+      <div class="person">
+        <div class="name">J.M.W. 透纳</div>
+        <div class="era">Joseph Mallord William Turner · 1775–1851</div>
+        <p>英国最伟大的风景画家之一。他对光与大气效果的极致追求，使画面几乎消融在炫目的光色之中，被誉为"光之画家"。代表作《暴风雪》《雨、蒸汽和速度》。</p>
+      </div>
+      <div class="person">
+        <div class="name">泰奥多尔·席里柯</div>
+        <div class="era">Théodore Géricault · 1791–1824</div>
+        <p>法国浪漫主义先驱。他以极具冲击力的现实题材和强烈的戏剧张力闻名，短暂的生命留下了不朽杰作。代表作《美杜莎之筏》。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">03 / 06</span>
+</section>
+
+<!-- Slide 4: Key Concepts -->
+<section class="slide content">
+  <div class="mountainSil one"></div>
+  <div class="flowLine h"></div>
+  <div class="cloudShape c2">&#9729;</div>
+  <div class="slideInner">
+    <h2>情感与 <span class="accent">自然</span></h2>
+    <p class="leadText">浪漫主义的核心信条：<strong>情感高于理性，自然高于文明</strong>。这一信念贯穿了浪漫主义艺术的各个维度。</p>
+    <div class="twoCol">
+      <div class="card">
+        <h3>崇高 · The Sublime</h3>
+        <p>浪漫主义的核心美学概念。面对浩瀚的自然——无边的海洋、险峻的雪山、雷鸣电闪的暴风雨——人类既感到渺小与恐惧，又在敬畏中获得精神的升华。这是理性无法抵达的领域。</p>
+      </div>
+      <div class="card">
+        <h3>民族之魂</h3>
+        <p>浪漫主义催生了欧洲各国的民族意识觉醒。艺术家从本民族的历史传说、民间故事和乡土风景中汲取灵感，用画笔构建民族的文化认同。从德国的森林到俄罗斯的草原。</p>
+      </div>
+      <div class="card">
+        <h3>自由与革命</h3>
+        <p>德拉克洛瓦的《自由引导人民》是浪漫主义精神最直接的宣言。浪漫主义艺术家往往站在时代变革的前沿，用画笔记录和呼唤政治自由与民族解放。</p>
+      </div>
+      <div class="card">
+        <h3>忧郁的个体</h3>
+        <p>浪漫主义塑造了现代意义上的"孤独天才"形象——敏感、忧郁、与世俗格格不入。从拜伦到歌德的维特，从弗里德里希画中背对观众的孤独身影到透纳笔下人在自然中的渺小。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">04 / 06</span>
+</section>
+
+<!-- Slide 5: Works -->
+<section class="slide content">
+  <div class="mountainSil two"></div>
+  <div class="flowLine v"></div>
+  <div class="cloudShape c1">&#9729;</div>
+  <div class="slideInner">
+    <h2>传世 <span class="accent">名作</span></h2>
+    <div class="workGrid">
+      <div class="frame">
+        <span class="title">自由引导人民</span>
+        <span class="meta">德拉克洛瓦 · 1830</span>
+        <span class="desc">浪漫主义精神的旗帜，自由与革命的永恒象征</span>
+      </div>
+      <div class="frame">
+        <span class="title">雾海漫游者</span>
+        <span class="meta">弗里德里希 · 1818</span>
+        <span class="desc">人与自然的神秘对话，对无限的沉思与向往</span>
+      </div>
+      <div class="frame">
+        <span class="title">暴风雪</span>
+        <span class="meta">透纳 · 1842</span>
+        <span class="desc">光与元素的狂暴交响，抽象化的自然之力</span>
+      </div>
+      <div class="frame">
+        <span class="title">美杜莎之筏</span>
+        <span class="meta">席里柯 · 1819</span>
+        <span class="desc">人类在绝境中的挣扎与希望，浪漫主义的开篇之作</span>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">05 / 06</span>
+</section>
+
+<!-- Slide 6: Quote -->
+<section class="slide quote">
+  <div class="mountainSil one"></div>
+  <div class="flowLine h"></div>
+  <div class="slideInner">
+    <div class="romQuote">
+      最纯粹的诗意存在于对无限事物的渴望与追求之中。
+      <cite>—— 卡斯帕·大卫·弗里德里希</cite>
+    </div>
+    <p style="margin-top:32px;color:var(--muted);font-size:14px;letter-spacing:0.04em;">
+      浪漫主义 · 情感是艺术的灵魂，自然是心灵的镜子
+    </p>
+  </div>
+  <span class="pageNum">06 / 06</span>
+</section>
+
+</div>
+
+<nav class="nav" id="nav">
+  <button onclick="prevSlide()" aria-label="上一页">&#8592;</button>
+  <span class="slideLabel" id="slideLabel">1 / 6</span>
+  <div class="dots" id="dots"></div>
+  <button onclick="nextSlide()" aria-label="下一页">&#8594;</button>
+</nav>
+
+<script>
+const deck = document.getElementById('deck');
+const slides = deck.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+const dotsContainer = document.getElementById('dots');
+const slideLabel = document.getElementById('slideLabel');
+
+for (let i = 0; i < total; i++) {
+  const dot = document.createElement('span');
+  dot.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(dot);
+}
+
+function update() {
+  deck.style.transform = `translateX(-${current * 100}vw)`;
+  dotsContainer.querySelectorAll('span').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+  slideLabel.textContent = `${current + 1} / ${total}`;
+}
+
+function goTo(n) {
+  current = Math.max(0, Math.min(n, total - 1));
+  update();
+}
+
+function nextSlide() { goTo(current + 1); }
+function prevSlide() { goTo(current - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+});
+
+update();
+</script>
+</body>
+</html>

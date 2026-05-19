@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>当代艺术 · 无界之境</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter','system-ui',sans-serif;background:#e8e8e6;color:#2a2a2e;overflow:hidden;height:100vh}
+    .deck{position:relative;width:100%;height:100vh;overflow:hidden}
+    .slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4rem 6rem;opacity:0;transition:opacity .5s ease;pointer-events:none;text-align:center}
+    .slide.active{opacity:1;pointer-events:auto;z-index:2}
+    .slide.exit{opacity:0;z-index:1}
+
+    .overlay-block{position:absolute;pointer-events:none;mix-blend-mode:multiply}
+    .overlay-block svg{width:100%;height:100%}
+    .asym-block{position:absolute;pointer-events:none;opacity:.06}
+    .asym-block svg{width:200px;height:200px}
+
+    .stripe{position:absolute;pointer-events:none;opacity:.04}
+    .stripe svg{width:100%;height:100%}
+
+    .slide h1{font-weight:600;font-size:4.2rem;color:#1a1a1e;margin-bottom:.4rem;position:relative;z-index:2;letter-spacing:-.02em}
+    .slide h1 .magenta{color:#d43060}
+    .slide h2{font-weight:600;font-size:2.4rem;color:#1a1a1e;margin-bottom:.3rem;letter-spacing:-.01em}
+    .slide p{font-weight:300;font-size:1.1rem;line-height:1.7;color:#4a4a4e;max-width:680px;position:relative;z-index:2}
+    .slide .sub{font-weight:300;font-size:1.2rem;color:#6a7a8a;margin-bottom:.5rem;letter-spacing:.04em;text-transform:uppercase}
+    .badge{display:inline-block;border:1px solid #d43060;color:#d43060;padding:.2rem 1rem;font-size:.8rem;letter-spacing:.08em;margin-top:1.5rem;background:rgba(212,48,96,.04);font-weight:400}
+
+    .nav-bar{position:fixed;bottom:0;left:0;width:100%;height:56px;background:rgba(232,232,230,.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;gap:12px;z-index:100;border-top:1px solid rgba(106,122,138,.15)}
+    .nav-bar .dot{width:24px;height:24px;border-radius:0;background:transparent;cursor:pointer;transition:all .3s;border:2px solid #b8b8b6;position:relative}
+    .nav-bar .dot.active{background:#d43060;border-color:#d43060;transform:rotate(45deg)}
+    .nav-bar .dot:hover{border-color:#6a7a8a}
+    .nav-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:101;width:48px;height:48px;background:rgba(232,232,230,.85);backdrop-filter:blur(4px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;color:#6a7a8a;font-size:1.1rem;border:none;font-weight:300}
+    .nav-arrow:hover{background:#d43060;color:#fff}
+    .nav-arrow.prev{left:0}
+    .nav-arrow.next{right:0}
+    .nav-arrow.hidden{opacity:0;pointer-events:none}
+
+    .grid-3{display:flex;gap:1.5rem;align-items:stretch;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;max-width:900px}
+    .grid-3 .cell{flex:1;min-width:180px;max-width:280px;padding:1.5rem;background:rgba(255,255,255,.4);border:1px solid rgba(106,122,138,.15);text-align:left}
+    .grid-3 .cell h3{font-weight:600;font-size:1rem;color:#d43060;margin-bottom:.3rem;letter-spacing:.03em;text-transform:uppercase}
+    .grid-3 .cell .yr{font-size:.75rem;color:#6a7a8a;font-weight:300}
+    .grid-3 .cell p{font-size:.85rem;line-height:1.5;margin-top:.3rem;font-weight:300}
+
+    .diagonal{position:absolute;pointer-events:none;opacity:.03}
+    .diagonal svg{width:300px;height:300px}
+
+    @media(max-width:768px){
+      .slide{padding:2.5rem 1.5rem}
+      .slide h1{font-size:2.6rem}
+      .slide h2{font-size:1.7rem}
+      .slide p{font-size:1rem;max-width:100%}
+      .grid-3 .cell{padding:1rem;min-width:140px}
+      .nav-arrow{width:36px;height:36px;font-size:.9rem}
+    }
+    @media(max-width:480px){
+      .slide h1{font-size:2rem}
+      .slide h2{font-size:1.4rem}
+      .slide .sub{font-size:.9rem}
+    }
+  </style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- Slide 1: Title -->
+  <div class="slide active">
+    <div class="stripe" style="top:0;left:0;width:100%;height:100%">
+      <svg viewBox="0 0 1200 800"><defs><pattern id="stripes1" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="30" height="60" fill="#d43060"/></pattern></defs><rect width="100%" height="100%" fill="url(#stripes1)"/></svg>
+    </div>
+    <h1>当代艺术</h1>
+    <p class="sub">Contemporary Art · 无界之境</p>
+    <p>一切边界都被打破。绘画可以是一堆颜料，<br>雕塑可以是废弃的材料，艺术可以是任何东西——<br>只要它表达了时代的精神。</p>
+    <span class="badge">1970s — 至今</span>
+  </div>
+
+  <!-- Slide 2: 安塞尔姆·基弗 -->
+  <div class="slide">
+    <div class="asym-block" style="top:0;right:0;width:100%;height:100%">
+      <svg viewBox="0 0 1200 800"><defs><clipPath id="clip2"><polygon points="800,0 1200,0 1200,500 600,800 400,800 800,400"/></clipPath></defs><rect x="0" y="0" width="100%" height="100%" fill="#6a7a8a" clip-path="url(#clip2)"/></svg>
+    </div>
+    <h2>安塞尔姆·基弗</h2>
+    <p class="sub">Anselm Kiefer · 1945 —</p>
+    <p>沉重的历史，破碎的记忆，废墟中的重生。<br>基弗用铅、稻草、灰烬和巨大的画布，<br>构建了一个关于德国历史与人类命运的史诗剧场。<br>他的作品沉重得让人无法呼吸，却又美得令人心碎。</p>
+    <span class="badge">废墟诗学 · 记忆考古</span>
+  </div>
+
+  <!-- Slide 3: 杰夫·昆斯 -->
+  <div class="slide">
+    <div class="overlay-block" style="top:20%;right:5%;width:200px;height:200px"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="100" fill="#d43060" opacity=".08"/></svg></div>
+    <div class="overlay-block" style="bottom:15%;left:8%;width:150px;height:150px"><svg viewBox="0 0 150 150"><rect x="0" y="0" width="150" height="150" fill="#6a7a8a" opacity=".06" transform="rotate(30,75,75)"/></svg></div>
+    <h2>杰夫·昆斯</h2>
+    <p class="sub">Jeff Koons · 1955 —</p>
+    <p>气球狗、不锈钢兔子、真空吸尘器——<br>昆斯将消费社会的日常物品变成天价艺术品。<br>他模糊了高雅与低俗、艺术与商业的界限，<br>成为当代艺术最具争议也最成功的明星。</p>
+    <span class="badge">媚俗即美学 · 商业即艺术</span>
+  </div>
+
+  <!-- Slide 4: 多元现场 -->
+  <div class="slide">
+    <div class="diagonal" style="top:5%;left:5%"><svg viewBox="0 0 300 300"><rect x="0" y="0" width="300" height="300" fill="none" stroke="#d43060" stroke-width="1" transform="rotate(45,150,150)"/><rect x="50" y="50" width="200" height="200" fill="none" stroke="#6a7a8a" stroke-width="1" transform="rotate(45,150,150)"/></svg></div>
+    <h2>当代艺术现场</h2>
+    <p class="sub">多元 · 跨界 · 观念</p>
+    <div class="grid-3">
+      <div class="cell">
+        <h3>观念艺术</h3>
+        <span class="yr">Conceptual Art</span>
+        <p>思想本身就是艺术品。约瑟夫·科苏斯的三把椅子，质疑了什么是"真实"。</p>
+      </div>
+      <div class="cell">
+        <h3>装置艺术</h3>
+        <span class="yr">Installation Art</span>
+        <p>观者被包裹在空间中。艾未未的葵花籽，每一颗都是手工陶瓷。</p>
+      </div>
+      <div class="cell">
+        <h3>数字艺术</h3>
+        <span class="yr">Digital Art</span>
+        <p>NFT、生成艺术、AI创作——当算法成为画笔，艺术的定义被再次改写。</p>
+      </div>
+    </div>
+    <span class="badge">任何媒介都可以是艺术</span>
+  </div>
+
+  <!-- Slide 5: 全球图景 -->
+  <div class="slide">
+    <div class="stripe" style="top:0;left:0;width:100%;height:100%">
+      <svg viewBox="0 0 1200 800"><defs><pattern id="stripes5" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse" patternTransform="rotate(-30)"><rect width="40" height="80" fill="#6a7a8a"/></pattern></defs><rect width="100%" height="100%" fill="url(#stripes5)"/></svg>
+    </div>
+    <h2>全球当代</h2>
+    <p class="sub">一个没有中心的世界</p>
+    <p>当代艺术不再有唯一的中心。北京、柏林、拉各斯、<br>圣保罗、孟买——每一个角落都有属于自己的声音。<br>身份政治、生态危机、后殖民叙事……<br>艺术成为时代最敏锐的传感器。</p>
+    <span class="badge">多中心 · 多声音</span>
+  </div>
+
+  <!-- Slide 6: 结语 -->
+  <div class="slide">
+    <div class="overlay-block" style="top:0;left:0;width:100%;height:100%">
+      <svg viewBox="0 0 1200 800"><defs><clipPath id="clip6"><polygon points="200,0 1000,0 1200,200 1200,800 0,800 0,400"/></clipPath></defs><rect x="0" y="0" width="100%" height="100%" fill="#d43060" clip-path="url(#clip6)"/></svg>
+    </div>
+    <h1>边界之外</h1>
+    <p class="sub">Beyond Boundaries</p>
+    <p>当代艺术最激动人心的地方，<br>在于它永远在追问"艺术还能是什么"。<br>这个问题没有答案——<br>而每一次追问，都是对创造力的重新定义。</p>
+    <span class="badge">永远在路上</span>
+  </div>
+
+</div>
+
+<button class="nav-arrow prev" id="prevBtn">‹</button>
+<button class="nav-arrow next" id="nextBtn">›</button>
+
+<div class="nav-bar" id="navBar"></div>
+
+<script>
+  (function(){var slides=document.querySelectorAll('.slide'),navBar=document.getElementById('navBar'),prevBtn=document.getElementById('prevBtn'),nextBtn=document.getElementById('nextBtn'),current=0;
+  function buildNav(){for(var i=0;i<slides.length;i++){var dot=document.createElement('button');dot.className='dot';dot.dataset.index=i;dot.addEventListener('click',function(){goTo(parseInt(this.dataset.index))});navBar.appendChild(dot)}}
+  function goTo(n){if(n===current)return;slides[current].classList.remove('active');slides[current].classList.add('exit');setTimeout(function(){slides[current].classList.remove('exit')},500);current=n;slides[current].classList.add('active');updateNav();updateArrows()}
+  function updateNav(){var dots=navBar.querySelectorAll('.dot');dots.forEach(function(d,i){d.classList.toggle('active',i===current)})}
+  function updateArrows(){prevBtn.classList.toggle('hidden',current===0);nextBtn.classList.toggle('hidden',current===slides.length-1)}
+  prevBtn.addEventListener('click',function(){if(current>0)goTo(current-1)});
+  nextBtn.addEventListener('click',function(){if(current<slides.length-1)goTo(current+1)});
+  document.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'&&current>0)goTo(current-1);if(e.key==='ArrowRight'&&current<slides.length-1)goTo(current+1)});
+  buildNav();updateNav();updateArrows()})();
+</script>
+</body>
+</html>

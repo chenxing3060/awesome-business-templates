@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>立体主义 · 碎片的交响</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #e8e4dc;
+  --surface: #ddd6cc;
+  --text: #2a2420;
+  --text-soft: #5a5248;
+  --text-muted: #8a8276;
+  --accent: #8a6a4a;
+  --accent-warm: #d48040;
+  --line: rgba(42, 36, 32, 0.10);
+  --line-strong: rgba(42, 36, 32, 0.18);
+  --shadow: 0 4px 32px rgba(42, 36, 32, 0.08);
+  --slide-w: min(1100px, 92vw);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.deck {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  height: 100vh;
+}
+
+.slide {
+  min-width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(138, 106, 74, 0.04) 0%, transparent 40%),
+    linear-gradient(225deg, rgba(212, 128, 64, 0.04) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(42, 36, 32, 0.015) 60px, rgba(42, 36, 32, 0.015) 61px),
+    repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(42, 36, 32, 0.015) 60px, rgba(42, 36, 32, 0.015) 61px);
+  pointer-events: none;
+}
+
+.slideInner {
+  position: relative;
+  z-index: 1;
+  width: var(--slide-w);
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+.cover {
+  text-align: center;
+}
+
+.cover .fragments {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 32px;
+  height: 80px;
+  position: relative;
+}
+
+.cover .fragments .piece {
+  display: block;
+  position: absolute;
+  border: 1px solid var(--line-strong);
+}
+
+.cover .fragments .piece:nth-child(1) {
+  width: 60px; height: 40px;
+  background: var(--accent);
+  opacity: 0.4;
+  transform: rotate(15deg);
+  top: 10px; left: calc(50% - 80px);
+}
+
+.cover .fragments .piece:nth-child(2) {
+  width: 50px; height: 50px;
+  background: var(--accent-warm);
+  opacity: 0.3;
+  transform: rotate(30deg);
+  top: 20px; left: calc(50% - 10px);
+}
+
+.cover .fragments .piece:nth-child(3) {
+  width: 45px; height: 35px;
+  background: var(--text);
+  opacity: 0.08;
+  transform: rotate(-10deg);
+  top: 5px; left: calc(50% + 40px);
+}
+
+.cover .fragments .piece:nth-child(4) {
+  width: 35px; height: 35px;
+  border-color: var(--accent);
+  opacity: 0.2;
+  transform: rotate(45deg);
+  top: 30px; left: calc(50% - 50px);
+}
+
+.cover h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(44px, 8vw, 88px);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.cover h1 .accent {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.cover .subtitle {
+  margin-top: 12px;
+  font-size: clamp(15px, 2vw, 22px);
+  font-weight: 300;
+  color: var(--text-soft);
+  letter-spacing: 0.04em;
+}
+
+.cover .meta {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.cover .meta span {
+  display: inline-block;
+  padding: 0 14px;
+  border-left: 1px solid rgba(90, 82, 72, 0.2);
+}
+
+.cover .meta span:first-child { border-left: 0; }
+
+.content {
+  text-align: left;
+}
+
+.content h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 400;
+  line-height: 1.12;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.content h2 .accent {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.content h2 .accent-warm {
+  color: var(--accent-warm);
+  font-style: italic;
+}
+
+.content p {
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.8;
+  color: var(--text-soft);
+  max-width: 680px;
+  margin-bottom: 14px;
+}
+
+.content .lead {
+  font-size: clamp(17px, 1.8vw, 20px);
+  line-height: 1.75;
+  color: var(--text);
+  font-weight: 400;
+}
+
+.splitLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.splitLine .seg {
+  flex: 1;
+  height: 1px;
+  background: var(--line-strong);
+  transform: skewX(-20deg);
+}
+
+.splitLine .diamond {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.twoCol .card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  position: relative;
+  background: rgba(221, 214, 204, 0.4);
+}
+
+.twoCol .card::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 16px;
+  height: 16px;
+  border-top: 2px solid var(--accent-warm);
+  border-right: 2px solid var(--accent-warm);
+  opacity: 0.6;
+}
+
+.twoCol .card h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.twoCol .card p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.artistsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.artistsGrid .profile {
+  padding: 20px;
+  position: relative;
+}
+
+.artistsGrid .profile:nth-child(1) {
+  border-right: 2px solid var(--line);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+}
+
+.artistsGrid .profile .name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.artistsGrid .profile .era {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.artistsGrid .profile p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.galleryCube {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.galleryCube .piece {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  transform: rotate(var(--r, 0deg));
+}
+
+.galleryCube .piece:nth-child(1) {
+  background: linear-gradient(135deg, #d4c8b8, #c8b8a4);
+  --r: -1deg;
+}
+
+.galleryCube .piece:nth-child(2) {
+  background: linear-gradient(135deg, #c8bcb0, #b8a898);
+  --r: 1deg;
+}
+
+.galleryCube .piece:nth-child(3) {
+  background: linear-gradient(135deg, #d0c4b0, #c0b09c);
+  --r: -0.5deg;
+}
+
+.galleryCube .piece .label {
+  background: rgba(232, 228, 220, 0.7);
+  padding: 4px 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.quote {
+  text-align: center;
+}
+
+.quote blockquote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(24px, 3.8vw, 42px);
+  line-height: 1.3;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.quote blockquote::before {
+  content: '\201C';
+  display: block;
+  font-size: 64px;
+  line-height: 0.4;
+  color: var(--accent);
+  opacity: 0.3;
+  margin-bottom: 16px;
+}
+
+.quote cite {
+  display: block;
+  margin-top: 24px;
+  font-size: 16px;
+  font-style: normal;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.pageNum {
+  position: absolute;
+  bottom: 28px;
+  right: 40px;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  z-index: 2;
+}
+
+.nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 100;
+  background: rgba(232, 228, 220, 0.88);
+  backdrop-filter: blur(12px);
+  padding: 7px 16px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.nav button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-size: 15px;
+}
+
+.nav button:hover {
+  background: rgba(42, 36, 32, 0.06);
+}
+
+.nav .dots {
+  display: flex;
+  gap: 5px;
+}
+
+.nav .dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(42, 36, 32, 0.12);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.nav .dots span.active {
+  background: var(--accent);
+  width: 20px;
+  border-radius: 2px;
+}
+
+.nav .slideLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 50px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .slide { padding: 24px; }
+  .twoCol { grid-template-columns: 1fr; gap: 16px; }
+  .artistsGrid { grid-template-columns: 1fr; }
+  .artistsGrid .profile:nth-child(1) { clip-path: none; border-right: 0; }
+  .galleryCube { grid-template-columns: 1fr; }
+  .pageNum { right: 24px; bottom: 80px; }
+  .nav { bottom: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<section class="slide cover">
+  <div class="slideInner">
+    <div class="fragments">
+      <span class="piece"></span>
+      <span class="piece"></span>
+      <span class="piece"></span>
+      <span class="piece"></span>
+    </div>
+    <h1>碎片的 <span class="accent">交响</span></h1>
+    <p class="subtitle">立体主义 · 毕加索和布拉克的立体革命</p>
+    <p class="meta">
+      <span>Cubism</span>
+      <span>1907–1914</span>
+      <span>多维之眼</span>
+    </p>
+  </div>
+  <span class="pageNum">01 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>立体主义的 <span class="accent">革命</span></h2>
+    <p class="lead">立体主义彻底打破了自文艺复兴以来的单一透视法，第一次在二维平面上呈现三维空间的多重视角。</p>
+    <p>1907 年，毕加索的《亚威农少女》宣告了立体主义的诞生。此后七年间，毕加索和布拉克在巴黎的工作室里，如科学家般严谨地拆解和重构视觉世界——将物体分解为几何碎片，再重新组合，让观看者同时看到物体的正面、侧面和背面。</p>
+    <p>这不仅是绘画的革命，更是<span class="accent" style="font-weight:500;">观看方式的革命</span>——它告诉我们：世界不止一个视角。</p>
+    <div class="splitLine">
+      <span class="seg"></span>
+      <span class="diamond"></span>
+      <span class="seg"></span>
+    </div>
+  </div>
+  <span class="pageNum">02 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>两位 <span class="accent">先驱</span></h2>
+    <div class="artistsGrid">
+      <div class="profile">
+        <div class="name">巴勃罗·毕加索</div>
+        <div class="era">1881–1973</div>
+        <p>立体主义的开创者，也是 20 世纪最富创造力的艺术家。《亚威农少女》撕碎了古典美学的面纱，而《吉他手》系列则将人物与空间彻底碎片化，开启了分析立体主义的时代。</p>
+      </div>
+      <div class="profile">
+        <div class="name">乔治·布拉克</div>
+        <div class="era">1882–1963</div>
+        <p>与毕加索共同发明了立体主义。他的风景画将房屋和树木简化为几何立方体——"立体主义"因此得名。布拉克还发明了拼贴技法，将报纸、壁纸引入绘画。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">03 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>立体主义 <span class="accent-warm">美学</span></h2>
+    <div class="twoCol">
+      <div class="card">
+        <h3>几何分解</h3>
+        <p>物体被还原为圆柱体、球体、锥体等基本几何形。人物、静物、风景都被拆解为相互交错的平面碎片。</p>
+      </div>
+      <div class="card">
+        <h3>多重视角</h3>
+        <p>在同一画面中同时呈现物体的正面、侧面和背面。打破了固定视点的限制，时间被引入了空间。</p>
+      </div>
+      <div class="card">
+        <h3>有限色彩</h3>
+        <p>分析立体主义时期几乎只使用棕、灰、赭石等中性色，避免色彩分散对形式的关注。色彩服务于结构。</p>
+      </div>
+      <div class="card">
+        <h3>拼贴介入</h3>
+        <p>布拉克和毕加索将报纸、乐谱、墙纸碎片粘贴到画布上，模糊了艺术与日常生活的边界。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">04 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>经典 <span class="accent">作品</span></h2>
+    <div class="galleryCube">
+      <div class="piece">
+        <span class="label">亚威农少女 · 毕加索</span>
+      </div>
+      <div class="piece">
+        <span class="label">埃斯塔克的房屋 · 布拉克</span>
+      </div>
+      <div class="piece">
+        <span class="label">吉他 · 毕加索</span>
+      </div>
+    </div>
+    <p style="margin-top:20px;font-size:14px;color:var(--text-muted);">每一件作品都是一个多棱镜，折射出全新的观看之道。</p>
+    <div class="splitLine">
+      <span class="seg"></span>
+      <span class="diamond"></span>
+      <span class="seg"></span>
+    </div>
+  </div>
+  <span class="pageNum">05 / 06</span>
+</section>
+
+<section class="slide quote">
+  <div class="slideInner">
+    <blockquote>
+      我不画我所看到的，我画我所知道的。
+      <cite>—— 巴勃罗·毕加索</cite>
+    </blockquote>
+    <p style="margin-top:32px;color:var(--text-muted);font-size:14px;letter-spacing:0.04em;">
+      立体主义 · 从单一视角到多维世界
+    </p>
+  </div>
+  <span class="pageNum">06 / 06</span>
+</section>
+
+</div>
+
+<nav class="nav" id="nav">
+  <button onclick="prevSlide()" aria-label="上一页">&#8592;</button>
+  <span class="slideLabel" id="slideLabel">1 / 6</span>
+  <div class="dots" id="dots"></div>
+  <button onclick="nextSlide()" aria-label="下一页">&#8594;</button>
+</nav>
+
+<script>
+const deck = document.getElementById('deck');
+const slides = deck.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+const dotsContainer = document.getElementById('dots');
+const slideLabel = document.getElementById('slideLabel');
+
+for (let i = 0; i < total; i++) {
+  const dot = document.createElement('span');
+  dot.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(dot);
+}
+
+function update() {
+  deck.style.transform = `translateX(-${current * 100}vw)`;
+  dotsContainer.querySelectorAll('span').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+  slideLabel.textContent = `${current + 1} / ${total}`;
+}
+
+function goTo(n) {
+  current = Math.max(0, Math.min(n, total - 1));
+  update();
+}
+
+function nextSlide() { goTo(current + 1); }
+function prevSlide() { goTo(current - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+});
+
+update();
+</script>
+</body>
+</html>

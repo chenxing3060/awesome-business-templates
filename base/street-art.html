@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>街头艺术 · 从班克斯到巴斯奎特</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #2a2a2a; color: #2a2a2a; overflow: hidden; height: 100vh; width: 100vw; }
+  .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+  .slides { display: flex; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); height: 100%; }
+  .slide { min-width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 40px; position: relative; overflow: hidden; background: #ece8e4; }
+
+  /* 喷漆飞溅效果 */
+  .slide::before { content: ''; position: absolute; top: -40px; right: -60px; width: 280px; height: 280px; background: radial-gradient(circle, rgba(224,64,64,0.15) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+  .slide::after { content: ''; position: absolute; bottom: -80px; left: -40px; width: 350px; height: 350px; background: radial-gradient(circle, rgba(224,64,64,0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+
+  /* 邮票边框 */
+  .stamp-border { position: relative; padding: 8px; border: 3px solid #2a2a2a; max-width: 90%; }
+  .stamp-border::before { content: ''; position: absolute; inset: -12px; border: 2px dashed rgba(42,42,42,0.3); border-radius: 4px; pointer-events: none; }
+
+  .slide-content { position: relative; z-index: 2; text-align: center; max-width: 820px; width: 100%; }
+  .tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; padding: 6px 14px; border: 2px solid #2a2a2a; margin-bottom: 24px; color: #2a2a2a; }
+  .tag-red { border-color: #e04040; color: #e04040; }
+  .slide h1 { font-size: clamp(2.4rem, 7vw, 5rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; }
+  .slide h1 .highlight { color: #e04040; }
+  .slide h2 { font-size: clamp(1.6rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .slide p { font-size: clamp(0.95rem, 2vw, 1.2rem); line-height: 1.7; color: #4a4a4a; max-width: 660px; margin: 0 auto 20px; }
+  .slide p.lead { font-size: clamp(1.05rem, 2.5vw, 1.35rem); color: #2a2a2a; font-weight: 400; }
+  .slide .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #888; margin-top: 12px; }
+
+  /* 粗线条装饰 */
+  .stripe { width: 80px; height: 4px; background: #e04040; margin: 16px auto; }
+  .stripe-black { background: #2a2a2a; }
+
+  /* 喷漆飞溅 dot */
+  .splatter { position: absolute; pointer-events: none; }
+  .splatter .dot { position: absolute; border-radius: 50%; background: #e04040; }
+  .splatter .dot:nth-child(1) { width: 12px; height: 12px; top: 20%; left: 15%; opacity: 0.25; }
+  .splatter .dot:nth-child(2) { width: 6px; height: 6px; top: 35%; left: 10%; opacity: 0.2; }
+  .splatter .dot:nth-child(3) { width: 18px; height: 18px; top: 70%; right: 20%; opacity: 0.15; }
+  .splatter .dot:nth-child(4) { width: 8px; height: 8px; bottom: 25%; right: 12%; opacity: 0.2; }
+  .splatter .dot:nth-child(5) { width: 14px; height: 14px; top: 10%; right: 35%; opacity: 0.18; }
+
+  /* 底部导航 */
+  .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; align-items: center; gap: 12px; padding: 18px 24px; background: rgba(42,42,42,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .nav-bar .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(236,232,228,0.25); border: none; cursor: pointer; transition: all 0.3s; }
+  .nav-bar .dot.active { background: #e04040; transform: scale(1.3); }
+  .nav-bar .dot:hover { background: rgba(236,232,228,0.6); }
+  .nav-bar .page-info { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: rgba(236,232,228,0.5); margin-left: 4px; letter-spacing: 0.1em; }
+
+  /* Slide-specific */
+  .slide-cover { background: #2a2a2a; }
+  .slide-cover .slide-content * { color: #ece8e4; }
+  .slide-cover p { color: rgba(236,232,228,0.75); }
+  .slide-cover .stripe { background: #e04040; }
+  .slide-cover .tag { border-color: #e04040; color: #e04040; }
+
+  .slide-dark { background: #3a3a3a; }
+  .slide-dark .slide-content * { color: #ece8e4; }
+  .slide-dark p { color: rgba(236,232,228,0.75); }
+  .slide-dark .tag { border-color: #e04040; color: #e04040; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; text-align: left; margin-top: 24px; }
+  .grid-2 .card { padding: 20px; border-left: 3px solid #e04040; }
+  .grid-2 .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+  .grid-2 .card p { font-size: 0.9rem; margin: 0; }
+  .slide-dark .grid-2 .card { border-left-color: #e04040; }
+
+  .quote-block { font-family: 'JetBrains Mono', monospace; font-size: clamp(1rem, 2.5vw, 1.5rem); font-weight: 400; line-height: 1.6; padding: 30px; border: 2px solid #2a2a2a; max-width: 700px; margin: 0 auto; position: relative; }
+  .quote-block::before { content: '"'; font-size: 4rem; position: absolute; top: -10px; left: 15px; color: #e04040; font-family: 'Inter', sans-serif; line-height: 1; }
+  .slide-dark .quote-block { border-color: #ece8e4; color: #ece8e4; }
+
+  /* 响应式 */
+  @media (max-width: 640px) {
+    .slide { padding: 40px 20px; }
+    .grid-2 { grid-template-columns: 1fr; gap: 16px; }
+    .nav-bar { padding: 12px 16px; gap: 8px; }
+    .stamp-border { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+  <div class="slides" id="slides">
+
+    <!-- Slide 1: 封面 -->
+    <div class="slide slide-cover">
+      <div class="splatter">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+      <div class="slide-content">
+        <div class="tag tag-red">街头革命</div>
+        <div class="stamp-border">
+          <h1>街头<br><span class="highlight">艺术</span></h1>
+        </div>
+        <div class="stripe"></div>
+        <p class="lead">从班克斯到巴斯奎特 — 涂鸦如何征服艺术世界</p>
+        <p class="meta">STREET ART · 1970s — PRESENT</p>
+      </div>
+    </div>
+
+    <!-- Slide 2: 班克斯 -->
+    <div class="slide">
+      <div class="splatter">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+      <div class="slide-content">
+        <div class="tag">BANKSY</div>
+        <h2>匿名的<span class="highlight">声音</span></h2>
+        <div class="stripe"></div>
+        <p class="lead">班克斯，全球最神秘的街头艺术家。他的模板喷绘出现在世界各地的墙壁上，以黑色幽默与尖锐政治评论闻名。</p>
+        <p>《气球女孩》《Love is in the Bin》—— 他的作品在拍卖场上自我毁灭的瞬间，成为艺术史上最震撼的行为艺术之一。</p>
+        <div class="meta">"艺术应该安慰受困扰的人，并困扰那些安逸的人。"</div>
+      </div>
+    </div>
+
+    <!-- Slide 3: 巴斯奎特 -->
+    <div class="slide slide-dark">
+      <div class="slide-content">
+        <div class="tag tag-red">JEAN-MICHEL BASQUIAT</div>
+        <h2>王冠的<span class="highlight">象征</span></h2>
+        <div class="stripe"></div>
+        <p class="lead">从曼哈顿下城的涂鸦墙到全球顶级画廊，巴斯奎特在短短十年间重新定义了当代艺术。</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>SAMO©</h3>
+            <p>1978年与阿尔·迪亚兹共同创作的匿名涂鸦项目，以诗意口号震撼纽约艺术圈。</p>
+          </div>
+          <div class="card">
+            <h3>王冠</h3>
+            <p>巴斯奎特标志性的三尖王冠符号，成为他作品中权力与身份的最强宣言。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: 涂鸦文化 -->
+    <div class="slide">
+      <div class="slide-content">
+        <div class="tag">GRAFFITI CULTURE</div>
+        <h2>从<span class="highlight">地下</span>到主流</h2>
+        <div class="stripe"></div>
+        <p class="lead">涂鸦起源于20世纪70年代的纽约地铁，是嘻哈文化四大元素之一。它曾是破坏公物的代名词，如今却成为博物馆的座上宾。</p>
+        <p>基思·哈林、让-米歇尔·巴斯奎特、谢泼德·费尔雷——这些名字从街头走向殿堂，证明了艺术不需要白立方才能存在。</p>
+        <div class="meta">从地铁车厢到苏富比拍卖行 · 街头艺术的逆袭之路</div>
+      </div>
+    </div>
+
+    <!-- Slide 5: 技术手法 -->
+    <div class="slide slide-dark">
+      <div class="slide-content">
+        <div class="tag tag-red">TECHNIQUES</div>
+        <h2>喷罐与<span class="highlight">模板</span></h2>
+        <div class="stripe"></div>
+        <p class="lead">街头艺术的核心工具：喷漆罐、模板、马克笔、粘贴海报。每一种工具都定义了一种风格。</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>模板喷绘</h3>
+            <p>班克斯的标志性技法，快速而精准，适合在夜间迅速完成作品。</p>
+          </div>
+          <div class="card">
+            <h3>自由涂鸦</h3>
+            <p>巴斯奎特式的即兴创作，线条狂放，文字与图像交织如意识流。</p>
+          </div>
+          <div class="card">
+            <h3>小麦糊</h3>
+            <p>用小麦粉制成的天然胶水粘贴海报，谢泼德·费尔雷的OBEY系列即用此法。</p>
+          </div>
+          <div class="card">
+            <h3>装置介入</h3>
+            <p>将街头现成品融入作品，如班克斯在动物园门口的动物涂鸦装置。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: 结语 -->
+    <div class="slide">
+      <div class="splatter">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+      <div class="slide-content">
+        <div class="tag">FINAL</div>
+        <div class="quote-block">
+          艺术不是一面镜子，而是一把锤子。
+          <div style="font-family:'Inter',sans-serif;font-size:0.85rem;margin-top:16px;color:#e04040;font-weight:700;">—— 街头艺术的精神</div>
+        </div>
+        <div class="stripe" style="margin-top:30px;"></div>
+        <p>每一面墙都是一块画布。每一个街角都可能是画廊。<br>街头艺术告诉我们：创造力不属于精英，它属于每一个人。</p>
+        <div class="meta">班克斯 · 巴斯奎特 · 基思·哈林 · 谢泼德·费尔雷</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 底部导航 -->
+  <div class="nav-bar" id="navBar">
+    <button class="dot active" data-index="0"></button>
+    <button class="dot" data-index="1"></button>
+    <button class="dot" data-index="2"></button>
+    <button class="dot" data-index="3"></button>
+    <button class="dot" data-index="4"></button>
+    <button class="dot" data-index="5"></button>
+    <span class="page-info" id="pageInfo">01 / 06</span>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const slides = document.getElementById('slides');
+    const dots = document.querySelectorAll('.nav-bar .dot');
+    const pageInfo = document.getElementById('pageInfo');
+    const total = dots.length;
+    let current = 0;
+
+    function goTo(index) {
+      if (index < 0) index = 0;
+      if (index >= total) index = total - 1;
+      if (index === current) return;
+      current = index;
+      slides.style.transform = 'translateX(-' + (current * 100) + 'vw)';
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      pageInfo.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', function() {
+        goTo(parseInt(this.dataset.index));
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
+    });
+
+    let touchStartX = 0;
+    document.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; });
+    document.addEventListener('touchend', function(e) {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+    });
+  })();
+</script>
+</body>
+</html>

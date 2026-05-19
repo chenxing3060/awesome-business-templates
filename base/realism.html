@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>写实主义 · 泥土与光影的真相</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #e8e4dc;
+  --surface: #ddd8cf;
+  --text: #2c2822;
+  --text-soft: #5a5448;
+  --text-muted: #8a8276;
+  --accent: #8a7a5a;
+  --accent-blue: #6a7a8a;
+  --accent-warm: #9a8a6a;
+  --line: rgba(44, 40, 34, 0.10);
+  --shadow: 0 4px 32px rgba(44, 40, 34, 0.08);
+  --slide-w: min(1100px, 92vw);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.deck {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  height: 100vh;
+}
+
+.slide {
+  min-width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 70%, rgba(138, 122, 90, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(106, 122, 138, 0.06) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(44, 40, 34, 0.015) 2px, rgba(44, 40, 34, 0.015) 3px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(44, 40, 34, 0.008) 40px, rgba(44, 40, 34, 0.008) 41px);
+  pointer-events: none;
+}
+
+.slideInner {
+  position: relative;
+  z-index: 1;
+  width: var(--slide-w);
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+.cover {
+  text-align: center;
+}
+
+.cover .textureBar {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 32px;
+}
+
+.cover .textureBar span {
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent);
+  opacity: 0.5;
+}
+
+.cover .textureBar span:nth-child(1) { width: 30px; }
+.cover .textureBar span:nth-child(2) { width: 50px; }
+.cover .textureBar span:nth-child(3) { width: 80px; }
+.cover .textureBar span:nth-child(4) { width: 50px; }
+.cover .textureBar span:nth-child(5) { width: 30px; }
+
+.cover h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(44px, 8vw, 88px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+.cover h1 .accent {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.cover .subtitle {
+  margin-top: 16px;
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 300;
+  color: var(--text-soft);
+  letter-spacing: 0.04em;
+}
+
+.cover .sketchLine {
+  margin: 28px auto 0;
+  width: 180px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.cover .meta {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.cover .meta span {
+  display: inline-block;
+  padding: 0 14px;
+  border-left: 1px solid rgba(90, 84, 72, 0.2);
+}
+
+.cover .meta span:first-child { border-left: 0; }
+
+.content {
+  text-align: left;
+}
+
+.content h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.content h2 .accent {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.content p {
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.8;
+  color: var(--text-soft);
+  max-width: 680px;
+  margin-bottom: 14px;
+}
+
+.content .lead {
+  font-size: clamp(17px, 1.8vw, 20px);
+  line-height: 1.75;
+  color: var(--text);
+  font-weight: 400;
+}
+
+.content .sketchBlock {
+  padding: 20px 0 20px 24px;
+  margin: 16px 0;
+  border-left: 2px solid var(--accent);
+  background: rgba(138, 122, 90, 0.04);
+}
+
+.content .sketchBlock p {
+  font-size: clamp(14px, 1.3vw, 16px);
+  margin-bottom: 0;
+  font-style: italic;
+  color: var(--text);
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 8px;
+}
+
+.twoCol .item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.twoCol .item h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.twoCol .item p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.mastersGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.mastersGrid .card {
+  padding: 20px;
+  border: 1px solid var(--line);
+  background: rgba(221, 216, 207, 0.4);
+}
+
+.mastersGrid .card .name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+
+.mastersGrid .card .era {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.mastersGrid .card p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 0;
+  color: var(--text-soft);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.gallery .piece {
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.gallery .piece:nth-child(1) { background: linear-gradient(135deg, #d8d0c4, #c8beb0); }
+.gallery .piece:nth-child(2) { background: linear-gradient(135deg, #c8c4bc, #b8b0a4); }
+.gallery .piece:nth-child(3) { background: linear-gradient(135deg, #d4ccc0, #c0b8a8); }
+
+.gallery .piece .label {
+  background: rgba(232, 228, 220, 0.8);
+  padding: 6px 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.quote {
+  text-align: center;
+}
+
+.quote blockquote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(24px, 3.8vw, 42px);
+  line-height: 1.35;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.quote blockquote::before {
+  content: '\201C';
+  display: block;
+  font-size: 64px;
+  line-height: 0.4;
+  color: var(--accent);
+  opacity: 0.3;
+  margin-bottom: 16px;
+}
+
+.quote cite {
+  display: block;
+  margin-top: 24px;
+  font-size: 16px;
+  font-style: normal;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.pageNum {
+  position: absolute;
+  bottom: 28px;
+  right: 40px;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  z-index: 2;
+}
+
+.nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 100;
+  background: rgba(232, 228, 220, 0.88);
+  backdrop-filter: blur(12px);
+  padding: 7px 16px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.nav button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-size: 15px;
+}
+
+.nav button:hover {
+  background: rgba(44, 40, 34, 0.06);
+}
+
+.nav .dots {
+  display: flex;
+  gap: 5px;
+}
+
+.nav .dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(44, 40, 34, 0.12);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.nav .dots span.active {
+  background: var(--accent);
+  width: 20px;
+  border-radius: 2px;
+}
+
+.nav .slideLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 50px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .slide { padding: 24px; }
+  .twoCol { grid-template-columns: 1fr; gap: 20px; }
+  .mastersGrid { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr; }
+  .pageNum { right: 24px; bottom: 80px; }
+  .nav { bottom: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<section class="slide cover">
+  <div class="slideInner">
+    <div class="textureBar">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <h1>泥土与光影的<span class="accent">真相</span></h1>
+    <p class="subtitle">写实主义绘画 · 从库尔贝到霍珀</p>
+    <div class="sketchLine"></div>
+    <p class="meta">
+      <span>Realism</span>
+      <span>19–20 世纪</span>
+      <span>质朴之眼</span>
+    </p>
+  </div>
+  <span class="pageNum">01 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>写实主义的<span class="accent">精神</span></h2>
+    <p class="lead">写实主义拒绝理想化的粉饰，将目光投向普通人——农民、工人、城市边缘人——描绘他们真实而朴素的生活。</p>
+    <p>19 世纪中期，居斯塔夫·库尔贝高举"画你所见"的旗帜，用粗犷的笔触和大地色系记录劳动阶层的尊严。此后，米勒的田园颂歌、霍珀的城市孤寂，将写实精神延伸至不同的时代与空间。</p>
+    <div class="sketchBlock">
+      <p>"我不会画天使，因为我从未见过天使。" —— 居斯塔夫·库尔贝</p>
+    </div>
+  </div>
+  <span class="pageNum">02 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>写实 <span class="accent">巨匠</span></h2>
+    <div class="mastersGrid">
+      <div class="card">
+        <div class="name">居斯塔夫·库尔贝</div>
+        <div class="era">1819–1877</div>
+        <p>写实主义的旗手。《采石工》以近乎挑衅的直白描绘体力劳动者，拒绝浪漫主义的修饰，宣告了"丑"也可以成为艺术的主角。</p>
+      </div>
+      <div class="card">
+        <div class="name">让-弗朗索瓦·米勒</div>
+        <div class="era">1814–1875</div>
+        <p>用画笔歌颂土地与劳作的尊严。《拾穗者》中三个弯腰的农妇成为了田园写实的不朽符号，画面中透着温暖而沉重的诗意。</p>
+      </div>
+      <div class="card">
+        <div class="name">爱德华·霍珀</div>
+        <div class="era">1882–1967</div>
+        <p>美国写实的孤独诗人。《夜鹰》中深夜餐馆的疏离感，捕捉了现代都市生活中的孤寂与沉默，光影的运用堪称绝妙。</p>
+      </div>
+      <div class="card">
+        <div class="name">温斯洛·霍默</div>
+        <div class="era">1836–1910</div>
+        <p>捕捉大海与自然的真实力量。他的水彩和油画以粗犷的笔触描绘渔民与海洋的搏斗，气势磅礴而不失真实质感。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">03 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>质朴的 <span class="accent">力量</span></h2>
+    <p class="lead">写实主义的美学扎根于泥土与汗水之中，它告诉我们——最平凡的事物往往蕴含着最深沉的力量。</p>
+    <div class="twoCol">
+      <div class="item">
+        <h3>日常的庄严</h3>
+        <p>米勒将祈祷的农民、播种的农夫提升到宗教画的高度，平凡的劳作被赋予了纪念碑式的庄重与肃穆。</p>
+      </div>
+      <div class="item">
+        <h3>城市的目光</h3>
+        <p>霍珀笔下的加油站、旅馆房间、深夜咖啡馆——美国现代生活的孤独被凝固在锐利的光影中，安静而震撼。</p>
+      </div>
+      <div class="item">
+        <h3>朴素的色彩</h3>
+        <p>大地色、土褐、灰蓝——写实主义的调色盘拒绝华丽，用泥土般的质感传递真实的力量。</p>
+      </div>
+      <div class="item">
+        <h3>社会之眼</h3>
+        <p>库尔贝的《奥南的葬礼》将普通人而非神祇或英雄放在巨大画布的中心，这本身就是一种宣言。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">04 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>经典 <span class="accent">作品</span></h2>
+    <div class="gallery">
+      <div class="piece">
+        <span class="label">采石工 · 库尔贝</span>
+      </div>
+      <div class="piece">
+        <span class="label">拾穗者 · 米勒</span>
+      </div>
+      <div class="piece">
+        <span class="label">夜鹰 · 霍珀</span>
+      </div>
+    </div>
+    <p style="margin-top:20px;font-size:14px;color:var(--text-muted);">每一幅画都锚定在真实的时间和空间中，让平凡变得不朽。</p>
+  </div>
+  <span class="pageNum">05 / 06</span>
+</section>
+
+<section class="slide quote">
+  <div class="slideInner">
+    <blockquote>
+      美在真实之中，平凡之中蕴含着最伟大的力量。
+      <cite>—— 居斯塔夫·库尔贝</cite>
+    </blockquote>
+    <p style="margin-top:32px;color:var(--text-muted);font-size:14px;letter-spacing:0.04em;">
+      写实主义 · 用真实的眼睛看世界
+    </p>
+  </div>
+  <span class="pageNum">06 / 06</span>
+</section>
+
+</div>
+
+<nav class="nav" id="nav">
+  <button onclick="prevSlide()" aria-label="上一页">&#8592;</button>
+  <span class="slideLabel" id="slideLabel">1 / 6</span>
+  <div class="dots" id="dots"></div>
+  <button onclick="nextSlide()" aria-label="下一页">&#8594;</button>
+</nav>
+
+<script>
+const deck = document.getElementById('deck');
+const slides = deck.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+const dotsContainer = document.getElementById('dots');
+const slideLabel = document.getElementById('slideLabel');
+
+for (let i = 0; i < total; i++) {
+  const dot = document.createElement('span');
+  dot.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(dot);
+}
+
+function update() {
+  deck.style.transform = `translateX(-${current * 100}vw)`;
+  dotsContainer.querySelectorAll('span').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+  slideLabel.textContent = `${current + 1} / ${total}`;
+}
+
+function goTo(n) {
+  current = Math.max(0, Math.min(n, total - 1));
+  update();
+}
+
+function nextSlide() { goTo(current + 1); }
+function prevSlide() { goTo(current - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+});
+
+update();
+</script>
+</body>
+</html>

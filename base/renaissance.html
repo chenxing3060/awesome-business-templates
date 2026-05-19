@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文艺复兴 · 人文之光</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter','system-ui',sans-serif;background:#e8e0d4;color:#3a3024;overflow:hidden;height:100vh}
+    .deck{position:relative;width:100%;height:100vh;overflow:hidden}
+    .slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4rem 6rem;opacity:0;transition:opacity .6s ease;pointer-events:none;text-align:center}
+    .slide.active{opacity:1;pointer-events:auto;z-index:2}
+    .slide.exit{opacity:0;z-index:1}
+
+    .arch{position:absolute;pointer-events:none;opacity:.06}
+    .arch svg{height:100%}
+    .arch-left{top:0;left:0}
+    .arch-right{top:0;right:0}
+    .arch-bottom{position:absolute;pointer-events:none;opacity:.04}
+    .arch-bottom svg{width:100%}
+
+    .parchment-bg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:.04;background:radial-gradient(ellipse at 30% 40%,#8a7a5a 0%,transparent 60%),radial-gradient(ellipse at 70% 60%,#c84030 0%,transparent 50%)}
+
+    .classic-border{position:absolute;pointer-events:none;opacity:.08}
+    .classic-border svg{width:120px;height:120px}
+
+    .slide h1{font-family:'Playfair Display','Georgia',serif;font-weight:700;font-size:4rem;color:#3a2a1a;margin-bottom:.4rem;position:relative;z-index:2}
+    .slide h1 .red{color:#c84030}
+    .slide h2{font-family:'Playfair Display','Georgia',serif;font-weight:700;font-size:2.4rem;color:#3a2a1a;margin-bottom:.3rem}
+    .slide p{font-weight:300;font-size:1.12rem;line-height:1.7;color:#5a5040;max-width:680px;position:relative;z-index:2}
+    .slide .sub{font-family:'Playfair Display','Georgia',serif;font-style:italic;font-size:1.3rem;color:#8a7a5a;margin-bottom:.5rem}
+    .badge{display:inline-block;border:1px solid #c84030;color:#c84030;padding:.2rem 1rem;font-size:.85rem;letter-spacing:.06em;margin-top:1.5rem;background:rgba(200,64,48,.05)}
+
+    .nav-bar{position:fixed;bottom:0;left:0;width:100%;height:56px;background:rgba(232,224,212,.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;gap:12px;z-index:100;border-top:1px solid rgba(138,122,90,.2)}
+    .nav-bar .dot{width:10px;height:10px;border-radius:50%;background:#b8b0a0;cursor:pointer;transition:all .3s;border:none}
+    .nav-bar .dot.active{background:#c84030;transform:scale(1.3);box-shadow:0 0 6px rgba(200,64,48,.4)}
+    .nav-bar .dot:hover{background:#8a7a5a}
+    .nav-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:101;width:48px;height:48px;background:rgba(232,224,212,.85);backdrop-filter:blur(4px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;color:#8a7a5a;font-size:1.2rem;border:1px solid rgba(138,122,90,.25)}
+    .nav-arrow:hover{background:#c84030;color:#fff;border-color:#c84030}
+    .nav-arrow.prev{left:20px}
+    .nav-arrow.next{right:20px}
+    .nav-arrow.hidden{opacity:0;pointer-events:none}
+
+    .col2{display:flex;gap:2.5rem;align-items:flex-start;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;max-width:900px}
+    .col2 .fig{flex:1;min-width:200px;max-width:300px;padding:1.5rem 1rem;border-top:3px solid #8a7a5a}
+    .col2 .fig h3{font-family:'Playfair Display','Georgia',serif;font-weight:700;font-size:1.4rem;color:#3a2a1a;margin-bottom:.2rem}
+    .col2 .fig .yr{font-size:.8rem;color:#8a8a7a}
+    .col2 .fig p{font-size:.9rem;line-height:1.5;margin-top:.3rem}
+
+    .line-divider{width:120px;height:1px;background:linear-gradient(90deg,transparent,#8a7a5a,transparent);margin:.5rem auto 1rem;position:relative;z-index:2}
+
+    @media(max-width:768px){
+      .slide{padding:2.5rem 1.5rem}
+      .slide h1{font-size:2.6rem}
+      .slide h2{font-size:1.7rem}
+      .slide p{font-size:1rem;max-width:100%}
+      .col2 .fig{padding:1rem .5rem;min-width:140px}
+      .nav-arrow{width:36px;height:36px;font-size:.9rem}
+      .nav-arrow.prev{left:8px}
+      .nav-arrow.next{right:8px}
+    }
+    @media(max-width:480px){
+      .slide h1{font-size:2rem}
+      .slide h2{font-size:1.4rem}
+      .slide .sub{font-size:1.1rem}
+    }
+  </style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- Slide 1: Title -->
+  <div class="slide active">
+    <div class="parchment-bg"></div>
+    <div class="arch-left arch"><svg viewBox="0 0 200 800" preserveAspectRatio="none"><path d="M200,800 L200,200 Q200,0 100,0 Q0,0 0,200 L0,800 Z" fill="#8a7a5a"/></svg></div>
+    <div class="arch-right arch"><svg viewBox="0 0 200 800" preserveAspectRatio="none"><path d="M0,800 L0,200 Q0,0 100,0 Q200,0 200,200 L200,800 Z" fill="#8a7a5a"/></svg></div>
+    <h1>文艺复兴</h1>
+    <p class="sub">Renaissance · 人文之光</p>
+    <div class="line-divider"></div>
+    <p>经历了千年的中世纪沉寂，欧洲迎来了一场伟大的觉醒。<br>艺术重新发现了人——人的美、人的智慧、人的尊严。</p>
+    <span class="badge">1400s — 1600s</span>
+    <div class="classic-border" style="bottom:80px;left:20px"><svg viewBox="0 0 120 120"><path d="M10,60 Q30,20 60,10 Q90,20 110,60" stroke="#8a7a5a" stroke-width="1.5" fill="none"/><circle cx="60" cy="10" r="4" fill="#c84030" opacity=".4"/></svg></div>
+    <div class="classic-border" style="bottom:80px;right:20px"><svg viewBox="0 0 120 120"><path d="M110,60 Q90,20 60,10 Q30,20 10,60" stroke="#8a7a5a" stroke-width="1.5" fill="none"/><circle cx="60" cy="10" r="4" fill="#c84030" opacity=".4"/></svg></div>
+  </div>
+
+  <!-- Slide 2: 达芬奇 -->
+  <div class="slide">
+    <div class="parchment-bg"></div>
+    <h2>列奥纳多·达·芬奇</h2>
+    <p class="sub">Leonardo da Vinci · 1452 — 1519</p>
+    <p>不仅是画家，更是科学家、发明家、解剖学家。<br>《蒙娜丽莎》的微笑藏着千年的秘密，<br>《最后的晚餐》将透视法推向巅峰。<br>"绘画是自然的孙子，是上帝的表亲。"</p>
+    <span class="badge">"一切知识都源于感知"</span>
+    <div class="classic-border" style="top:20px;right:30px"><svg viewBox="0 0 120 120"><path d="M60,0 L70,30 L100,40 L70,50 L60,80 L50,50 L20,40 L50,30Z" fill="#8a7a5a" opacity=".3"/></svg></div>
+  </div>
+
+  <!-- Slide 3: 米开朗基罗 & 拉斐尔 -->
+  <div class="slide">
+    <div class="parchment-bg"></div>
+    <div class="arch-bottom"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,20 Q300,0 600,20 Q900,40 1200,20 L1200,120 Z" fill="#8a7a5a" opacity=".05"/></svg></div>
+    <h2>米开朗基罗 · 拉斐尔</h2>
+    <div class="col2">
+      <div class="fig">
+        <h3>米开朗基罗</h3>
+        <span class="yr">Michelangelo · 1475 — 1564</span>
+        <p>雕塑《大卫》展现了人体的完美比例；西斯廷教堂天顶画《创世纪》是人类的创造力与神性对话的巅峰。</p>
+      </div>
+      <div class="fig" style="border-top-color:#c84030">
+        <h3>拉斐尔</h3>
+        <span class="yr">Raphael · 1483 — 1520</span>
+        <p>《雅典学院》将古希腊哲人汇聚一堂，成为文艺复兴人文主义精神的完美象征。他的圣母像温柔而崇高。</p>
+      </div>
+    </div>
+    <span class="badge">三杰鼎立 · 日月同辉</span>
+  </div>
+
+  <!-- Slide 4: 透视与技法 -->
+  <div class="slide">
+    <div class="parchment-bg"></div>
+    <div class="classic-border" style="top:15%;left:8%"><svg viewBox="0 0 120 120"><rect x="20" y="20" width="80" height="80" rx="2" fill="none" stroke="#8a7a5a" stroke-width="1" opacity=".4"/><line x1="20" y1="20" x2="100" y2="100" stroke="#8a7a5a" stroke-width=".5" opacity=".3"/><line x1="100" y1="20" x2="20" y2="100" stroke="#8a7a5a" stroke-width=".5" opacity=".3"/></svg></div>
+    <h2>透视法 · 人文主义</h2>
+    <p class="sub">文艺复兴的技术与精神</p>
+    <p>线性透视法的发明，让平面画布拥有了无限纵深。<br>油画技法的完善，让色彩更加丰富而持久。<br>但更重要的是——艺术开始描绘人的情感，赞颂人的价值。<br>人文主义，才是文艺复兴最伟大的遗产。</p>
+    <span class="badge">人，是万物的尺度</span>
+    <div class="classic-border" style="bottom:15%;right:10%"><svg viewBox="0 0 120 120"><path d="M60,0 L65,30 L95,35 L65,40 L60,70 L55,40 L25,35 L55,30Z" fill="#c84030" opacity=".2"/></svg></div>
+  </div>
+
+  <!-- Slide 5: 影响 -->
+  <div class="slide">
+    <div class="parchment-bg"></div>
+    <div class="arch-left arch" style="opacity:.04"><svg viewBox="0 0 200 800" preserveAspectRatio="none"><path d="M200,800 L200,200 Q200,0 100,0 Q0,0 0,200 L0,800 Z" fill="#c84030"/></svg></div>
+    <h2>觉醒的回响</h2>
+    <p class="sub">从佛罗伦萨到全世界</p>
+    <p>文艺复兴不仅改变了艺术，也改变了世界。<br>它推动了科学革命，启发了宗教改革，<br>为启蒙运动播下了种子。<br>今天，我们依然生活在文艺复兴的延长线上。</p>
+    <span class="badge">现代世界的黎明</span>
+  </div>
+
+  <!-- Slide 6: 结语 -->
+  <div class="slide">
+    <div class="parchment-bg"></div>
+    <div class="arch-bottom"><svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,120 L0,20 Q300,0 600,20 Q900,40 1200,20 L1200,120 Z" fill="#8a7a5a" opacity=".06"/></svg></div>
+    <h1>人的赞歌</h1>
+    <p class="sub">L'Uomo Universale</p>
+    <div class="line-divider"></div>
+    <p>文艺复兴留下了一个永恒的信念：<br>人，可以成为宇宙的全才。<br>追求知识，热爱美，创造不朽——<br>这是文艺复兴献给人类最珍贵的礼物。</p>
+    <span class="badge">美将拯救世界</span>
+  </div>
+
+</div>
+
+<button class="nav-arrow prev" id="prevBtn">‹</button>
+<button class="nav-arrow next" id="nextBtn">›</button>
+
+<div class="nav-bar" id="navBar"></div>
+
+<script>
+  (function(){var slides=document.querySelectorAll('.slide'),navBar=document.getElementById('navBar'),prevBtn=document.getElementById('prevBtn'),nextBtn=document.getElementById('nextBtn'),current=0;
+  function buildNav(){for(var i=0;i<slides.length;i++){var dot=document.createElement('button');dot.className='dot';dot.dataset.index=i;dot.addEventListener('click',function(){goTo(parseInt(this.dataset.index))});navBar.appendChild(dot)}}
+  function goTo(n){if(n===current)return;slides[current].classList.remove('active');slides[current].classList.add('exit');setTimeout(function(){slides[current].classList.remove('exit')},600);current=n;slides[current].classList.add('active');updateNav();updateArrows()}
+  function updateNav(){var dots=navBar.querySelectorAll('.dot');dots.forEach(function(d,i){d.classList.toggle('active',i===current)})}
+  function updateArrows(){prevBtn.classList.toggle('hidden',current===0);nextBtn.classList.toggle('hidden',current===slides.length-1)}
+  prevBtn.addEventListener('click',function(){if(current>0)goTo(current-1)});
+  nextBtn.addEventListener('click',function(){if(current<slides.length-1)goTo(current+1)});
+  document.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'&&current>0)goTo(current-1);if(e.key==='ArrowRight'&&current<slides.length-1)goTo(current+1)});
+  buildNav();updateNav();updateArrows()})();
+</script>
+</body>
+</html>

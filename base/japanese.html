@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>和风禅意 · 日本美学</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #f8f6f0; color: #3a3a32; overflow: hidden; height: 100vh; width: 100vw; }
+  .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+  .slides { display: flex; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); height: 100%; }
+  .slide { min-width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 40px; position: relative; overflow: hidden; background: #f8f6f0; }
+
+  /* 枯山水波纹 */
+  .wave-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .wave-bg svg { position: absolute; width: 200%; height: auto; opacity: 0.04; }
+  .wave-bg .wave1 { top: 15%; left: -10%; }
+  .wave-bg .wave2 { bottom: 10%; right: -20%; transform: rotate(180deg); }
+
+  /* 竹节分割线 */
+  .bamboo-divider { width: 2px; height: 60px; background: linear-gradient(180deg, transparent 0%, #5a7a5a 20%, #5a7a5a 80%, transparent 100%); margin: 16px auto; position: relative; }
+  .bamboo-divider::before { content: ''; position: absolute; top: 20%; left: -3px; width: 8px; height: 8px; background: #5a7a5a; border-radius: 50%; opacity: 0.4; }
+  .bamboo-divider::after { content: ''; position: absolute; bottom: 20%; left: -3px; width: 8px; height: 8px; background: #5a7a5a; border-radius: 50%; opacity: 0.4; }
+
+  /* 印章元素 */
+  .seal { display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; border: 2px solid #c23a2b; color: #c23a2b; font-family: 'Noto Serif SC', serif; font-size: 0.8rem; transform: rotate(-5deg); margin-bottom: 20px; opacity: 0.8; }
+  .seal-small { width: 36px; height: 36px; font-size: 0.55rem; margin-bottom: 0; display: inline-flex; }
+
+  .slide-content { position: relative; z-index: 2; text-align: center; max-width: 780px; width: 100%; }
+
+  .tag { display: inline-block; font-family: 'Noto Serif SC', serif; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.2em; padding: 6px 20px; border: 1px solid rgba(58,58,50,0.2); margin-bottom: 24px; color: #5a5a52; }
+  .tag-red { border-color: #c23a2b; color: #c23a2b; }
+
+  .slide h1 { font-family: 'Noto Serif SC', serif; font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 900; letter-spacing: 0.05em; line-height: 1.3; margin-bottom: 16px; color: #3a3a32; }
+  .slide h1 .highlight-red { color: #c23a2b; }
+  .slide h2 { font-family: 'Noto Serif SC', serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; letter-spacing: 0.03em; margin-bottom: 14px; color: #3a3a32; }
+  .slide h2 .highlight-red { color: #c23a2b; }
+  .slide p { font-size: clamp(0.9rem, 2vw, 1.1rem); line-height: 1.8; color: #5a5a52; max-width: 640px; margin: 0 auto 20px; font-weight: 300; letter-spacing: 0.02em; }
+  .slide p.lead { font-size: clamp(1rem, 2.5vw, 1.25rem); color: #3a3a32; font-weight: 400; }
+  .slide .meta { font-family: 'Noto Serif SC', serif; font-size: 0.75rem; color: rgba(58,58,50,0.4); margin-top: 14px; letter-spacing: 0.1em; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; margin-top: 24px; max-width: 680px; margin-left: auto; margin-right: auto; }
+  .grid-2 .card { padding: 20px 24px; border: 1px solid rgba(58,58,50,0.06); background: rgba(255,255,255,0.3); }
+  .grid-2 .card h3 { font-family: 'Noto Serif SC', serif; font-size: 1rem; font-weight: 700; color: #3a3a32; margin-bottom: 6px; }
+  .grid-2 .card h3 .highlight-red { color: #c23a2b; }
+  .grid-2 .card p { font-size: 0.8rem; margin: 0; color: #7a7a72; line-height: 1.7; }
+
+  .slide-warm { background: #f3f0e6; }
+  .slide-ink { background: #e8e4d8; }
+  .slide-dark { background: #2a2822; }
+  .slide-dark .slide-content * { color: #f8f6f0; }
+  .slide-dark p { color: rgba(248,246,240,0.65); }
+  .slide-dark p.lead { color: rgba(248,246,240,0.85); }
+  .slide-dark .tag { border-color: rgba(248,246,240,0.2); color: rgba(248,246,240,0.5); }
+  .slide-dark .tag-red { border-color: #c23a2b; color: #c23a2b; }
+  .slide-dark .grid-2 .card { border-color: rgba(248,246,240,0.06); background: rgba(255,255,255,0.02); }
+  .slide-dark .grid-2 .card h3 { color: #f8f6f0; }
+  .slide-dark .grid-2 .card p { color: rgba(248,246,240,0.5); }
+
+  .quote-block { font-family: 'Noto Serif SC', serif; font-size: clamp(1.1rem, 2.5vw, 1.5rem); font-weight: 400; line-height: 1.8; padding: 20px 28px; max-width: 640px; margin: 0 auto; color: #3a3a32; letter-spacing: 0.05em; }
+  .quote-block .attribution { font-size: 0.8rem; color: rgba(58,58,50,0.4); margin-top: 12px; font-family: 'Inter', sans-serif; letter-spacing: 0.05em; }
+
+  /* 导航 */
+  .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; align-items: center; gap: 12px; padding: 18px 24px; background: rgba(42,40,34,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .nav-bar .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(248,246,240,0.15); border: none; cursor: pointer; transition: all 0.3s; }
+  .nav-bar .dot.active { background: #c23a2b; transform: scale(1.4); }
+  .nav-bar .dot:hover { background: rgba(248,246,240,0.4); }
+  .nav-bar .page-info { font-family: 'Noto Serif SC', serif; font-size: 0.7rem; color: rgba(248,246,240,0.35); margin-left: 4px; letter-spacing: 0.1em; }
+
+  @media (max-width: 640px) {
+    .slide { padding: 40px 20px; }
+    .grid-2 { grid-template-columns: 1fr; gap: 12px; }
+    .nav-bar { padding: 12px 16px; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+  <div class="slides" id="slides">
+
+    <!-- Slide 1: 封面 -->
+    <div class="slide">
+      <div class="wave-bg">
+        <svg class="wave1" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 L1200,200 L0,200 Z" fill="#3a3a32"/></svg>
+        <svg class="wave2" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 L1200,200 L0,200 Z" fill="#3a3a32"/></svg>
+      </div>
+      <div class="slide-content">
+        <div class="seal">禅</div>
+        <div class="tag">和敬清寂</div>
+        <h1>和风<br><span class="highlight-red">禅意</span></h1>
+        <div class="bamboo-divider"></div>
+        <p class="lead">日本美学与禅意 — 在空寂中寻找无限</p>
+        <p class="meta">侘寂 · 幽玄 · 物哀 · 一期一会</p>
+      </div>
+    </div>
+
+    <!-- Slide 2: 侘寂 -->
+    <div class="slide slide-warm">
+      <div class="wave-bg">
+        <svg class="wave1" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 L1200,200 L0,200 Z" fill="#3a3a32"/></svg>
+      </div>
+      <div class="slide-content">
+        <div class="tag">侘寂 · WABI-SABI</div>
+        <h2>残缺中的<span class="highlight-red">完美</span></h2>
+        <div class="bamboo-divider"></div>
+        <p class="lead">侘寂是日本美学的核心——在不完美、不完整、不恒久中发现美。一只金缮修复的茶碗，比崭新的更有价值。</p>
+        <p>千利休将茶道提升为一门哲学：在简陋的茶室中品味永恒。侘寂教会我们接受无常，在岁月的痕迹中看见生命的深度。</p>
+        <div class="meta">金缮 · 茶道 · 千利休 · 一期一会</div>
+      </div>
+    </div>
+
+    <!-- Slide 3: 枯山水 -->
+    <div class="slide slide-ink">
+      <div class="wave-bg">
+        <svg class="wave1" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 L1200,200 L0,200 Z" fill="#3a3a32"/></svg>
+        <svg class="wave2" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 L1200,200 L0,200 Z" fill="#3a3a32"/></svg>
+      </div>
+      <div class="slide-content">
+        <div class="tag tag-red">枯山水 · KARESANSUI</div>
+        <h2>石与砂的<span class="highlight-red">禅</span></h2>
+        <div class="bamboo-divider"></div>
+        <p class="lead">枯山水庭院是禅宗思想的物化。白砂耙出的波纹象征着流水，置石则代表山岛。在方寸之间，见天地、见众生、见自己。</p>
+        <p>龙安寺的十五石庭是枯山水最著名的代表。从任何角度都无法同时看到全部十五块石头——正如人生，总有看不见的真相。</p>
+        <div class="meta">龙安寺 · 石庭 · 白砂 · 禅宗</div>
+      </div>
+    </div>
+
+    <!-- Slide 4: 浮世绘 -->
+    <div class="slide slide-warm">
+      <div class="wave-bg">
+        <svg class="wave1" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 L1200,200 L0,200 Z" fill="#3a3a32"/></svg>
+      </div>
+      <div class="slide-content">
+        <div class="tag">浮世绘 · UKIYO-E</div>
+        <h2>浮世<span class="highlight-red">绘卷</span></h2>
+        <div class="bamboo-divider"></div>
+        <p class="lead">浮世绘是江户时代的大众艺术，描绘"浮世"的瞬息万变。葛饰北斋的《神奈川冲浪里》成为日本艺术最具辨识度的符号之一。</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>北斋 <span class="highlight-red">HOKUSAI</span></h3>
+            <p>《富岳三十六景》系列以大胆的构图和普鲁士蓝颠覆了传统绘画。</p>
+          </div>
+          <div class="card">
+            <h3>广重 <span class="highlight-red">HIROSHIGE</span></h3>
+            <p>《东海道五十三次》以细腻的笔触捕捉旅途中的四季变化。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: 书道与墨绘 -->
+    <div class="slide slide-ink">
+      <div class="wave-bg">
+        <svg class="wave1" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 L1200,200 L0,200 Z" fill="#3a3a32"/></svg>
+        <svg class="wave2" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 L1200,200 L0,200 Z" fill="#3a3a32"/></svg>
+      </div>
+      <div class="slide-content">
+        <div class="tag tag-red">书道 · SHODO</div>
+        <h2>墨与<span class="highlight-red">笔</span></h2>
+        <div class="bamboo-divider"></div>
+        <p class="lead">书道是一门将书写升华为精神修行的艺术。一笔一画之间，不仅是文字的形态，更是书写者的心境与气韵。</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>墨绘 <span class="highlight-red">SUMI-E</span></h3>
+            <p>以墨的浓淡干湿表现万物的神韵，追求"意在笔先"的境界。</p>
+          </div>
+          <div class="card">
+            <h3>禅画 <span class="highlight-red">ZENGA</span></h3>
+            <p>以最简单的笔触表达最深刻的禅理——圆相（Enso）即是明证。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: 结语 -->
+    <div class="slide slide-dark">
+      <div class="wave-bg">
+        <svg class="wave1" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 L1200,200 L0,200 Z" fill="#f8f6f0"/></svg>
+        <svg class="wave2" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg"><path d="M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 L1200,200 L0,200 Z" fill="#f8f6f0"/></svg>
+      </div>
+      <div class="slide-content">
+        <div class="seal" style="border-color:#c23a2b;color:#c23a2b;">美</div>
+        <div class="tag tag-red">一期一会</div>
+        <h2>禅意的<span class="highlight-red">当代</span></h2>
+        <div class="bamboo-divider" style="background:linear-gradient(180deg, transparent 0%, rgba(248,246,240,0.3) 20%, rgba(248,246,240,0.3) 80%, transparent 100%);"></div>
+        <div class="bamboo-divider" style="background:linear-gradient(180deg, transparent 0%, rgba(248,246,240,0.3) 20%, rgba(248,246,240,0.3) 80%, transparent 100%);"></div>
+        <div class="quote-block" style="color:#f8f6f0;">
+          本来无一物，何处惹尘埃。
+          <div class="attribution" style="color:rgba(248,246,240,0.3);">—— 六祖惠能 · 禅宗精髓</div>
+        </div>
+        <p style="margin-top:24px;color:rgba(248,246,240,0.65);">从侘寂的残缺之美到枯山水的空寂之境，日本美学教会我们如何与时间、与自然、与自我和解。在繁华之外，留一份寂静给自己。</p>
+        <div class="meta" style="color:rgba(248,246,240,0.25);">侘寂 · 幽玄 · 物哀 · 意气 · 粹</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="nav-bar" id="navBar">
+    <button class="dot active" data-index="0"></button>
+    <button class="dot" data-index="1"></button>
+    <button class="dot" data-index="2"></button>
+    <button class="dot" data-index="3"></button>
+    <button class="dot" data-index="4"></button>
+    <button class="dot" data-index="5"></button>
+    <span class="page-info" id="pageInfo">01 / 06</span>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const slides = document.getElementById('slides');
+    const dots = document.querySelectorAll('.nav-bar .dot');
+    const pageInfo = document.getElementById('pageInfo');
+    const total = dots.length;
+    let current = 0;
+
+    function goTo(index) {
+      if (index < 0) index = 0;
+      if (index >= total) index = total - 1;
+      if (index === current) return;
+      current = index;
+      slides.style.transform = 'translateX(-' + (current * 100) + 'vw)';
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      pageInfo.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', function() {
+        goTo(parseInt(this.dataset.index));
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
+    });
+
+    let touchStartX = 0;
+    document.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; });
+    document.addEventListener('touchend', function(e) {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+    });
+  })();
+</script>
+</body>
+</html>

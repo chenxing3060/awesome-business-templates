@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>野兽派 · 色彩的狂欢</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4ece4;
+  --surface: #ede3d8;
+  --text: #1a1614;
+  --text-soft: #4a4440;
+  --text-muted: #8a8278;
+  --red: #e04040;
+  --orange: #e8a030;
+  --green: #30a060;
+  --blue: #4070c0;
+  --purple: #9060b0;
+  --shadow: 0 4px 32px rgba(26, 22, 20, 0.08);
+  --slide-w: min(1100px, 92vw);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.deck {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  height: 100vh;
+}
+
+.slide {
+  min-width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(224, 64, 64, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(232, 160, 48, 0.08) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 50%, rgba(48, 160, 96, 0.04) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.slideInner {
+  position: relative;
+  z-index: 1;
+  width: var(--slide-w);
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+.cover {
+  text-align: center;
+}
+
+.cover .colorBlocks {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 36px;
+  height: 12px;
+}
+
+.cover .colorBlocks span {
+  display: block;
+  width: 50px;
+  height: 100%;
+}
+
+.cover .colorBlocks span:nth-child(1) { background: var(--red); }
+.cover .colorBlocks span:nth-child(2) { background: var(--orange); }
+.cover .colorBlocks span:nth-child(3) { background: var(--green); }
+.cover .colorBlocks span:nth-child(4) { background: var(--blue); }
+.cover .colorBlocks span:nth-child(5) { background: var(--purple); }
+.cover .colorBlocks span:nth-child(6) { background: var(--red); }
+.cover .colorBlocks span:nth-child(7) { background: var(--orange); }
+.cover .colorBlocks span:nth-child(8) { background: var(--green); }
+
+.cover h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(52px, 9vw, 100px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.cover h1 .red { color: var(--red); }
+.cover h1 .orange { color: var(--orange); }
+.cover h1 .green { color: var(--green); }
+.cover h1 .blue { color: var(--blue); }
+
+.cover .subtitle {
+  margin-top: 16px;
+  font-size: clamp(16px, 2.2vw, 24px);
+  font-weight: 400;
+  color: var(--text-soft);
+  letter-spacing: 0.04em;
+}
+
+.cover .meta {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cover .meta span {
+  display: inline-block;
+  padding: 0 14px;
+  border-left: 2px solid var(--red);
+}
+
+.cover .meta span:first-child { border-left: 0; }
+
+.content {
+  text-align: left;
+}
+
+.content h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(34px, 5.5vw, 52px);
+  font-weight: 600;
+  line-height: 1.08;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.content h2 .accent-red { color: var(--red); }
+.content h2 .accent-orange { color: var(--orange); }
+.content h2 .accent-green { color: var(--green); }
+.content h2 .accent-blue { color: var(--blue); }
+
+.content p {
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.8;
+  color: var(--text-soft);
+  max-width: 680px;
+  margin-bottom: 14px;
+}
+
+.content .lead {
+  font-size: clamp(17px, 1.8vw, 20px);
+  line-height: 1.75;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.colorStripe {
+  display: flex;
+  height: 6px;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.colorStripe span {
+  flex: 1;
+}
+
+.colorStripe span:nth-child(1) { background: var(--red); }
+.colorStripe span:nth-child(2) { background: var(--orange); }
+.colorStripe span:nth-child(3) { background: var(--green); }
+.colorStripe span:nth-child(4) { background: var(--blue); }
+.colorStripe span:nth-child(5) { background: var(--purple); }
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.twoCol .card {
+  padding: 20px;
+  border-left: 4px solid var(--red);
+  background: rgba(237, 227, 216, 0.5);
+}
+
+.twoCol .card:nth-child(2) { border-left-color: var(--orange); }
+.twoCol .card:nth-child(3) { border-left-color: var(--green); }
+.twoCol .card:nth-child(4) { border-left-color: var(--blue); }
+
+.twoCol .card h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.twoCol .card p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.artistsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 12px;
+}
+
+.artistsRow .portrait {
+  padding: 20px;
+  position: relative;
+}
+
+.artistsRow .portrait::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+}
+
+.artistsRow .portrait:nth-child(1)::before { background: var(--red); }
+.artistsRow .portrait:nth-child(2)::before { background: var(--orange); }
+
+.artistsRow .portrait .name {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.artistsRow .portrait:nth-child(1) .name { color: var(--red); }
+.artistsRow .portrait:nth-child(2) .name { color: var(--orange); }
+
+.artistsRow .portrait .era {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.artistsRow .portrait p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.galleryGrid .piece {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--bg);
+  font-weight: 500;
+  text-align: center;
+  padding: 12px;
+}
+
+.galleryGrid .piece:nth-child(1) { background: linear-gradient(135deg, var(--red), #c03030); }
+.galleryGrid .piece:nth-child(2) { background: linear-gradient(135deg, var(--orange), #d08820); }
+.galleryGrid .piece:nth-child(3) { background: linear-gradient(135deg, var(--green), #208050); }
+
+.galleryGrid .piece .label {
+  background: rgba(0,0,0,0.2);
+  padding: 4px 10px;
+}
+
+.quote {
+  text-align: center;
+}
+
+.quote blockquote {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(24px, 4vw, 44px);
+  line-height: 1.3;
+  font-weight: 500;
+  color: var(--text);
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.quote blockquote::before {
+  content: '\201C';
+  display: block;
+  font-size: 72px;
+  line-height: 0.3;
+  color: var(--red);
+  opacity: 0.4;
+  margin-bottom: 16px;
+}
+
+.quote cite {
+  display: block;
+  margin-top: 24px;
+  font-size: 16px;
+  font-style: normal;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.pageNum {
+  position: absolute;
+  bottom: 28px;
+  right: 40px;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  z-index: 2;
+}
+
+.nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 100;
+  background: rgba(244, 236, 228, 0.88);
+  backdrop-filter: blur(12px);
+  padding: 7px 16px;
+  border: 1px solid rgba(26, 22, 20, 0.08);
+  box-shadow: var(--shadow);
+}
+
+.nav button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-size: 15px;
+}
+
+.nav button:hover {
+  background: rgba(26, 22, 20, 0.06);
+}
+
+.nav .dots {
+  display: flex;
+  gap: 5px;
+}
+
+.nav .dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(26, 22, 20, 0.12);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.nav .dots span.active {
+  background: var(--red);
+  width: 20px;
+  border-radius: 2px;
+}
+
+.nav .slideLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 50px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .slide { padding: 24px; }
+  .twoCol { grid-template-columns: 1fr; gap: 16px; }
+  .artistsRow { grid-template-columns: 1fr; }
+  .galleryGrid { grid-template-columns: 1fr; }
+  .pageNum { right: 24px; bottom: 80px; }
+  .nav { bottom: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<section class="slide cover">
+  <div class="slideInner">
+    <div class="colorBlocks">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <h1>
+      <span class="red">色</span><span class="orange">彩</span><br>
+      <span class="green">的</span> <span class="blue">狂</span><span class="red">欢</span>
+    </h1>
+    <p class="subtitle">野兽派 · 马蒂斯和德兰的色彩革命</p>
+    <p class="meta">
+      <span>Fauvism</span>
+      <span>1905–1907</span>
+      <span>色彩解放</span>
+    </p>
+  </div>
+  <span class="pageNum">01 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <div class="colorStripe">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <h2>什么是 <span class="accent-red">野兽派</span></h2>
+    <p class="lead">野兽派是 20 世纪第一个前卫艺术运动，以爆炸性的色彩和简化的造型震撼了巴黎艺术界。</p>
+    <p>1905 年秋季沙龙上，马蒂斯、德兰等人的作品被批评家路易·沃塞勒形容为"多纳泰罗被野兽包围了"——"野兽派"因此得名。他们抛弃了自然的色彩模仿，让颜料直接从管中挤出，用纯色的大胆并置来表达情感。</p>
+    <p >野兽派虽然只活跃了短短三年，却彻底解放了色彩——<span class="accent-red" style="font-weight:500;">色彩不再依附于物体，而成为独立的情感载体。</span></p>
+  </div>
+  <span class="pageNum">02 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>色彩的 <span class="accent-orange">革命者</span></h2>
+    <div class="artistsRow">
+      <div class="portrait">
+        <div class="name">亨利·马蒂斯</div>
+        <div class="era">1869–1954</div>
+        <p>野兽派的领袖与灵魂。他追求的"平衡、纯粹与宁静"通过最简化的形体和最饱和的色彩来实现。《生活的欢乐》中平涂的纯色块宣告了一种全新的视觉语言。</p>
+      </div>
+      <div class="portrait">
+        <div class="name">安德烈·德兰</div>
+        <div class="era">1880–1954</div>
+        <p>与马蒂斯共同开创野兽派。他的《伦敦桥》用橙色的天空和绿色河水重新定义了城市风景——不是看到什么，而是感受到什么。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">03 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>野兽派 <span class="accent-green">美学</span></h2>
+    <div class="twoCol">
+      <div class="card">
+        <h3>纯色直用</h3>
+        <p>直接将颜料管中的原色涂上画布，拒绝调色板的调和。红色就是最红的红，绿色就是最翠的绿。</p>
+      </div>
+      <div class="card">
+        <h3>简化造型</h3>
+        <p>轮廓被简化到极致，有时仅用粗黑的线条勾勒。形体是色彩得以彰显的舞台，而非目的本身。</p>
+      </div>
+      <div class="card">
+        <h3>主观色彩</h3>
+        <p>天空可以是橙色的，人脸可以是绿色的。色彩的功能不是再现自然，而是传达画家的情感反应。</p>
+      </div>
+      <div class="card">
+        <h3>平面装饰</h3>
+        <p>抛弃透视和体积感，追求画面的平面装饰效果。色彩平涂和图案化布局使画作具有强烈的装饰性。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">04 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>经典 <span class="accent-blue">作品</span></h2>
+    <div class="galleryGrid">
+      <div class="piece">
+        <span class="label">生活的欢乐 · 马蒂斯</span>
+      </div>
+      <div class="piece">
+        <span class="label">伦敦桥 · 德兰</span>
+      </div>
+      <div class="piece">
+        <span class="label">开着的窗户 · 马蒂斯</span>
+      </div>
+    </div>
+    <p style="margin-top:20px;font-size:14px;color:var(--text-muted);">每一幅画都是色彩的爆炸，宣告着色彩的绝对自由。</p>
+    <div class="colorStripe" style="margin-top:16px;">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+  <span class="pageNum">05 / 06</span>
+</section>
+
+<section class="slide quote">
+  <div class="slideInner">
+    <blockquote>
+      色彩不是用来模仿自然的，而是用来表达情感的。
+      <cite>—— 亨利·马蒂斯</cite>
+    </blockquote>
+    <p style="margin-top:32px;color:var(--text-muted);font-size:14px;letter-spacing:0.04em;">
+      野兽派 · 一场色彩的解放运动
+    </p>
+  </div>
+  <span class="pageNum">06 / 06</span>
+</section>
+
+</div>
+
+<nav class="nav" id="nav">
+  <button onclick="prevSlide()" aria-label="上一页">&#8592;</button>
+  <span class="slideLabel" id="slideLabel">1 / 6</span>
+  <div class="dots" id="dots"></div>
+  <button onclick="nextSlide()" aria-label="下一页">&#8594;</button>
+</nav>
+
+<script>
+const deck = document.getElementById('deck');
+const slides = deck.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+const dotsContainer = document.getElementById('dots');
+const slideLabel = document.getElementById('slideLabel');
+
+for (let i = 0; i < total; i++) {
+  const dot = document.createElement('span');
+  dot.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(dot);
+}
+
+function update() {
+  deck.style.transform = `translateX(-${current * 100}vw)`;
+  dotsContainer.querySelectorAll('span').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+  slideLabel.textContent = `${current + 1} / ${total}`;
+}
+
+function goTo(n) {
+  current = Math.max(0, Math.min(n, total - 1));
+  update();
+}
+
+function nextSlide() { goTo(current + 1); }
+function prevSlide() { goTo(current - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+});
+
+update();
+</script>
+</body>
+</html>

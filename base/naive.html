@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>稚拙派 · 天真之眼</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter','system-ui',sans-serif;background:#f0ece0;color:#3a3a2a;overflow:hidden;height:100vh}
+    .deck{position:relative;width:100%;height:100vh;overflow:hidden}
+    .slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4rem 6rem;opacity:0;transition:opacity .6s ease;pointer-events:none;text-align:center}
+    .slide.active{opacity:1;pointer-events:auto;z-index:2}
+    .slide.exit{opacity:0;z-index:1}
+
+    .hand-drawn{position:absolute;pointer-events:none;opacity:.07}
+    .hand-drawn svg{width:80px;height:80px}
+
+    .foliage{position:absolute;pointer-events:none;opacity:.06}
+    .foliage svg{width:150px;height:150px}
+
+    .leaf{position:absolute;pointer-events:none;opacity:.08}
+    .leaf svg{width:60px;height:60px}
+
+    .slide h1{font-family:'DM Serif Display','Georgia',serif;font-weight:400;font-size:4rem;color:#2a4a2a;margin-bottom:.4rem;position:relative;z-index:2}
+    .slide h1 .gold{color:#d4a030}
+    .slide h2{font-family:'DM Serif Display','Georgia',serif;font-weight:400;font-size:2.4rem;color:#2a4a2a;margin-bottom:.3rem}
+    .slide p{font-weight:300;font-size:1.12rem;line-height:1.7;color:#5a5a4a;max-width:680px;position:relative;z-index:2}
+    .slide .sub{font-family:'DM Serif Display','Georgia',serif;font-style:italic;font-size:1.3rem;color:#30a040;margin-bottom:.5rem}
+    .badge{display:inline-block;border:2px solid #30a040;color:#2a5a2a;padding:.15rem 1rem;font-size:.85rem;margin-top:1.5rem;background:rgba(48,160,64,.06);border-radius:4px}
+
+    .nav-bar{position:fixed;bottom:0;left:0;width:100%;height:56px;background:rgba(240,236,224,.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;gap:16px;z-index:100;border-top:2px dashed #30a040}
+    .nav-bar .dot{width:12px;height:12px;border-radius:50%;background:#c8c4b4;cursor:pointer;transition:all .3s;border:2px solid transparent}
+    .nav-bar .dot.active{background:#30a040;border-color:#d4a030;transform:scale(1.2)}
+    .nav-bar .dot:hover{background:#d4a030}
+    .nav-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:101;width:48px;height:48px;border-radius:50%;border:2px dashed #30a040;background:rgba(240,236,224,.85);backdrop-filter:blur(4px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;color:#30a040;font-size:1.2rem}
+    .nav-arrow:hover{background:#30a040;color:#fff;border-color:#30a040}
+    .nav-arrow.prev{left:20px}
+    .nav-arrow.next{right:20px}
+    .nav-arrow.hidden{opacity:0;pointer-events:none}
+
+    .jungle-grid{display:flex;gap:2rem;align-items:flex-start;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;max-width:800px}
+    .jungle-grid .creature{flex:1;min-width:180px;max-width:280px;padding:1.2rem;border-left:4px solid #d4a030;text-align:left}
+    .jungle-grid .creature:nth-child(2){border-left-color:#30a040}
+    .jungle-grid .creature h3{font-family:'DM Serif Display','Georgia',serif;font-weight:400;font-size:1.2rem;color:#2a4a2a;margin-bottom:.2rem}
+    .jungle-grid .creature p{font-size:.9rem;line-height:1.5}
+
+    .doodle{position:absolute;pointer-events:none;opacity:.05}
+    .doodle svg{width:100px;height:100px}
+
+    .dashed-border{position:absolute;pointer-events:none;opacity:.06}
+    .dashed-border svg{width:200px;height:200px}
+
+    @media(max-width:768px){
+      .slide{padding:2.5rem 1.5rem}
+      .slide h1{font-size:2.6rem}
+      .slide h2{font-size:1.7rem}
+      .slide p{font-size:1rem;max-width:100%}
+      .jungle-grid .creature{padding:1rem;min-width:140px}
+      .nav-arrow{width:36px;height:36px;font-size:.9rem}
+      .nav-arrow.prev{left:8px}
+      .nav-arrow.next{right:8px}
+    }
+    @media(max-width:480px){
+      .slide h1{font-size:2rem}
+      .slide h2{font-size:1.4rem}
+      .slide .sub{font-size:1.1rem}
+    }
+  </style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- Slide 1: Title -->
+  <div class="slide active">
+    <div class="foliage" style="top:5%;left:2%"><svg viewBox="0 0 150 150"><path d="M75,0 Q90,40 130,30 Q110,60 120,100 Q90,80 75,100 Q60,80 30,100 Q40,60 20,30 Q60,40 75,0Z" fill="#30a040"/></svg></div>
+    <div class="foliage" style="bottom:5%;right:2%"><svg viewBox="0 0 150 150"><path d="M75,0 Q90,40 130,30 Q110,60 120,100 Q90,80 75,100 Q60,80 30,100 Q40,60 20,30 Q60,40 75,0Z" fill="#d4a030"/></svg></div>
+    <div class="hand-drawn" style="top:20%;right:15%"><svg viewBox="0 0 80 80"><path d="M20,40 Q30,20 40,10 Q50,20 60,40 Q50,60 40,70 Q30,60 20,40Z" fill="none" stroke="#30a040" stroke-width="2"/></svg></div>
+    <h1>稚拙派</h1>
+    <p class="sub">Naïve Art · 天真之眼</p>
+    <p>没有学院派的教条，没有透视法的约束。<br>稚拙派的画家像孩子一样看世界——<br>纯粹、直接、充满了惊奇与喜悦。</p>
+    <span class="badge">回归童真 · 原始之美</span>
+  </div>
+
+  <!-- Slide 2: 亨利·卢梭 -->
+  <div class="slide">
+    <div class="leaf" style="top:12%;left:8%"><svg viewBox="0 0 60 60"><path d="M30,0 Q40,20 55,25 Q45,35 50,55 Q35,40 30,50 Q25,40 10,55 Q15,35 5,25 Q20,20 30,0Z" fill="#30a040"/></svg></div>
+    <div class="leaf" style="bottom:15%;right:10%"><svg viewBox="0 0 60 60"><path d="M30,0 Q40,20 55,25 Q45,35 50,55 Q35,40 30,50 Q25,40 10,55 Q15,35 5,25 Q20,20 30,0Z" fill="#d4a030"/></svg></div>
+    <h2>亨利·卢梭</h2>
+    <p class="sub">Henri Rousseau · 1844 — 1910</p>
+    <p>他是海关职员，从未离开过法国，<br>却画出了世界上最神秘的丛林。<br>《梦》中，裸女在异域的植物间休憩；<br>《沉睡的吉普赛人》里，狮子和人在月光下和平共处。<br>"我没有老师，大自然就是我的老师。"</p>
+    <span class="badge">海关官员的异想世界</span>
+    <div class="hand-drawn" style="top:30%;right:20%"><svg viewBox="0 0 80 80"><path d="M10,40 Q25,10 40,10 Q55,10 70,40 Q55,70 40,70 Q25,70 10,40Z" fill="none" stroke="#d4a030" stroke-width="1.5"/><circle cx="40" cy="40" r="8" fill="none" stroke="#30a040" stroke-width="1.5"/></svg></div>
+  </div>
+
+  <!-- Slide 3: 丛林梦 -->
+  <div class="slide">
+    <div class="foliage" style="bottom:5%;left:5%"><svg viewBox="0 0 150 150"><path d="M75,0 Q90,40 130,30 Q110,60 120,100 Q90,80 75,100 Q60,80 30,100 Q40,60 20,30 Q60,40 75,0Z" fill="#30a040"/></svg></div>
+    <div class="foliage" style="top:8%;right:8%"><svg viewBox="0 0 150 150"><path d="M75,0 Q90,40 130,30 Q110,60 120,100 Q90,80 75,100 Q60,80 30,100 Q40,60 20,30 Q60,40 75,0Z" fill="#d4a030"/></svg></div>
+    <h2>丛林之梦</h2>
+    <p class="sub">Jungle Dreams</p>
+    <div class="jungle-grid">
+      <div class="creature">
+        <h3>🌿 异域植物</h3>
+        <p>卢梭的丛林从巴黎的温室与植物园中生长出来。巨大的叶片、奇异的花朵，构成了一个想象中的热带世界。</p>
+      </div>
+      <div class="creature">
+        <h3>🦁 人与野兽</h3>
+        <p>在他的画中，猛兽与人类和平共处。狮子、蛇、猴子——它们不是威胁，而是梦境中的伙伴。</p>
+      </div>
+    </div>
+    <span class="badge">从未远行，却画出了整个世界</span>
+  </div>
+
+  <!-- Slide 4: 稚拙的魅力 -->
+  <div class="slide">
+    <div class="doodle" style="top:10%;left:5%"><svg viewBox="0 0 100 100"><path d="M20,50 Q30,20 50,20 Q70,20 80,50 Q70,80 50,80 Q30,80 20,50Z" fill="none" stroke="#30a040" stroke-width="1.5" stroke-dasharray="4,3"/><path d="M35,50 Q45,35 50,35 Q55,35 65,50" fill="none" stroke="#d4a030" stroke-width="1.5"/></svg></div>
+    <h2>天真的力量</h2>
+    <p class="sub">The Power of Naivety</p>
+    <p>稚拙派的魅力在于——它不需要你懂艺术。<br>没有复杂的象征，没有晦涩的隐喻。<br>只有鲜艳的色彩、清晰的轮廓、纯真的情感。<br>它提醒我们：在学会画"正确"之前，<br>每个人都是艺术家。</p>
+    <span class="badge">人人都是艺术家</span>
+    <div class="dashed-border" style="bottom:10%;right:8%"><svg viewBox="0 0 200 200"><rect x="10" y="10" width="180" height="180" rx="20" fill="none" stroke="#30a040" stroke-width="2" stroke-dasharray="8,6"/></svg></div>
+  </div>
+
+  <!-- Slide 5: 影响 -->
+  <div class="slide">
+    <div class="leaf" style="top:20%;right:12%"><svg viewBox="0 0 60 60"><path d="M30,0 Q40,20 55,25 Q45,35 50,55 Q35,40 30,50 Q25,40 10,55 Q15,35 5,25 Q20,20 30,0Z" fill="#d4a030"/></svg></div>
+    <h2>稚拙的遗产</h2>
+    <p class="sub">从卢梭到现代</p>
+    <p>卢梭的作品被毕加索、康定斯基、克利等<br>现代艺术大师深深推崇。他们羡慕卢梭<br>那种未被污染的目光——<br>稚拙派证明了一个道理：<br>真正的艺术不在于技巧的复杂，而在于心灵的纯粹。</p>
+    <span class="badge">纯粹即力量</span>
+    <div class="hand-drawn" style="bottom:20%;left:10%"><svg viewBox="0 0 80 80"><path d="M40,5 L45,30 L70,35 L45,40 L40,65 L35,40 L10,35 L35,30Z" fill="none" stroke="#30a040" stroke-width="1.5"/></svg></div>
+  </div>
+
+  <!-- Slide 6: 结语 -->
+  <div class="slide">
+    <div class="foliage" style="top:2%;left:2%"><svg viewBox="0 0 150 150"><path d="M75,0 Q90,40 130,30 Q110,60 120,100 Q90,80 75,100 Q60,80 30,100 Q40,60 20,30 Q60,40 75,0Z" fill="#30a040"/></svg></div>
+    <div class="foliage" style="bottom:2%;right:2%"><svg viewBox="0 0 150 150"><path d="M75,0 Q90,40 130,30 Q110,60 120,100 Q90,80 75,100 Q60,80 30,100 Q40,60 20,30 Q60,40 75,0Z" fill="#d4a030"/></svg></div>
+    <div class="hand-drawn" style="top:15%;right:10%"><svg viewBox="0 0 80 80"><path d="M20,40 Q30,20 40,10 Q50,20 60,40 Q50,60 40,70 Q30,60 20,40Z" fill="none" stroke="#30a040" stroke-width="2"/></svg></div>
+    <h1>像孩子一样看世界</h1>
+    <p class="sub">See the world like a child</p>
+    <p>稚拙派教会我们最珍贵的事：<br>在变得专业之前，先保持天真。<br>因为艺术的起点，从来不是技巧，<br>而是那双充满惊奇的眼睛。</p>
+    <span class="badge">永远天真 · 永远热泪盈眶</span>
+  </div>
+
+</div>
+
+<button class="nav-arrow prev" id="prevBtn">‹</button>
+<button class="nav-arrow next" id="nextBtn">›</button>
+
+<div class="nav-bar" id="navBar"></div>
+
+<script>
+  (function(){var slides=document.querySelectorAll('.slide'),navBar=document.getElementById('navBar'),prevBtn=document.getElementById('prevBtn'),nextBtn=document.getElementById('nextBtn'),current=0;
+  function buildNav(){for(var i=0;i<slides.length;i++){var dot=document.createElement('button');dot.className='dot';dot.dataset.index=i;dot.addEventListener('click',function(){goTo(parseInt(this.dataset.index))});navBar.appendChild(dot)}}
+  function goTo(n){if(n===current)return;slides[current].classList.remove('active');slides[current].classList.add('exit');setTimeout(function(){slides[current].classList.remove('exit')},600);current=n;slides[current].classList.add('active');updateNav();updateArrows()}
+  function updateNav(){var dots=navBar.querySelectorAll('.dot');dots.forEach(function(d,i){d.classList.toggle('active',i===current)})}
+  function updateArrows(){prevBtn.classList.toggle('hidden',current===0);nextBtn.classList.toggle('hidden',current===slides.length-1)}
+  prevBtn.addEventListener('click',function(){if(current>0)goTo(current-1)});
+  nextBtn.addEventListener('click',function(){if(current<slides.length-1)goTo(current+1)});
+  document.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'&&current>0)goTo(current-1);if(e.key==='ArrowRight'&&current<slides.length-1)goTo(current+1)});
+  buildNav();updateNav();updateArrows()})();
+</script>
+</body>
+</html>

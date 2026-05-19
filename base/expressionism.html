@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>表现主义 · 灵魂的呐喊</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #e8e0d8;
+  --surface: #ddd4ca;
+  --text: #2a221e;
+  --text-soft: #4a3a2a;
+  --text-muted: #7a6a5a;
+  --accent: #d46040;
+  --accent-deep: #4a3a2a;
+  --line: rgba(42, 34, 30, 0.10);
+  --shadow: 0 4px 32px rgba(42, 34, 30, 0.08);
+  --slide-w: min(1100px, 92vw);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.deck {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  height: 100vh;
+}
+
+.slide {
+  min-width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 40% 50%, rgba(212, 96, 64, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 30%, rgba(74, 58, 42, 0.05) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(42, 34, 30, 0.025) 8px, rgba(42, 34, 30, 0.025) 9px);
+  pointer-events: none;
+}
+
+.slideInner {
+  position: relative;
+  z-index: 1;
+  width: var(--slide-w);
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+.cover {
+  text-align: center;
+}
+
+.cover .tearBars {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 32px;
+  height: 60px;
+  position: relative;
+}
+
+.cover .tearBars .bar {
+  display: block;
+  width: 40px;
+  background: var(--accent-deep);
+  opacity: 0.4;
+  clip-path: polygon(20% 0%, 100% 5%, 80% 100%, 0% 95%);
+}
+
+.cover .tearBars .bar:nth-child(1) { height: 40px; align-self: flex-start; }
+.cover .tearBars .bar:nth-child(2) { height: 60px; align-self: flex-end; background: var(--accent); opacity: 0.3; }
+.cover .tearBars .bar:nth-child(3) { height: 50px; align-self: center; }
+.cover .tearBars .bar:nth-child(4) { height: 60px; align-self: flex-start; background: var(--accent); opacity: 0.2; }
+.cover .tearBars .bar:nth-child(5) { height: 35px; align-self: flex-end; }
+
+.cover h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(52px, 9vw, 96px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.cover h1 .accent {
+  color: var(--accent);
+}
+
+.cover .subtitle {
+  margin-top: 14px;
+  font-size: clamp(15px, 2vw, 22px);
+  font-weight: 400;
+  color: var(--text-soft);
+  letter-spacing: 0.04em;
+}
+
+.cover .meta {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.cover .meta span {
+  display: inline-block;
+  padding: 0 14px;
+  border-left: 2px solid var(--accent);
+}
+
+.cover .meta span:first-child { border-left: 0; }
+
+.content {
+  text-align: left;
+}
+
+.content h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(34px, 5.5vw, 52px);
+  font-weight: 600;
+  line-height: 1.08;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.content h2 .accent {
+  color: var(--accent);
+}
+
+.content p {
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.8;
+  color: var(--text-soft);
+  max-width: 680px;
+  margin-bottom: 14px;
+}
+
+.content .lead {
+  font-size: clamp(17px, 1.8vw, 20px);
+  line-height: 1.75;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.content .blockQuote {
+  padding: 16px 20px;
+  margin: 16px 0;
+  background: rgba(212, 96, 64, 0.05);
+  position: relative;
+}
+
+.content .blockQuote::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent);
+}
+
+.content .blockQuote p {
+  font-size: clamp(15px, 1.4vw, 17px);
+  font-weight: 500;
+  margin-bottom: 0;
+  color: var(--text);
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.twoCol .card {
+  padding: 20px;
+  position: relative;
+  border: 1px solid var(--line);
+}
+
+.twoCol .card::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 30px;
+  height: 1px;
+  background: var(--accent);
+  transform: rotate(-45deg);
+  transform-origin: bottom right;
+}
+
+.twoCol .card h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+
+.twoCol .card p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.artistsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.artistsGrid .card {
+  padding: 20px;
+  position: relative;
+  background: rgba(221, 212, 202, 0.4);
+}
+
+.artistsGrid .card:nth-child(1) {
+  border-bottom: 3px solid var(--accent);
+}
+
+.artistsGrid .card:nth-child(2) {
+  border-top: 3px solid var(--accent-deep);
+}
+
+.artistsGrid .card .name {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+  letter-spacing: -0.02em;
+}
+
+.artistsGrid .card .era {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.artistsGrid .card p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.galleryExpr {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.galleryExpr .piece {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--bg);
+  font-weight: 500;
+  text-align: center;
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.galleryExpr .piece:nth-child(1) { background: linear-gradient(135deg, #d46040, #b04830); }
+.galleryExpr .piece:nth-child(2) { background: linear-gradient(135deg, #5a4a3a, #3a2a1a); }
+.galleryExpr .piece:nth-child(3) { background: linear-gradient(135deg, #8a6a50, #6a4a30); }
+
+.galleryExpr .piece .label {
+  background: rgba(0,0,0,0.25);
+  padding: 4px 10px;
+}
+
+.quote {
+  text-align: center;
+}
+
+.quote blockquote {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(24px, 4vw, 44px);
+  line-height: 1.3;
+  font-weight: 500;
+  color: var(--text);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.quote blockquote::before {
+  content: '\201C';
+  display: block;
+  font-size: 72px;
+  line-height: 0.3;
+  color: var(--accent);
+  opacity: 0.3;
+  margin-bottom: 16px;
+}
+
+.quote cite {
+  display: block;
+  margin-top: 24px;
+  font-size: 15px;
+  font-style: normal;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.pageNum {
+  position: absolute;
+  bottom: 28px;
+  right: 40px;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  z-index: 2;
+}
+
+.nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 100;
+  background: rgba(232, 224, 216, 0.88);
+  backdrop-filter: blur(12px);
+  padding: 7px 16px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.nav button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-size: 15px;
+}
+
+.nav button:hover {
+  background: rgba(42, 34, 30, 0.06);
+}
+
+.nav .dots {
+  display: flex;
+  gap: 5px;
+}
+
+.nav .dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(42, 34, 30, 0.12);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.nav .dots span.active {
+  background: var(--accent);
+  width: 20px;
+  border-radius: 2px;
+}
+
+.nav .slideLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 50px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .slide { padding: 24px; }
+  .twoCol { grid-template-columns: 1fr; gap: 16px; }
+  .artistsGrid { grid-template-columns: 1fr; }
+  .galleryExpr { grid-template-columns: 1fr; }
+  .pageNum { right: 24px; bottom: 80px; }
+  .nav { bottom: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<section class="slide cover">
+  <div class="slideInner">
+    <div class="tearBars">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <h1>灵魂的<span class="accent">呐喊</span></h1>
+    <p class="subtitle">表现主义 · 从蒙克到席勒的情感表达</p>
+    <p class="meta">
+      <span>Expressionism</span>
+      <span>1905–1920</span>
+      <span>情感至上</span>
+    </p>
+  </div>
+  <span class="pageNum">01 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>表现主义的 <span class="accent">内核</span></h2>
+    <p class="lead">表现主义不是要再现外部世界，而是要表达内心的真实——恐惧、痛苦、狂喜、孤独——那些比看得见的东西更真实的情感。</p>
+    <p>20 世纪初，表现主义在德国和奥地利达到顶峰。艺术家们用扭曲的形体、刺目的色彩和粗犷的笔触，将内心的焦虑与不安直接投射在画布上。世界被变形了——但变形恰恰是为了更真实地表达。</p>
+    <div class="blockQuote">
+      <p>我不画我看到的，我画我感受到的。如果我的画让人不安，那是因为世界本身就让人不安。</p>
+    </div>
+  </div>
+  <span class="pageNum">02 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>情感的 <span class="accent">先驱</span></h2>
+    <div class="artistsGrid">
+      <div class="card">
+        <div class="name">爱德华·蒙克</div>
+        <div class="era">1863–1944</div>
+        <p>表现主义的灵魂人物。《呐喊》中扭曲的人物与血色的天空，成为了现代人类焦虑的终极符号。他将个人的创伤——死亡、疾病、爱情——升华为普遍的人类情感图景。</p>
+      </div>
+      <div class="card">
+        <div class="name">埃贡·席勒</div>
+        <div class="era">1890–1918</div>
+        <p>用瘦骨嶙峋的线条和病态的色调探索人体与情欲的边界。他的自画像和裸体画以近乎残忍的坦率解剖自我，每一根线条都充满了张力与脆弱。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">03 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>表现主义的 <span class="accent">语言</span></h2>
+    <div class="twoCol">
+      <div class="card">
+        <h3>扭曲变形</h3>
+        <p>人物被拉长、挤压、扭曲——不是为了丑化，而是为了更强烈地传达情感。变形让内心的痛苦找到了视觉的形式。</p>
+      </div>
+      <div class="card">
+        <h3>主观色彩</h3>
+        <p>红色不是夕阳的颜色，而是焦虑的颜色。黄色不是阳光的颜色，而是嫉妒的颜色。色彩脱离了自然，服务于情感。</p>
+      </div>
+      <div class="card">
+        <h3>粗犷笔触</h3>
+        <p>快速、暴烈、不加修饰的笔触，像刀痕一样刻在画布上。肌理本身就是情感的记录，每一道划痕都是一次情绪的爆发。</p>
+      </div>
+      <div class="card">
+        <h3>黑色轮廓</h3>
+        <p>粗重、不规则的黑色线条包裹形体，像铁笼一样困住人物。线条不再是轮廓的边界，而是情感的牢笼。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">04 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>经典 <span class="accent">作品</span></h2>
+    <div class="galleryExpr">
+      <div class="piece">
+        <span class="label">呐喊 · 蒙克</span>
+      </div>
+      <div class="piece">
+        <span class="label">死神与少女 · 席勒</span>
+      </div>
+      <div class="piece">
+        <span class="label">桥社 · 基希纳</span>
+      </div>
+    </div>
+    <p style="margin-top:20px;font-size:14px;color:var(--text-muted);">每一幅画都是一声呐喊，回响在二十世纪人类心灵的深谷中。</p>
+  </div>
+  <span class="pageNum">05 / 06</span>
+</section>
+
+<section class="slide quote">
+  <div class="slideInner">
+    <blockquote>
+      我走在路上，突然感到一阵强烈的焦虑——天空变成了血红色。我站在那里，因恐惧而颤抖。我感到一声无边的呐喊穿越了自然。
+      <cite>—— 爱德华·蒙克 关于《呐喊》</cite>
+    </blockquote>
+    <p style="margin-top:32px;color:var(--text-muted);font-size:14px;letter-spacing:0.04em;">
+      表现主义 · 灵魂深处的回响
+    </p>
+  </div>
+  <span class="pageNum">06 / 06</span>
+</section>
+
+</div>
+
+<nav class="nav" id="nav">
+  <button onclick="prevSlide()" aria-label="上一页">&#8592;</button>
+  <span class="slideLabel" id="slideLabel">1 / 6</span>
+  <div class="dots" id="dots"></div>
+  <button onclick="nextSlide()" aria-label="下一页">&#8594;</button>
+</nav>
+
+<script>
+const deck = document.getElementById('deck');
+const slides = deck.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+const dotsContainer = document.getElementById('dots');
+const slideLabel = document.getElementById('slideLabel');
+
+for (let i = 0; i < total; i++) {
+  const dot = document.createElement('span');
+  dot.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(dot);
+}
+
+function update() {
+  deck.style.transform = `translateX(-${current * 100}vw)`;
+  dotsContainer.querySelectorAll('span').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+  slideLabel.textContent = `${current + 1} / ${total}`;
+}
+
+function goTo(n) {
+  current = Math.max(0, Math.min(n, total - 1));
+  update();
+}
+
+function nextSlide() { goTo(current + 1); }
+function prevSlide() { goTo(current - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+});
+
+update();
+</script>
+</body>
+</html>

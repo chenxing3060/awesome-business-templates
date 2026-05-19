@@ -1,0 +1,1527 @@
+{
+  "version": "1.0",
+  "description": "Qiaomu Artist Style - 200 套风格模板元数据索引",
+  "tagDimensions": {
+    "colorScheme": { "description": "色彩基调", "values": ["light", "dark", "warm", "cool", "vibrant", "neutral", "monochrome", "pastel", "earth", "jewel"] },
+    "mood": { "description": "情绪氛围", "values": ["serene", "dramatic", "playful", "elegant", "rustic", "futuristic", "romantic", "minimal", "bold", "academic", "mystical", "nostalgic", "energetic", "peaceful", "luxurious", "whimsical", "contemplative", "whimsical"] },
+    "movement": { "description": "艺术流派", "values": ["impressionism", "oriental", "art-nouveau", "classical", "modernism", "surrealism", "pop-art", "abstract", "baroque", "renaissance", "romanticism", "realism", "fauvism", "minimalism", "cubism", "bauhaus", "rococo", "symbolism", "ukiyo-e", "expressionism", "post-impressionism", "contemporary"] },
+    "formality": { "description": "正式程度", "values": ["high", "medium", "low"] },
+    "density": { "description": "内容密度", "values": ["sparse", "medium", "dense"] },
+    "useCase": { "description": "适用场景", "values": ["presentation", "portfolio", "gallery", "blog", "poster", "resume", "pitch", "report", "invitation", "catalog", "slideshow", "moodboard", "lookbook", "manifesto", "yearbook"] },
+    "fontStyle": { "description": "字体风格", "values": ["serif", "sans-serif", "display", "monospace", "handwritten", "slab-serif", "modern-serif", "geometric"] },
+    "era": { "description": "时代感", "values": ["classic", "vintage", "modern", "contemporary", "futuristic", "retro", "medieval", "industrial"] }
+  },
+  "templates": [
+    {
+      "id": "imp-001",
+      "name": "光与色的诗篇",
+      "baseTemplate": "impressionism",
+      "description": "柔光渐变、可见笔触、暖色调，适合印象派主题展示",
+      "tags": { "colorScheme": "warm", "mood": "serene", "movement": "impressionism", "formality": "medium", "density": "medium", "useCase": "gallery", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#e8a0b4", "bgTint": "#fef9f0" }
+    },
+    {
+      "id": "imp-002",
+      "name": "莫奈的睡莲",
+      "baseTemplate": "impressionism",
+      "description": "蓝紫色调、水光潋滟，以莫奈《睡莲》为灵感的静谧风格",
+      "tags": { "colorScheme": "cool", "mood": "peaceful", "movement": "impressionism", "formality": "low", "density": "sparse", "useCase": "moodboard", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#7baad4", "bgTint": "#eef4fa" }
+    },
+    {
+      "id": "imp-003",
+      "name": "日出印象",
+      "baseTemplate": "impressionism",
+      "description": "橙红色调、晨雾朦胧，适合清晨/开端主题",
+      "tags": { "colorScheme": "warm", "mood": "romantic", "movement": "impressionism", "formality": "medium", "density": "medium", "useCase": "presentation", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#d4875a", "bgTint": "#fdf6ee" }
+    },
+    {
+      "id": "imp-004",
+      "name": "雷诺阿的午后",
+      "baseTemplate": "impressionism",
+      "description": "温暖明媚、柔和粉彩，适合生活/日常主题",
+      "tags": { "colorScheme": "warm", "mood": "playful", "movement": "impressionism", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#f0b8a0", "bgTint": "#fdf5ed" }
+    },
+    {
+      "id": "imp-005",
+      "name": "德加的舞者",
+      "baseTemplate": "impressionism",
+      "description": "柔和粉彩、动态构图，适合舞蹈/表演艺术主题",
+      "tags": { "colorScheme": "pastel", "mood": "elegant", "movement": "impressionism", "formality": "medium", "density": "medium", "useCase": "portfolio", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#d4a8b8", "bgTint": "#faf0f4" }
+    },
+    {
+      "id": "imp-006",
+      "name": "毕沙罗的田园",
+      "baseTemplate": "impressionism",
+      "description": "绿色调、质朴温暖，适合自然/田园主题",
+      "tags": { "colorScheme": "earth", "mood": "peaceful", "movement": "impressionism", "formality": "low", "density": "sparse", "useCase": "gallery", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#8aaa7a", "bgTint": "#f4f8ee" }
+    },
+    {
+      "id": "imp-007",
+      "name": "西斯莱的河岸",
+      "baseTemplate": "impressionism",
+      "description": "水蓝色系、宁静悠远，适合水景/自然主题",
+      "tags": { "colorScheme": "cool", "mood": "serene", "movement": "impressionism", "formality": "medium", "density": "sparse", "useCase": "moodboard", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#6a9ab8", "bgTint": "#eef6fa" }
+    },
+    {
+      "id": "imp-008",
+      "name": "卡耶博特的雨",
+      "baseTemplate": "impressionism",
+      "description": "灰蓝冷调、都市雨景感，适合城市/现代主题",
+      "tags": { "colorScheme": "cool", "mood": "contemplative", "movement": "impressionism", "formality": "medium", "density": "dense", "useCase": "presentation", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#5a7a8a", "bgTint": "#f0f2f4" }
+    },
+    {
+      "id": "imp-009",
+      "name": "摩里索的花园",
+      "baseTemplate": "impressionism",
+      "description": "粉紫暖调、花园意境，适合花卉/园艺主题",
+      "tags": { "colorScheme": "pastel", "mood": "romantic", "movement": "impressionism", "formality": "low", "density": "medium", "useCase": "invitation", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#c8a0b8", "bgTint": "#faf4f8" }
+    },
+    {
+      "id": "imp-010",
+      "name": "布丹的天空",
+      "baseTemplate": "impressionism",
+      "description": "蓝白调、云彩变幻感，适合天空/旅行主题",
+      "tags": { "colorScheme": "light", "mood": "serene", "movement": "impressionism", "formality": "low", "density": "sparse", "useCase": "blog", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#8ab4d8", "bgTint": "#f4f8fc" }
+    },
+    {
+      "id": "ori-001",
+      "name": "墨韵",
+      "baseTemplate": "oriental",
+      "description": "水墨意境、留白美学，适合东方主题展示",
+      "tags": { "colorScheme": "neutral", "mood": "contemplative", "movement": "oriental", "formality": "high", "density": "sparse", "useCase": "gallery", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#c23a2b", "bgTint": "#f5f0e8" }
+    },
+    {
+      "id": "ori-002",
+      "name": "千里江山",
+      "baseTemplate": "oriental",
+      "description": "青绿色系、山水长卷，适合风景/山河主题",
+      "tags": { "colorScheme": "cool", "mood": "serene", "movement": "oriental", "formality": "high", "density": "medium", "useCase": "catalog", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#3a8a7a", "bgTint": "#f0f4ee" }
+    },
+    {
+      "id": "ori-003",
+      "name": "浮世绘",
+      "baseTemplate": "oriental",
+      "description": "木版画风格、鲜明平面感，适合装饰/流行主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "ukiyo-e", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "serif", "era": "vintage" },
+      "variants": { "accentColor": "#d45030", "bgTint": "#faf0e0" }
+    },
+    {
+      "id": "ori-004",
+      "name": "齐白石的虾",
+      "baseTemplate": "oriental",
+      "description": "简约笔墨、生动趣味，适合生灵/自然主题",
+      "tags": { "colorScheme": "neutral", "mood": "playful", "movement": "oriental", "formality": "low", "density": "sparse", "useCase": "blog", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#4a4a42", "bgTint": "#f8f4ee" }
+    },
+    {
+      "id": "ori-005",
+      "name": "宋人山水",
+      "baseTemplate": "oriental",
+      "description": "高远构图、淡雅设色，适合哲学/意境主题",
+      "tags": { "colorScheme": "monochrome", "mood": "contemplative", "movement": "oriental", "formality": "high", "density": "sparse", "useCase": "presentation", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#8a7a6a", "bgTint": "#f0ece4" }
+    },
+    {
+      "id": "ori-006",
+      "name": "吴冠中的江南",
+      "baseTemplate": "oriental",
+      "description": "点线抽象、黑白意境，适合现代东方主题",
+      "tags": { "colorScheme": "monochrome", "mood": "minimal", "movement": "oriental", "formality": "medium", "density": "sparse", "useCase": "portfolio", "fontStyle": "serif", "era": "contemporary" },
+      "variants": { "accentColor": "#2a2a22", "bgTint": "#f5f2ea" }
+    },
+    {
+      "id": "ori-007",
+      "name": "唐卡",
+      "baseTemplate": "oriental",
+      "description": "浓墨重彩、繁复精致，适合宗教/仪式主题",
+      "tags": { "colorScheme": "jewel", "mood": "mystical", "movement": "oriental", "formality": "high", "density": "dense", "useCase": "catalog", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#c84030", "bgTint": "#f0e8d8" }
+    },
+    {
+      "id": "ori-008",
+      "name": "徐悲鸿的奔马",
+      "baseTemplate": "oriental",
+      "description": "笔墨酣畅、力量感强，适合励志/动力主题",
+      "tags": { "colorScheme": "neutral", "mood": "energetic", "movement": "oriental", "formality": "medium", "density": "medium", "useCase": "poster", "fontStyle": "serif", "era": "modern" },
+      "variants": { "accentColor": "#6a4a32", "bgTint": "#f4eee6" }
+    },
+    {
+      "id": "ori-009",
+      "name": "八大山人",
+      "baseTemplate": "oriental",
+      "description": "简约奇崛、冷逸孤高，适合极简/艺术主题",
+      "tags": { "colorScheme": "monochrome", "mood": "minimal", "movement": "oriental", "formality": "high", "density": "sparse", "useCase": "moodboard", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#3a3a32", "bgTint": "#f2eee8" }
+    },
+    {
+      "id": "ori-010",
+      "name": "敦煌飞天",
+      "baseTemplate": "oriental",
+      "description": "绚丽色彩、飘带流畅，适合庆典/飞天主题",
+      "tags": { "colorScheme": "vibrant", "mood": "whimsical", "movement": "oriental", "formality": "medium", "density": "dense", "useCase": "invitation", "fontStyle": "serif", "era": "medieval" },
+      "variants": { "accentColor": "#d48050", "bgTint": "#f0e4d8" }
+    },
+    {
+      "id": "nouveau-001",
+      "name": "穆夏的黄金时代",
+      "baseTemplate": "art-nouveau",
+      "description": "流动曲线、金色调、华丽装饰，适合高端/装饰主题",
+      "tags": { "colorScheme": "warm", "mood": "luxurious", "movement": "art-nouveau", "formality": "high", "density": "dense", "useCase": "invitation", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#c9a84c", "bgTint": "#fdf8f0" }
+    },
+    {
+      "id": "nouveau-002",
+      "name": "四季女神",
+      "baseTemplate": "art-nouveau",
+      "description": "花卉环绕、女性柔美、自然曲线，适合美/自然主题",
+      "tags": { "colorScheme": "pastel", "mood": "romantic", "movement": "art-nouveau", "formality": "medium", "density": "dense", "useCase": "catalog", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#d4a8b8", "bgTint": "#fcf6f0" }
+    },
+    {
+      "id": "nouveau-003",
+      "name": "高迪的巴塞罗那",
+      "baseTemplate": "art-nouveau",
+      "description": "彩色马赛克、有机建筑感，适合建筑/设计主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "art-nouveau", "formality": "medium", "density": "dense", "useCase": "portfolio", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#4a8a8a", "bgTint": "#f8f4ec" }
+    },
+    {
+      "id": "nouveau-004",
+      "name": "蒂芙尼的彩窗",
+      "baseTemplate": "art-nouveau",
+      "description": "彩色玻璃、光影斑斓，适合宗教/光影主题",
+      "tags": { "colorScheme": "jewel", "mood": "mystical", "movement": "art-nouveau", "formality": "high", "density": "dense", "useCase": "gallery", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#6a8aaa", "bgTint": "#f4f0ec" }
+    },
+    {
+      "id": "nouveau-005",
+      "name": "克里姆特之吻",
+      "baseTemplate": "art-nouveau",
+      "description": "金色镶嵌、装饰图案华丽，适合爱情/奢华主题",
+      "tags": { "colorScheme": "warm", "mood": "romantic", "movement": "art-nouveau", "formality": "high", "density": "dense", "useCase": "invitation", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#b8943a", "bgTint": "#faf0e4" }
+    },
+    {
+      "id": "nouveau-006",
+      "name": "吉马德的巴黎",
+      "baseTemplate": "art-nouveau",
+      "description": "铁艺曲线、优雅法式，适合巴黎/浪漫主题",
+      "tags": { "colorScheme": "neutral", "mood": "elegant", "movement": "art-nouveau", "formality": "high", "density": "medium", "useCase": "presentation", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#5a7a5a", "bgTint": "#f4f0ea" }
+    },
+    {
+      "id": "nouveau-007",
+      "name": "蝴蝶夫人",
+      "baseTemplate": "art-nouveau",
+      "description": "日式元素融入新艺术、蝴蝶意象，适合东方融合主题",
+      "tags": { "colorScheme": "pastel", "mood": "elegant", "movement": "art-nouveau", "formality": "medium", "density": "medium", "useCase": "blog", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#d4a0a0", "bgTint": "#fcf4ee" }
+    },
+    {
+      "id": "nouveau-008",
+      "name": "孔雀",
+      "baseTemplate": "art-nouveau",
+      "description": "蓝绿色系、孔雀羽纹，适合华贵/自然主题",
+      "tags": { "colorScheme": "jewel", "mood": "luxurious", "movement": "art-nouveau", "formality": "high", "density": "dense", "useCase": "catalog", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#2a7a6a", "bgTint": "#f4f4ec" }
+    },
+    {
+      "id": "nouveau-009",
+      "name": "慕尼黑分离派",
+      "baseTemplate": "art-nouveau",
+      "description": "几何装饰、简约新艺术，适合设计/现代主题",
+      "tags": { "colorScheme": "neutral", "mood": "elegant", "movement": "art-nouveau", "formality": "medium", "density": "medium", "useCase": "portfolio", "fontStyle": "display", "era": "modern" },
+      "variants": { "accentColor": "#8a7a5a", "bgTint": "#f0ece6" }
+    },
+    {
+      "id": "nouveau-010",
+      "name": "比亚兹莱的线条",
+      "baseTemplate": "art-nouveau",
+      "description": "黑白对比、精细线条，适合文学/戏剧主题",
+      "tags": { "colorScheme": "monochrome", "mood": "dramatic", "movement": "art-nouveau", "formality": "high", "density": "dense", "useCase": "manifesto", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#2a2a2a", "bgTint": "#f8f4f0" }
+    },
+    {
+      "id": "cla-001",
+      "name": "光与影的永恒",
+      "baseTemplate": "classical",
+      "description": "深色戏剧背景、明暗对比强烈",
+      "tags": { "colorScheme": "dark", "mood": "dramatic", "movement": "classical", "formality": "high", "density": "medium", "useCase": "presentation", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#b8944a", "bgTint": "#1a1512" }
+    },
+    {
+      "id": "cla-002",
+      "name": "达芬奇的笔记",
+      "baseTemplate": "classical",
+      "description": "羊皮纸色调、手稿质感，适合研究/学术主题",
+      "tags": { "colorScheme": "warm", "mood": "academic", "movement": "renaissance", "formality": "high", "density": "dense", "useCase": "report", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#8a7a5a", "bgTint": "#e8e0d4" }
+    },
+    {
+      "id": "cla-003",
+      "name": "卡拉瓦乔的光芒",
+      "baseTemplate": "classical",
+      "description": "酒窖光线、极致明暗，适合宗教/戏剧主题",
+      "tags": { "colorScheme": "dark", "mood": "dramatic", "movement": "baroque", "formality": "high", "density": "medium", "useCase": "presentation", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#c8a060", "bgTint": "#14100c" }
+    },
+    {
+      "id": "cla-004",
+      "name": "拉斐尔的圣母",
+      "baseTemplate": "classical",
+      "description": "柔和温暖、理想化美，适合母爱/宗教主题",
+      "tags": { "colorScheme": "warm", "mood": "peaceful", "movement": "renaissance", "formality": "high", "density": "medium", "useCase": "gallery", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#d4a080", "bgTint": "#2a221c" }
+    },
+    {
+      "id": "cla-005",
+      "name": "米开朗基罗的力量",
+      "baseTemplate": "classical",
+      "description": "雕塑感、磅礴气势，适合力量/人文主题",
+      "tags": { "colorScheme": "dark", "mood": "bold", "movement": "renaissance", "formality": "high", "density": "dense", "useCase": "manifesto", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#9a8a6a", "bgTint": "#1e1814" }
+    },
+    {
+      "id": "cla-006",
+      "name": "维米尔的珍珠",
+      "baseTemplate": "classical",
+      "description": "蓝黄对比、静谧日常，适合生活/女性主题",
+      "tags": { "colorScheme": "cool", "mood": "peaceful", "movement": "classical", "formality": "medium", "density": "sparse", "useCase": "portfolio", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#4a7a9a", "bgTint": "#221e18" }
+    },
+    {
+      "id": "cla-007",
+      "name": "鲁本斯的盛宴",
+      "baseTemplate": "classical",
+      "description": "丰腴华丽、暖色浓郁，适合宴会/庆典主题",
+      "tags": { "colorScheme": "warm", "mood": "luxurious", "movement": "baroque", "formality": "high", "density": "dense", "useCase": "invitation", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#c87050", "bgTint": "#1e1814" }
+    },
+    {
+      "id": "cla-008",
+      "name": "波提切利的春天",
+      "baseTemplate": "classical",
+      "description": "柔和诗意、春日气息，适合春天/爱情主题",
+      "tags": { "colorScheme": "pastel", "mood": "romantic", "movement": "renaissance", "formality": "medium", "density": "medium", "useCase": "invitation", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#c8a0a0", "bgTint": "#2a2420" }
+    },
+    {
+      "id": "cla-009",
+      "name": "伦勃朗的自画像",
+      "baseTemplate": "classical",
+      "description": "深刻内省、光影塑造灵魂，适合个人/自省主题",
+      "tags": { "colorScheme": "dark", "mood": "contemplative", "movement": "baroque", "formality": "high", "density": "medium", "useCase": "portfolio", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#a89070", "bgTint": "#181410" }
+    },
+    {
+      "id": "cla-010",
+      "name": "凡艾克的婚约",
+      "baseTemplate": "classical",
+      "description": "精细写实、细节丰富，适合婚礼/承诺主题",
+      "tags": { "colorScheme": "warm", "mood": "elegant", "movement": "renaissance", "formality": "high", "density": "dense", "useCase": "invitation", "fontStyle": "serif", "era": "medieval" },
+      "variants": { "accentColor": "#c83030", "bgTint": "#1e1814" }
+    },
+    {
+      "id": "mod-001",
+      "name": "几何构成",
+      "baseTemplate": "modernism",
+      "description": "简洁几何、大胆色块，适合现代设计主题",
+      "tags": { "colorScheme": "vibrant", "mood": "bold", "movement": "modernism", "formality": "medium", "density": "sparse", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#e84a3a", "bgTint": "#f8f6f4" }
+    },
+    {
+      "id": "mod-002",
+      "name": "包豪斯宣言",
+      "baseTemplate": "modernism",
+      "description": "功能主义、红黄蓝原色，适合工业/设计主题",
+      "tags": { "colorScheme": "vibrant", "mood": "bold", "movement": "bauhaus", "formality": "high", "density": "medium", "useCase": "manifesto", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#e03030", "bgTint": "#f4f2f0" }
+    },
+    {
+      "id": "mod-003",
+      "name": "蒙德里安的格子",
+      "baseTemplate": "modernism",
+      "description": "红黄蓝黑、方形节奏，适合秩序/抽象主题",
+      "tags": { "colorScheme": "vibrant", "mood": "minimal", "movement": "modernism", "formality": "medium", "density": "sparse", "useCase": "poster", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#d43030", "bgTint": "#f0eee8" }
+    },
+    {
+      "id": "mod-004",
+      "name": "康定斯基的乐章",
+      "baseTemplate": "modernism",
+      "description": "抽象几何、色彩音乐感，适合艺术/音乐主题",
+      "tags": { "colorScheme": "vibrant", "mood": "energetic", "movement": "abstract", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#e8a030", "bgTint": "#f4f0e8" }
+    },
+    {
+      "id": "mod-005",
+      "name": "马蒂斯的剪纸",
+      "baseTemplate": "modernism",
+      "description": "鲜艳色块、自由形状，适合快乐/活力主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "modernism", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#30a8d4", "bgTint": "#faf6f0" }
+    },
+    {
+      "id": "mod-006",
+      "name": "未来主义",
+      "baseTemplate": "modernism",
+      "description": "速度感、动态线条，适合科技/运动主题",
+      "tags": { "colorScheme": "vibrant", "mood": "energetic", "movement": "modernism", "formality": "low", "density": "medium", "useCase": "poster", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#d46030", "bgTint": "#f4f0ec" }
+    },
+    {
+      "id": "mod-007",
+      "name": "风格派",
+      "baseTemplate": "modernism",
+      "description": "杜斯堡的斜线、矩形节奏，适合前卫/先锋主题",
+      "tags": { "colorScheme": "vibrant", "mood": "bold", "movement": "modernism", "formality": "high", "density": "sparse", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#2a2a2a", "bgTint": "#f0eee8" }
+    },
+    {
+      "id": "mod-008",
+      "name": "柯布西耶的模度",
+      "baseTemplate": "modernism",
+      "description": "比例系统、建筑感，适合建筑/规划主题",
+      "tags": { "colorScheme": "neutral", "mood": "academic", "movement": "modernism", "formality": "high", "density": "dense", "useCase": "report", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#4a6a8a", "bgTint": "#f0eeec" }
+    },
+    {
+      "id": "mod-009",
+      "name": "马列维奇的黑方块",
+      "baseTemplate": "modernism",
+      "description": "至上主义、极简黑白，适合极简/哲学主题",
+      "tags": { "colorScheme": "monochrome", "mood": "minimal", "movement": "abstract", "formality": "high", "density": "sparse", "useCase": "moodboard", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#1a1a1a", "bgTint": "#ece8e4" }
+    },
+    {
+      "id": "mod-010",
+      "name": "维也纳工坊",
+      "baseTemplate": "modernism",
+      "description": "几何装饰、手工艺感，适合精致/设计主题",
+      "tags": { "colorScheme": "neutral", "mood": "elegant", "movement": "modernism", "formality": "high", "density": "medium", "useCase": "catalog", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#8a7a5a", "bgTint": "#f0ece6" }
+    },
+    {
+      "id": "pop-001",
+      "name": "安迪的罐头",
+      "baseTemplate": "pop-art",
+      "description": "波普复制、鲜艳原色，适合流行/商业主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "pop-art", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#e03030", "bgTint": "#f8f4f0" }
+    },
+    {
+      "id": "pop-002",
+      "name": "利希滕斯坦的网点",
+      "baseTemplate": "pop-art",
+      "description": "漫画风格、班戴点，适合漫画/幽默主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "pop-art", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#d43060", "bgTint": "#fcf8f4" }
+    },
+    {
+      "id": "pop-003",
+      "name": "沃霍尔的玛丽莲",
+      "baseTemplate": "pop-art",
+      "description": "丝网印刷、重复人像，适合名人/偶像主题",
+      "tags": { "colorScheme": "vibrant", "mood": "bold", "movement": "pop-art", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#e8c030", "bgTint": "#fcf8f0" }
+    },
+    {
+      "id": "pop-004",
+      "name": "汉密尔顿的拼贴",
+      "baseTemplate": "pop-art",
+      "description": "拼贴风格、消费文化，适合广告/媒体主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "pop-art", "formality": "low", "density": "dense", "useCase": "catalog", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#30a0c8", "bgTint": "#f8f4ec" }
+    },
+    {
+      "id": "pop-005",
+      "name": "草间弥生的波点",
+      "baseTemplate": "pop-art",
+      "description": "无穷波点、鲜艳对比，适合迷幻/无限主题",
+      "tags": { "colorScheme": "vibrant", "mood": "whimsical", "movement": "pop-art", "formality": "low", "density": "dense", "useCase": "gallery", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#e84070", "bgTint": "#fcf8f4" }
+    },
+    {
+      "id": "pop-006",
+      "name": "巴斯奎特的涂鸦",
+      "baseTemplate": "pop-art",
+      "description": "涂鸦风格、原始力量，适合街头/城市主题",
+      "tags": { "colorScheme": "vibrant", "mood": "energetic", "movement": "pop-art", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "handwritten", "era": "contemporary" },
+      "variants": { "accentColor": "#d4a030", "bgTint": "#f0ece4" }
+    },
+    {
+      "id": "pop-007",
+      "name": "凯斯·哈林的小人",
+      "baseTemplate": "pop-art",
+      "description": "简笔涂鸦、律动线条，适合运动/儿童主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "pop-art", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#e03030", "bgTint": "#fcf8f4" }
+    },
+    {
+      "id": "pop-008",
+      "name": "霍克尼的泳池",
+      "baseTemplate": "pop-art",
+      "description": "加州阳光、水光色彩，适合度假/夏天主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "pop-art", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#30b0d4", "bgTint": "#fcf8f0" }
+    },
+    {
+      "id": "pop-009",
+      "name": "罗森奎斯特的广告牌",
+      "baseTemplate": "pop-art",
+      "description": "大幅拼贴、消费符号，适合广告/宣传主题",
+      "tags": { "colorScheme": "vibrant", "mood": "bold", "movement": "pop-art", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#d06040", "bgTint": "#f4f0e8" }
+    },
+    {
+      "id": "pop-010",
+      "name": "奥登堡的软雕塑",
+      "baseTemplate": "pop-art",
+      "description": "软萌放大、日常物异化，适合趣味/创意主题",
+      "tags": { "colorScheme": "vibrant", "mood": "whimsical", "movement": "pop-art", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#d4a0c0", "bgTint": "#fcf8f4" }
+    },
+    {
+      "id": "sur-001",
+      "name": "达利的梦境",
+      "baseTemplate": "surrealism",
+      "description": "梦幻荒诞、融化时空，适合梦境/幻想主题",
+      "tags": { "colorScheme": "warm", "mood": "mystical", "movement": "surrealism", "formality": "medium", "density": "dense", "useCase": "gallery", "fontStyle": "serif", "era": "modern" },
+      "variants": { "accentColor": "#d4a040", "bgTint": "#f0e8dc" }
+    },
+    {
+      "id": "sur-002",
+      "name": "马格利特的苹果",
+      "baseTemplate": "surrealism",
+      "description": "超现实静谧、错位逻辑，适合哲学/思考主题",
+      "tags": { "colorScheme": "cool", "mood": "contemplative", "movement": "surrealism", "formality": "medium", "density": "sparse", "useCase": "moodboard", "fontStyle": "serif", "era": "modern" },
+      "variants": { "accentColor": "#4a7a8a", "bgTint": "#e8eaec" }
+    },
+    {
+      "id": "sur-003",
+      "name": "恩斯特的丛林",
+      "baseTemplate": "surrealism",
+      "description": "拓印肌理、梦幻森林，适合自然/幻想主题",
+      "tags": { "colorScheme": "earth", "mood": "mystical", "movement": "surrealism", "formality": "low", "density": "dense", "useCase": "gallery", "fontStyle": "serif", "era": "modern" },
+      "variants": { "accentColor": "#5a8a5a", "bgTint": "#eef0e8" }
+    },
+    {
+      "id": "sur-004",
+      "name": "米罗的星座",
+      "baseTemplate": "surrealism",
+      "description": "抽象符号、童趣涂鸦，适合宇宙/儿童主题",
+      "tags": { "colorScheme": "vibrant", "mood": "whimsical", "movement": "surrealism", "formality": "low", "density": "medium", "useCase": "gallery", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#e04060", "bgTint": "#f0eef0" }
+    },
+    {
+      "id": "sur-005",
+      "name": "唐吉的旷野",
+      "baseTemplate": "surrealism",
+      "description": "荒凉梦幻、白骨般岩石，适合孤独/广阔主题",
+      "tags": { "colorScheme": "cool", "mood": "contemplative", "movement": "surrealism", "formality": "medium", "density": "sparse", "useCase": "moodboard", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#6a8a9a", "bgTint": "#e8eaf0" }
+    },
+    {
+      "id": "sur-006",
+      "name": "弗里达的自我",
+      "baseTemplate": "surrealism",
+      "description": "浓烈色彩、直白情感，适合个人/女性主题",
+      "tags": { "colorScheme": "vibrant", "mood": "dramatic", "movement": "surrealism", "formality": "medium", "density": "dense", "useCase": "portfolio", "fontStyle": "serif", "era": "modern" },
+      "variants": { "accentColor": "#d45040", "bgTint": "#f0e8e0" }
+    },
+    {
+      "id": "sur-007",
+      "name": "夏加尔的恋人",
+      "baseTemplate": "surrealism",
+      "description": "漂浮梦幻、爱情意象，适合爱情/婚礼主题",
+      "tags": { "colorScheme": "vibrant", "mood": "romantic", "movement": "surrealism", "formality": "medium", "density": "medium", "useCase": "invitation", "fontStyle": "serif", "era": "modern" },
+      "variants": { "accentColor": "#e080a0", "bgTint": "#f0ecf0" }
+    },
+    {
+      "id": "sur-008",
+      "name": "德尔沃的月夜",
+      "baseTemplate": "surrealism",
+      "description": "神秘月夜、裸女与骷髅，适合深夜/神秘主题",
+      "tags": { "colorScheme": "cool", "mood": "mystical", "movement": "surrealism", "formality": "medium", "density": "sparse", "useCase": "moodboard", "fontStyle": "serif", "era": "modern" },
+      "variants": { "accentColor": "#8a8aaa", "bgTint": "#e8e4f0" }
+    },
+    {
+      "id": "sur-009",
+      "name": "基里科的广场",
+      "baseTemplate": "surrealism",
+      "description": "形而上画派、荒凉拱廊，适合哲学/城市主题",
+      "tags": { "colorScheme": "warm", "mood": "contemplative", "movement": "surrealism", "formality": "high", "density": "sparse", "useCase": "gallery", "fontStyle": "serif", "era": "modern" },
+      "variants": { "accentColor": "#8a7a5a", "bgTint": "#ece8e0" }
+    },
+    {
+      "id": "sur-010",
+      "name": "曼雷的物影",
+      "baseTemplate": "surrealism",
+      "description": "摄影物影、光影实验，适合摄影/光影主题",
+      "tags": { "colorScheme": "monochrome", "mood": "mystical", "movement": "surrealism", "formality": "medium", "density": "sparse", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#3a3a42", "bgTint": "#ececee" }
+    },
+    {
+      "id": "abs-001",
+      "name": "波洛克的滴画",
+      "baseTemplate": "abstract",
+      "description": "行动绘画、线条交织，适合能量/自由主题",
+      "tags": { "colorScheme": "vibrant", "mood": "energetic", "movement": "abstract", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#e8a040", "bgTint": "#f4f0e8" }
+    },
+    {
+      "id": "abs-002",
+      "name": "罗斯科的色域",
+      "baseTemplate": "abstract",
+      "description": "大色块、冥想氛围，适合沉思/精神主题",
+      "tags": { "colorScheme": "vibrant", "mood": "contemplative", "movement": "abstract", "formality": "medium", "density": "sparse", "useCase": "moodboard", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#c83060", "bgTint": "#e8e0d8" }
+    },
+    {
+      "id": "abs-003",
+      "name": "纽曼的拉链",
+      "baseTemplate": "abstract",
+      "description": "大色面、垂直线条，适合极简/力量主题",
+      "tags": { "colorScheme": "vibrant", "mood": "bold", "movement": "abstract", "formality": "high", "density": "sparse", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#d43030", "bgTint": "#f0eee8" }
+    },
+    {
+      "id": "abs-004",
+      "name": "托姆布雷的涂写",
+      "baseTemplate": "abstract",
+      "description": "潦草书写、诗意涂鸦，适合诗歌/文学主题",
+      "tags": { "colorScheme": "monochrome", "mood": "contemplative", "movement": "abstract", "formality": "low", "density": "sparse", "useCase": "moodboard", "fontStyle": "handwritten", "era": "contemporary" },
+      "variants": { "accentColor": "#2a2a2a", "bgTint": "#f0ece8" }
+    },
+    {
+      "id": "abs-005",
+      "name": "克莱因的蓝",
+      "baseTemplate": "abstract",
+      "description": "纯粹蓝色、无限空间，适合宇宙/极限主题",
+      "tags": { "colorScheme": "cool", "mood": "contemplative", "movement": "abstract", "formality": "medium", "density": "sparse", "useCase": "moodboard", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#1a3a8a", "bgTint": "#e8ecf4" }
+    },
+    {
+      "id": "abs-006",
+      "name": "德库宁的女人",
+      "baseTemplate": "abstract",
+      "description": "狂野笔触、粗犷人体，适合原始/力量主题",
+      "tags": { "colorScheme": "vibrant", "mood": "energetic", "movement": "abstract", "formality": "low", "density": "dense", "useCase": "gallery", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#d06040", "bgTint": "#f0ece4" }
+    },
+    {
+      "id": "abs-007",
+      "name": "霍夫曼的推拉",
+      "baseTemplate": "abstract",
+      "description": "色块推拉、空间张力，适合空间/动态主题",
+      "tags": { "colorScheme": "vibrant", "mood": "energetic", "movement": "abstract", "formality": "medium", "density": "medium", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#30a060", "bgTint": "#f0f0ec" }
+    },
+    {
+      "id": "abs-008",
+      "name": "莱茵哈特的黑色",
+      "baseTemplate": "abstract",
+      "description": "极黑画面、微差质感，适合终极极简主题",
+      "tags": { "colorScheme": "dark", "mood": "contemplative", "movement": "minimalism", "formality": "high", "density": "sparse", "useCase": "moodboard", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#2a2a2a", "bgTint": "#141414" }
+    },
+    {
+      "id": "abs-009",
+      "name": "戈尔基的抽象",
+      "baseTemplate": "abstract",
+      "description": "生物形态抽象、色彩柔和，适合有机/自然主题",
+      "tags": { "colorScheme": "pastel", "mood": "serene", "movement": "abstract", "formality": "medium", "density": "medium", "useCase": "gallery", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#a0c8a0", "bgTint": "#f0f4f0" }
+    },
+    {
+      "id": "abs-010",
+      "name": "克兰的大笔触",
+      "baseTemplate": "abstract",
+      "description": "黑白巨幅、书法笔触，适合书法/黑白主题",
+      "tags": { "colorScheme": "monochrome", "mood": "bold", "movement": "abstract", "formality": "medium", "density": "sparse", "useCase": "poster", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#1a1a1a", "bgTint": "#f0e8e4" }
+    },
+    {
+      "id": "bar-001",
+      "name": "巴洛克华章",
+      "baseTemplate": "baroque",
+      "description": "金色辉煌、动感构图，适合盛大/宗教主题",
+      "tags": { "colorScheme": "warm", "mood": "dramatic", "movement": "baroque", "formality": "high", "density": "dense", "useCase": "presentation", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#c8a040", "bgTint": "#1a1410" }
+    },
+    {
+      "id": "bar-002",
+      "name": "贝尔尼尼的狂喜",
+      "baseTemplate": "baroque",
+      "description": "大理石纹理、戏剧动态，适合雕塑/动态主题",
+      "tags": { "colorScheme": "warm", "mood": "dramatic", "movement": "baroque", "formality": "high", "density": "dense", "useCase": "gallery", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#d4b8a0", "bgTint": "#1e1814" }
+    },
+    {
+      "id": "bar-003",
+      "name": "普桑的秩序",
+      "baseTemplate": "baroque",
+      "description": "理性构图、风景叙事，适合史诗/古典主题",
+      "tags": { "colorScheme": "warm", "mood": "academic", "movement": "classical", "formality": "high", "density": "dense", "useCase": "report", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#6a8a6a", "bgTint": "#22201a" }
+    },
+    {
+      "id": "bar-004",
+      "name": "维拉斯开兹的宫娥",
+      "baseTemplate": "baroque",
+      "description": "宫廷生活、镜像游戏，适合宫廷/反射主题",
+      "tags": { "colorScheme": "warm", "mood": "elegant", "movement": "baroque", "formality": "high", "density": "dense", "useCase": "catalog", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#8a7a6a", "bgTint": "#1e1814" }
+    },
+    {
+      "id": "bar-005",
+      "name": "牟利罗的圣母",
+      "baseTemplate": "baroque",
+      "description": "柔和温暖、宗教柔情，适合信仰/母爱主题",
+      "tags": { "colorScheme": "warm", "mood": "peaceful", "movement": "baroque", "formality": "high", "density": "medium", "useCase": "gallery", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#c8a0a0", "bgTint": "#201a16" }
+    },
+    {
+      "id": "rom-001",
+      "name": "浪漫的云海",
+      "baseTemplate": "romanticism",
+      "description": "壮丽自然、崇高情感，适合风景/情感主题",
+      "tags": { "colorScheme": "cool", "mood": "dramatic", "movement": "romanticism", "formality": "medium", "density": "medium", "useCase": "gallery", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#4a7a9a", "bgTint": "#e8e6e0" }
+    },
+    {
+      "id": "rom-002",
+      "name": "弗里德里希的孤月",
+      "baseTemplate": "romanticism",
+      "description": "忧郁静谧、人与自然，适合孤独/冥想主题",
+      "tags": { "colorScheme": "cool", "mood": "contemplative", "movement": "romanticism", "formality": "medium", "density": "sparse", "useCase": "moodboard", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#5a6a7a", "bgTint": "#e4e4e0" }
+    },
+    {
+      "id": "rom-003",
+      "name": "德拉克洛瓦的自由",
+      "baseTemplate": "romanticism",
+      "description": "激情澎湃、旗帜飘扬，适合革命/自由主题",
+      "tags": { "colorScheme": "vibrant", "mood": "dramatic", "movement": "romanticism", "formality": "medium", "density": "dense", "useCase": "poster", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#c83030", "bgTint": "#e8e0d8" }
+    },
+    {
+      "id": "rom-004",
+      "name": "透纳的风暴",
+      "baseTemplate": "romanticism",
+      "description": "漩涡色彩、自然之力，适合海洋/风暴主题",
+      "tags": { "colorScheme": "warm", "mood": "dramatic", "movement": "romanticism", "formality": "low", "density": "dense", "useCase": "gallery", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#c88040", "bgTint": "#e8ddd0" }
+    },
+    {
+      "id": "rom-005",
+      "name": "戈雅的黑色",
+      "baseTemplate": "romanticism",
+      "description": "黑暗怪诞、人性暗面，适合黑暗/批判主题",
+      "tags": { "colorScheme": "dark", "mood": "dramatic", "movement": "romanticism", "formality": "high", "density": "dense", "useCase": "manifesto", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#4a3a2a", "bgTint": "#14100c" }
+    },
+    {
+      "id": "real-001",
+      "name": "库尔贝的真相",
+      "baseTemplate": "realism",
+      "description": "写实朴素、泥土气息，适合真实/劳动主题",
+      "tags": { "colorScheme": "earth", "mood": "rustic", "movement": "realism", "formality": "medium", "density": "medium", "useCase": "report", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#8a7a5a", "bgTint": "#e8e4dc" }
+    },
+    {
+      "id": "real-002",
+      "name": "米勒的拾穗者",
+      "baseTemplate": "realism",
+      "description": "田园劳作、质朴生活，适合乡村/劳动主题",
+      "tags": { "colorScheme": "earth", "mood": "peaceful", "movement": "realism", "formality": "low", "density": "medium", "useCase": "gallery", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#b8a080", "bgTint": "#e8e4dc" }
+    },
+    {
+      "id": "real-003",
+      "name": "霍珀的孤独",
+      "baseTemplate": "realism",
+      "description": "美国写实、孤独都市，适合城市/孤独主题",
+      "tags": { "colorScheme": "cool", "mood": "contemplative", "movement": "realism", "formality": "medium", "density": "sparse", "useCase": "moodboard", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#6a7a8a", "bgTint": "#e8e6e4" }
+    },
+    {
+      "id": "real-004",
+      "name": "怀斯的克里斯蒂娜",
+      "baseTemplate": "realism",
+      "description": "细腻写实、乡愁感，适合乡村/怀旧主题",
+      "tags": { "colorScheme": "earth", "mood": "nostalgic", "movement": "realism", "formality": "low", "density": "sparse", "useCase": "moodboard", "fontStyle": "serif", "era": "modern" },
+      "variants": { "accentColor": "#8a9a7a", "bgTint": "#e8e6dc" }
+    },
+    {
+      "id": "fav-001",
+      "name": "马蒂斯的野兽",
+      "baseTemplate": "fauvism",
+      "description": "狂野色彩、简化造型，适合大胆/快乐主题",
+      "tags": { "colorScheme": "vibrant", "mood": "energetic", "movement": "fauvism", "formality": "low", "density": "medium", "useCase": "poster", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#e04040", "bgTint": "#f4ece4" }
+    },
+    {
+      "id": "fav-002",
+      "name": "德兰的伦敦桥",
+      "baseTemplate": "fauvism",
+      "description": "强烈对比、城市色彩，适合城市/旅行主题",
+      "tags": { "colorScheme": "vibrant", "mood": "bold", "movement": "fauvism", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#e8a030", "bgTint": "#f0ece4" }
+    },
+    {
+      "id": "fav-003",
+      "name": "弗拉芒克的田野",
+      "baseTemplate": "fauvism",
+      "description": "浓烈风景、色彩爆炸，适合自然/活力主题",
+      "tags": { "colorScheme": "vibrant", "mood": "energetic", "movement": "fauvism", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#30a060", "bgTint": "#f0ece4" }
+    },
+    {
+      "id": "min-001",
+      "name": "少即是多",
+      "baseTemplate": "minimalism",
+      "description": "极致简约、大量留白，适合现代/品牌主题",
+      "tags": { "colorScheme": "neutral", "mood": "minimal", "movement": "minimalism", "formality": "high", "density": "sparse", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#3a3a3a", "bgTint": "#f8f6f4" }
+    },
+    {
+      "id": "min-002",
+      "name": "空白的力量",
+      "baseTemplate": "minimalism",
+      "description": "大量负空间、文字焦点，适合排版/文字主题",
+      "tags": { "colorScheme": "monochrome", "mood": "minimal", "movement": "minimalism", "formality": "high", "density": "sparse", "useCase": "presentation", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#1a1a1a", "bgTint": "#faf8f6" }
+    },
+    {
+      "id": "min-003",
+      "name": "白盒子画廊",
+      "baseTemplate": "minimalism",
+      "description": "洁白空间、艺术展示，适合艺术品/展览主题",
+      "tags": { "colorScheme": "light", "mood": "minimal", "movement": "minimalism", "formality": "high", "density": "sparse", "useCase": "gallery", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#6a6a6a", "bgTint": "#fafafa" }
+    },
+    {
+      "id": "cub-001",
+      "name": "毕加索的凝视",
+      "baseTemplate": "cubism",
+      "description": "立体分割、多面视角，适合分析/解构主题",
+      "tags": { "colorScheme": "warm", "mood": "bold", "movement": "cubism", "formality": "medium", "density": "dense", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#8a6a4a", "bgTint": "#e8e4dc" }
+    },
+    {
+      "id": "cub-002",
+      "name": "布拉克的静物",
+      "baseTemplate": "cubism",
+      "description": "破碎画面、拼贴质感，适合音乐/文学主题",
+      "tags": { "colorScheme": "earth", "mood": "academic", "movement": "cubism", "formality": "high", "density": "dense", "useCase": "report", "fontStyle": "serif", "era": "modern" },
+      "variants": { "accentColor": "#6a5a4a", "bgTint": "#e4e0d8" }
+    },
+    {
+      "id": "cub-003",
+      "name": "莱热的机械",
+      "baseTemplate": "cubism",
+      "description": "机器造型、管状人体，适合工业/机械主题",
+      "tags": { "colorScheme": "vibrant", "mood": "bold", "movement": "cubism", "formality": "medium", "density": "dense", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#c85030", "bgTint": "#e8e4dc" }
+    },
+    {
+      "id": "cub-004",
+      "name": "格里斯的结构",
+      "baseTemplate": "cubism",
+      "description": "清晰结构、明亮色块，适合建筑/几何主题",
+      "tags": { "colorScheme": "vibrant", "mood": "academic", "movement": "cubism", "formality": "high", "density": "dense", "useCase": "report", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#d48040", "bgTint": "#e8e4e0" }
+    },
+    {
+      "id": "exp-001",
+      "name": "蒙克的尖叫",
+      "baseTemplate": "expressionism",
+      "description": "扭曲情感、强烈色彩，适合焦虑/存在主题",
+      "tags": { "colorScheme": "vibrant", "mood": "dramatic", "movement": "expressionism", "formality": "medium", "density": "dense", "useCase": "poster", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#d46040", "bgTint": "#e8e0d8" }
+    },
+    {
+      "id": "exp-002",
+      "name": "康定斯基的即兴",
+      "baseTemplate": "expressionism",
+      "description": "即兴表达、色彩丰富，适合音乐/即兴主题",
+      "tags": { "colorScheme": "vibrant", "mood": "energetic", "movement": "expressionism", "formality": "low", "density": "dense", "useCase": "gallery", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#e8a030", "bgTint": "#f0ece4" }
+    },
+    {
+      "id": "exp-003",
+      "name": "诺尔德的热带",
+      "baseTemplate": "expressionism",
+      "description": "浓烈色彩、原始力量，适合热带/原始主题",
+      "tags": { "colorScheme": "vibrant", "mood": "energetic", "movement": "expressionism", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#d45030", "bgTint": "#ece4d8" }
+    },
+    {
+      "id": "exp-004",
+      "name": "科柯施卡的肖像",
+      "baseTemplate": "expressionism",
+      "description": "神经质线条、心理刻画，适合心理/人物主题",
+      "tags": { "colorScheme": "warm", "mood": "dramatic", "movement": "expressionism", "formality": "high", "density": "dense", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#8a6a4a", "bgTint": "#e4e0d8" }
+    },
+    {
+      "id": "exp-005",
+      "name": "席勒的线条",
+      "baseTemplate": "expressionism",
+      "description": "骨感线条、紧张人体，适合人体/张力主题",
+      "tags": { "colorScheme": "warm", "mood": "dramatic", "movement": "expressionism", "formality": "medium", "density": "dense", "useCase": "gallery", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#c87050", "bgTint": "#e8e0d8" }
+    },
+    {
+      "id": "exp-006",
+      "name": "贝克曼的夜",
+      "baseTemplate": "expressionism",
+      "description": "黑暗沉重、社会批判，适合社会/批判主题",
+      "tags": { "colorScheme": "dark", "mood": "dramatic", "movement": "expressionism", "formality": "high", "density": "dense", "useCase": "manifesto", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#4a3a2a", "bgTint": "#14100c" }
+    },
+    {
+      "id": "roc-001",
+      "name": "布歇的闺房",
+      "baseTemplate": "rococo",
+      "description": "粉彩柔美、轻快浪漫，适合爱情/甜点主题",
+      "tags": { "colorScheme": "pastel", "mood": "playful", "movement": "rococo", "formality": "low", "density": "dense", "useCase": "invitation", "fontStyle": "display", "era": "classic" },
+      "variants": { "accentColor": "#d4a0b8", "bgTint": "#fcf4f0" }
+    },
+    {
+      "id": "roc-002",
+      "name": "弗拉戈纳尔的秋千",
+      "baseTemplate": "rococo",
+      "description": "轻佻浪漫、花园调情，适合爱情/秘密主题",
+      "tags": { "colorScheme": "pastel", "mood": "playful", "movement": "rococo", "formality": "low", "density": "dense", "useCase": "invitation", "fontStyle": "display", "era": "classic" },
+      "variants": { "accentColor": "#d4a080", "bgTint": "#fcf6f0" }
+    },
+    {
+      "id": "roc-003",
+      "name": "华托的舟发西苔岛",
+      "baseTemplate": "rococo",
+      "description": "梦幻田园、爱情朝圣，适合梦幻/旅行主题",
+      "tags": { "colorScheme": "pastel", "mood": "romantic", "movement": "rococo", "formality": "medium", "density": "dense", "useCase": "invitation", "fontStyle": "display", "era": "classic" },
+      "variants": { "accentColor": "#a0c8a0", "bgTint": "#f0f6f0" }
+    },
+    {
+      "id": "sym-001",
+      "name": "雷东的梦境",
+      "baseTemplate": "symbolism",
+      "description": "神秘花卉、梦幻色彩，适合梦境/幻想主题",
+      "tags": { "colorScheme": "pastel", "mood": "mystical", "movement": "symbolism", "formality": "medium", "density": "medium", "useCase": "gallery", "fontStyle": "serif", "era": "vintage" },
+      "variants": { "accentColor": "#8a5a8a", "bgTint": "#f4eef4" }
+    },
+    {
+      "id": "sym-002",
+      "name": "莫罗的幻象",
+      "baseTemplate": "symbolism",
+      "description": "神秘华丽、神话女性，适合神话/象征主题",
+      "tags": { "colorScheme": "jewel", "mood": "mystical", "movement": "symbolism", "formality": "high", "density": "dense", "useCase": "catalog", "fontStyle": "serif", "era": "vintage" },
+      "variants": { "accentColor": "#8a6a8a", "bgTint": "#ece4e8" }
+    },
+    {
+      "id": "sym-003",
+      "name": "克里姆特的拥抱",
+      "baseTemplate": "symbolism",
+      "description": "金色装饰、生命轮回，适合生命/爱情主题",
+      "tags": { "colorScheme": "warm", "mood": "romantic", "movement": "symbolism", "formality": "high", "density": "dense", "useCase": "invitation", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#b89440", "bgTint": "#f8f0e4" }
+    },
+    {
+      "id": "post-001",
+      "name": "梵高的星月",
+      "baseTemplate": "post-impressionism",
+      "description": "漩涡笔触、情感星空，适合宇宙/情感主题",
+      "tags": { "colorScheme": "vibrant", "mood": "dramatic", "movement": "post-impressionism", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "sans-serif", "era": "vintage" },
+      "variants": { "accentColor": "#e8c030", "bgTint": "#e8e4dc" }
+    },
+    {
+      "id": "post-002",
+      "name": "高更的塔希提",
+      "baseTemplate": "post-impressionism",
+      "description": "原始色彩、热带风情，适合岛屿/原始主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "post-impressionism", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "sans-serif", "era": "vintage" },
+      "variants": { "accentColor": "#d48030", "bgTint": "#f0e8d8" }
+    },
+    {
+      "id": "post-003",
+      "name": "修拉的周日",
+      "baseTemplate": "post-impressionism",
+      "description": "点彩技法、休闲时光，适合假日/悠闲主题",
+      "tags": { "colorScheme": "cool", "mood": "peaceful", "movement": "post-impressionism", "formality": "medium", "density": "dense", "useCase": "gallery", "fontStyle": "serif", "era": "vintage" },
+      "variants": { "accentColor": "#6a8a7a", "bgTint": "#eef0ec" }
+    },
+    {
+      "id": "post-004",
+      "name": "塞尚的圣维克多",
+      "baseTemplate": "post-impressionism",
+      "description": "块面结构、坚实风景，适合结构/风景主题",
+      "tags": { "colorScheme": "earth", "mood": "contemplative", "movement": "post-impressionism", "formality": "high", "density": "medium", "useCase": "portfolio", "fontStyle": "serif", "era": "vintage" },
+      "variants": { "accentColor": "#8a8a6a", "bgTint": "#ece8e0" }
+    },
+    {
+      "id": "post-005",
+      "name": "图卢兹-洛特雷克的红磨坊",
+      "baseTemplate": "post-impressionism",
+      "description": "海报风格、夜巴黎生活，适合夜生活/表演主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "post-impressionism", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#c84040", "bgTint": "#f0e8d8" }
+    },
+    {
+      "id": "ren-001",
+      "name": "文艺复兴的黎明",
+      "baseTemplate": "renaissance",
+      "description": "神圣之光、透视法则，适合科学/人文主题",
+      "tags": { "colorScheme": "warm", "mood": "academic", "movement": "renaissance", "formality": "high", "density": "dense", "useCase": "report", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#8a7a5a", "bgTint": "#e8e0d4" }
+    },
+    {
+      "id": "ren-002",
+      "name": "乌切洛的战役",
+      "baseTemplate": "renaissance",
+      "description": "透视实验、骑士战争，适合战争/历史主题",
+      "tags": { "colorScheme": "warm", "mood": "dramatic", "movement": "renaissance", "formality": "high", "density": "dense", "useCase": "presentation", "fontStyle": "serif", "era": "medieval" },
+      "variants": { "accentColor": "#c84030", "bgTint": "#e0dcd4" }
+    },
+    {
+      "id": "ren-003",
+      "name": "乔托的哀歌",
+      "baseTemplate": "renaissance",
+      "description": "朴素情感、壁画质感，适合宗教/悲伤主题",
+      "tags": { "colorScheme": "earth", "mood": "contemplative", "movement": "renaissance", "formality": "high", "density": "medium", "useCase": "gallery", "fontStyle": "serif", "era": "medieval" },
+      "variants": { "accentColor": "#6a7a6a", "bgTint": "#e0dcd4" }
+    },
+    {
+      "id": "con-001",
+      "name": "基弗的废墟",
+      "baseTemplate": "contemporary",
+      "description": "沉重历史、材料肌理，适合历史/记忆主题",
+      "tags": { "colorScheme": "dark", "mood": "dramatic", "movement": "contemporary", "formality": "high", "density": "dense", "useCase": "gallery", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#6a5a4a", "bgTint": "#14100c" }
+    },
+    {
+      "id": "con-002",
+      "name": "里希特的模糊",
+      "baseTemplate": "contemporary",
+      "description": "模糊边界、摄影绘画，适合摄影/记忆主题",
+      "tags": { "colorScheme": "cool", "mood": "contemplative", "movement": "contemporary", "formality": "medium", "density": "medium", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#6a7a8a", "bgTint": "#e8e8e6" }
+    },
+    {
+      "id": "con-003",
+      "name": "昆斯的 balloon",
+      "baseTemplate": "contemporary",
+      "description": "亮面充气、流行奢华，适合派对/奢侈主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "contemporary", "formality": "low", "density": "medium", "useCase": "invitation", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#e04060", "bgTint": "#fcf8f4" }
+    },
+    {
+      "id": "con-004",
+      "name": "赫斯特的蝴蝶",
+      "baseTemplate": "contemporary",
+      "description": "对称图案、生命轮回，适合自然/生命主题",
+      "tags": { "colorScheme": "vibrant", "mood": "mystical", "movement": "contemporary", "formality": "medium", "density": "dense", "useCase": "gallery", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#d43060", "bgTint": "#f4f0ec" }
+    },
+    {
+      "id": "bau-001",
+      "name": "格罗皮乌斯的工坊",
+      "baseTemplate": "bauhaus",
+      "description": "功能形式、理性美学，适合工业/设计主题",
+      "tags": { "colorScheme": "neutral", "mood": "academic", "movement": "bauhaus", "formality": "high", "density": "medium", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#4a4a4a", "bgTint": "#f4f2f0" }
+    },
+    {
+      "id": "bau-002",
+      "name": "莫霍利的实验",
+      "baseTemplate": "bauhaus",
+      "description": "摄影蒙太奇、光影实验，适合摄影/媒体主题",
+      "tags": { "colorScheme": "monochrome", "mood": "bold", "movement": "bauhaus", "formality": "medium", "density": "medium", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#2a2a2a", "bgTint": "#f0eeec" }
+    },
+    {
+      "id": "bau-003",
+      "name": "施莱默的芭蕾",
+      "baseTemplate": "bauhaus",
+      "description": "几何人体、舞台空间，适合舞蹈/抽象主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "bauhaus", "formality": "medium", "density": "medium", "useCase": "poster", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#d43030", "bgTint": "#f0eeec" }
+    },
+    {
+      "id": "bau-004",
+      "name": "康定斯基的包豪斯",
+      "baseTemplate": "bauhaus",
+      "description": "几何抽象、色彩理论，适合教育/理论主题",
+      "tags": { "colorScheme": "vibrant", "mood": "academic", "movement": "bauhaus", "formality": "high", "density": "dense", "useCase": "presentation", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#e04040", "bgTint": "#f0eee8" }
+    },
+    {
+      "id": "bau-005",
+      "name": "阿尔伯斯的方形",
+      "baseTemplate": "bauhaus",
+      "description": "色彩交互、方形递进，适合配色/设计主题",
+      "tags": { "colorScheme": "vibrant", "mood": "academic", "movement": "bauhaus", "formality": "high", "density": "sparse", "useCase": "moodboard", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#8a5a8a", "bgTint": "#f0eeec" }
+    },
+    {
+      "id": "dig-001",
+      "name": "数字像素",
+      "baseTemplate": "modernism",
+      "description": "像素风格、8-bit 复古，适合游戏/科技主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "contemporary", "formality": "low", "density": "dense", "useCase": "blog", "fontStyle": "monospace", "era": "futuristic" },
+      "variants": { "accentColor": "#30c030", "bgTint": "#f0f4f0" }
+    },
+    {
+      "id": "dig-002",
+      "name": "赛博霓虹",
+      "baseTemplate": "modernism",
+      "description": "霓虹紫蓝、赛博朋克，适合未来/科技主题",
+      "tags": { "colorScheme": "vibrant", "mood": "futuristic", "movement": "contemporary", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "sans-serif", "era": "futuristic" },
+      "variants": { "accentColor": "#d040d0", "bgTint": "#0a0a14" }
+    },
+    {
+      "id": "dig-003",
+      "name": "故障艺术",
+      "baseTemplate": "modernism",
+      "description": "数字失真、RGB 分离，适合音乐/极限主题",
+      "tags": { "colorScheme": "vibrant", "mood": "energetic", "movement": "contemporary", "formality": "low", "density": "medium", "useCase": "poster", "fontStyle": "sans-serif", "era": "futuristic" },
+      "variants": { "accentColor": "#e030a0", "bgTint": "#0c0c10" }
+    },
+    {
+      "id": "dig-004",
+      "name": "数据流",
+      "baseTemplate": "minimalism",
+      "description": "极简科技、数据可视化，适合科技/数据主题",
+      "tags": { "colorScheme": "cool", "mood": "futuristic", "movement": "contemporary", "formality": "high", "density": "medium", "useCase": "presentation", "fontStyle": "monospace", "era": "futuristic" },
+      "variants": { "accentColor": "#30a0d0", "bgTint": "#0a0a12" }
+    },
+    {
+      "id": "na-001",
+      "name": "卢梭的丛林",
+      "baseTemplate": "naive",
+      "description": "稚拙原始、梦幻植物，适合童话/自然主题",
+      "tags": { "colorScheme": "vibrant", "mood": "whimsical", "movement": "modernism", "formality": "low", "density": "dense", "useCase": "gallery", "fontStyle": "sans-serif", "era": "vintage" },
+      "variants": { "accentColor": "#30a040", "bgTint": "#f0f4ec" }
+    },
+    {
+      "id": "na-002",
+      "name": "摩西奶奶的农场",
+      "baseTemplate": "naive",
+      "description": "美国民间、乡村日常，适合怀旧/乡村主题",
+      "tags": { "colorScheme": "earth", "mood": "peaceful", "movement": "naive", "formality": "low", "density": "dense", "useCase": "gallery", "fontStyle": "serif", "era": "vintage" },
+      "variants": { "accentColor": "#8aaa7a", "bgTint": "#f0ece0" }
+    },
+    {
+      "id": "na-003",
+      "name": "夏加尔的村庄",
+      "baseTemplate": "naive",
+      "description": "漂浮村落、梦幻记忆，适合乡愁/幻想主题",
+      "tags": { "colorScheme": "vibrant", "mood": "whimsical", "movement": "naive", "formality": "low", "density": "dense", "useCase": "gallery", "fontStyle": "serif", "era": "modern" },
+      "variants": { "accentColor": "#d4a030", "bgTint": "#ece8e0" }
+    },
+    {
+      "id": "str-001",
+      "name": "班克斯的街头",
+      "baseTemplate": "street-art",
+      "description": "模板喷绘、社会讽刺，适合城市/抗议主题",
+      "tags": { "colorScheme": "monochrome", "mood": "bold", "movement": "contemporary", "formality": "low", "density": "sparse", "useCase": "manifesto", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#2a2a2a", "bgTint": "#e8e4e0" }
+    },
+    {
+      "id": "str-002",
+      "name": "街头波普",
+      "baseTemplate": "street-art",
+      "description": "强烈对比、城市能量，适合城市/青年主题",
+      "tags": { "colorScheme": "vibrant", "mood": "energetic", "movement": "contemporary", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#e04040", "bgTint": "#ece8e4" }
+    },
+    {
+      "id": "str-003",
+      "name": "墨色涂鸦",
+      "baseTemplate": "street-art",
+      "description": "黑白涂鸦、水墨质感，适合书法/街头融合主题",
+      "tags": { "colorScheme": "monochrome", "mood": "bold", "movement": "contemporary", "formality": "low", "density": "dense", "useCase": "gallery", "fontStyle": "handwritten", "era": "contemporary" },
+      "variants": { "accentColor": "#1a1a1a", "bgTint": "#f0ece8" }
+    },
+    {
+      "id": "gra-001",
+      "name": "插画线条",
+      "baseTemplate": "graphic",
+      "description": "简洁线条、扁平色彩，适合插画/品牌主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "contemporary", "formality": "medium", "density": "medium", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#e0a030", "bgTint": "#fcf8f4" }
+    },
+    {
+      "id": "gra-002",
+      "name": "几何动物",
+      "baseTemplate": "graphic",
+      "description": "多边形构成、时尚感，适合时尚/动物主题",
+      "tags": { "colorScheme": "vibrant", "mood": "bold", "movement": "contemporary", "formality": "medium", "density": "medium", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#d060a0", "bgTint": "#f8f4f0" }
+    },
+    {
+      "id": "gra-003",
+      "name": "复古招贴",
+      "baseTemplate": "graphic",
+      "description": "旧海报质感、怀旧色调，适合复古/广告主题",
+      "tags": { "colorScheme": "warm", "mood": "nostalgic", "movement": "contemporary", "formality": "medium", "density": "dense", "useCase": "poster", "fontStyle": "serif", "era": "retro" },
+      "variants": { "accentColor": "#c87040", "bgTint": "#ece0d0" }
+    },
+    {
+      "id": "gra-004",
+      "name": "日式简约",
+      "baseTemplate": "graphic",
+      "description": "和风简约、留白雅致，适合东方/现代主题",
+      "tags": { "colorScheme": "neutral", "mood": "minimal", "movement": "oriental", "formality": "medium", "density": "sparse", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#4a4a42", "bgTint": "#f8f6f0" }
+    },
+    {
+      "id": "gra-005",
+      "name": "孟菲斯",
+      "baseTemplate": "graphic",
+      "description": "80 年代、波点条纹，适合趣味/装饰主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "contemporary", "formality": "low", "density": "dense", "useCase": "blog", "fontStyle": "sans-serif", "era": "retro" },
+      "variants": { "accentColor": "#30a0d0", "bgTint": "#fcf8f0" }
+    },
+    {
+      "id": "gra-006",
+      "name": "瑞士平面",
+      "baseTemplate": "graphic",
+      "description": "瑞士风格、网格排版，适合排版/品牌主题",
+      "tags": { "colorScheme": "vibrant", "mood": "academic", "movement": "bauhaus", "formality": "high", "density": "medium", "useCase": "report", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#e03030", "bgTint": "#f8f6f4" }
+    },
+    {
+      "id": "ill-001",
+      "name": "绘本水彩",
+      "baseTemplate": "impressionism",
+      "description": "柔和水彩、童趣风格，适合绘本/儿童主题",
+      "tags": { "colorScheme": "pastel", "mood": "playful", "movement": "impressionism", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#a0d0c0", "bgTint": "#faf8f4" }
+    },
+    {
+      "id": "ill-002",
+      "name": "故事板",
+      "baseTemplate": "realism",
+      "description": "分镜草图、叙事情绪，适合故事/电影主题",
+      "tags": { "colorScheme": "monochrome", "mood": "dramatic", "movement": "realism", "formality": "low", "density": "medium", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#4a4a4a", "bgTint": "#ece8e4" }
+    },
+    {
+      "id": "ill-003",
+      "name": "北欧童画",
+      "baseTemplate": "naive",
+      "description": "北欧色彩、童话氛围，适合童话/冬季主题",
+      "tags": { "colorScheme": "cool", "mood": "whimsical", "movement": "naive", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#6aa0c0", "bgTint": "#f0f4f8" }
+    },
+    {
+      "id": "misc-001",
+      "name": "剪影黄昏",
+      "baseTemplate": "romanticism",
+      "description": "逆光剪影、暖色天空，适合黄昏/剪影主题",
+      "tags": { "colorScheme": "warm", "mood": "romantic", "movement": "romanticism", "formality": "low", "density": "sparse", "useCase": "moodboard", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#d08040", "bgTint": "#e8dcd0" }
+    },
+    {
+      "id": "misc-002",
+      "name": "黑白摄影",
+      "baseTemplate": "minimalism",
+      "description": "高对比黑白、摄影质感，适合纪实/光影主题",
+      "tags": { "colorScheme": "monochrome", "mood": "dramatic", "movement": "realism", "formality": "medium", "density": "sparse", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#1a1a1a", "bgTint": "#f0eeec" }
+    },
+    {
+      "id": "misc-003",
+      "name": "金箔时代",
+      "baseTemplate": "baroque",
+      "description": "奢华金箔、拜占庭风，适合皇室/宗教主题",
+      "tags": { "colorScheme": "warm", "mood": "luxurious", "movement": "baroque", "formality": "high", "density": "dense", "useCase": "invitation", "fontStyle": "serif", "era": "medieval" },
+      "variants": { "accentColor": "#d4b040", "bgTint": "#1a1410" }
+    },
+    {
+      "id": "misc-004",
+      "name": "冰岛极光",
+      "baseTemplate": "romanticism",
+      "description": "绿色紫色、极光梦幻，适合自然/奇迹主题",
+      "tags": { "colorScheme": "cool", "mood": "mystical", "movement": "romanticism", "formality": "low", "density": "sparse", "useCase": "moodboard", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#40a080", "bgTint": "#0c0a14" }
+    },
+    {
+      "id": "misc-005",
+      "name": "地中海阳光",
+      "baseTemplate": "fauvism",
+      "description": "蓝白对比、阳光灿烂，适合度假/夏天主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "fauvism", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#30a0c8", "bgTint": "#f8f8f0" }
+    },
+    {
+      "id": "misc-006",
+      "name": "暗黑哥特",
+      "baseTemplate": "classical",
+      "description": "黑暗哥特、血色点缀，适合恐怖/哥特主题",
+      "tags": { "colorScheme": "dark", "mood": "dramatic", "movement": "classical", "formality": "high", "density": "dense", "useCase": "manifesto", "fontStyle": "serif", "era": "medieval" },
+      "variants": { "accentColor": "#c83030", "bgTint": "#0c0808" }
+    },
+    {
+      "id": "misc-007",
+      "name": "沙漠商队",
+      "baseTemplate": "oriental",
+      "description": "沙漠暖色、异域风情，适合沙漠/异域主题",
+      "tags": { "colorScheme": "warm", "mood": "rustic", "movement": "oriental", "formality": "medium", "density": "medium", "useCase": "catalog", "fontStyle": "serif", "era": "medieval" },
+      "variants": { "accentColor": "#d09040", "bgTint": "#ece0d0" }
+    },
+    {
+      "id": "misc-008",
+      "name": "樱花雨",
+      "baseTemplate": "oriental",
+      "description": "粉色樱花、日式浪漫，适合春天/美主题",
+      "tags": { "colorScheme": "pastel", "mood": "romantic", "movement": "oriental", "formality": "low", "density": "medium", "useCase": "invitation", "fontStyle": "serif", "era": "vintage" },
+      "variants": { "accentColor": "#e0a0b8", "bgTint": "#f8f0f0" }
+    },
+    {
+      "id": "misc-009",
+      "name": "墨水海洋",
+      "baseTemplate": "abstract",
+      "description": "墨水流淌、液体抽象，适合流体/实验主题",
+      "tags": { "colorScheme": "cool", "mood": "contemplative", "movement": "abstract", "formality": "low", "density": "medium", "useCase": "moodboard", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#3a6a8a", "bgTint": "#e8ecf0" }
+    },
+    {
+      "id": "misc-010",
+      "name": "蒸汽波",
+      "baseTemplate": "pop-art",
+      "description": "粉紫渐变、希腊雕塑，适合复古未来主题",
+      "tags": { "colorScheme": "vibrant", "mood": "nostalgic", "movement": "pop-art", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "sans-serif", "era": "retro" },
+      "variants": { "accentColor": "#e040a0", "bgTint": "#f0e8f0" }
+    },
+    {
+      "id": "misc-011", "name": "日落大道", "baseTemplate": "romanticism", "description": "橙色天空、棕榈剪影，适合加州/日落主题",
+      "tags": { "colorScheme": "warm", "mood": "romantic", "movement": "romanticism", "formality": "low", "density": "sparse", "useCase": "moodboard", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#d07030", "bgTint": "#f0e4d8" }
+    },
+    {
+      "id": "misc-012", "name": "森林秘境", "baseTemplate": "naive", "description": "墨绿浓荫、光斑洒落，适合森林/自然主题",
+      "tags": { "colorScheme": "earth", "mood": "mystical", "movement": "naive", "formality": "low", "density": "dense", "useCase": "gallery", "fontStyle": "serif", "era": "vintage" },
+      "variants": { "accentColor": "#3a7a5a", "bgTint": "#e8ece4" }
+    },
+    {
+      "id": "misc-013", "name": "极光之夜", "baseTemplate": "abstract", "description": "绿色极光、深邃夜空，适合北极/自然奇迹主题",
+      "tags": { "colorScheme": "cool", "mood": "mystical", "movement": "abstract", "formality": "low", "density": "sparse", "useCase": "moodboard", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#40c8a0", "bgTint": "#0a0a18" }
+    },
+    {
+      "id": "misc-014", "name": "红酒与玫瑰", "baseTemplate": "rococo", "description": "深红丝绒、金色烛光，适合晚宴/奢华主题",
+      "tags": { "colorScheme": "dark", "mood": "luxurious", "movement": "rococo", "formality": "high", "density": "dense", "useCase": "invitation", "fontStyle": "display", "era": "classic" },
+      "variants": { "accentColor": "#c83040", "bgTint": "#1a1010" }
+    },
+    {
+      "id": "misc-015", "name": "海风习习", "baseTemplate": "impressionism", "description": "海蓝白浪、夏日气息，适合海洋/度假主题",
+      "tags": { "colorScheme": "cool", "mood": "peaceful", "movement": "impressionism", "formality": "low", "density": "sparse", "useCase": "blog", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#4a8aaa", "bgTint": "#eef4f8" }
+    },
+    {
+      "id": "misc-016", "name": "纸醉金迷", "baseTemplate": "luxury", "description": "奢华金黑、Art Deco 几何，适合高端/派对主题",
+      "tags": { "colorScheme": "dark", "mood": "luxurious", "movement": "art-nouveau", "formality": "high", "density": "dense", "useCase": "invitation", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#d4b040", "bgTint": "#0c0a08" }
+    },
+    {
+      "id": "misc-017", "name": "茶道", "baseTemplate": "japanese", "description": "抹茶绿、竹木色、静谧和风，适合禅意/日本主题",
+      "tags": { "colorScheme": "earth", "mood": "peaceful", "movement": "oriental", "formality": "high", "density": "sparse", "useCase": "presentation", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#5a8a5a", "bgTint": "#f0ece4" }
+    },
+    {
+      "id": "misc-018", "name": "洛城霓虹", "baseTemplate": "digital", "description": "粉蓝霓虹、棕榈树影，适合都市/夜间主题",
+      "tags": { "colorScheme": "vibrant", "mood": "futuristic", "movement": "contemporary", "formality": "low", "density": "medium", "useCase": "poster", "fontStyle": "sans-serif", "era": "futuristic" },
+      "variants": { "accentColor": "#e040a0", "bgTint": "#0a0a14" }
+    },
+    {
+      "id": "misc-019", "name": "文艺复兴手稿", "baseTemplate": "renaissance", "description": "羊皮纸质感、花体字装饰，适合古典/学术主题",
+      "tags": { "colorScheme": "warm", "mood": "academic", "movement": "renaissance", "formality": "high", "density": "dense", "useCase": "report", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#6a5a4a", "bgTint": "#e8e0d4" }
+    },
+    {
+      "id": "misc-020", "name": "极地日记", "baseTemplate": "minimalism", "description": "纯白冷蓝、冰雪质感，适合冬季/极简主题",
+      "tags": { "colorScheme": "cool", "mood": "minimal", "movement": "minimalism", "formality": "medium", "density": "sparse", "useCase": "portfolio", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#6a8aaa", "bgTint": "#f4f6f8" }
+    },
+    {
+      "id": "misc-021", "name": "爵士年代", "baseTemplate": "vintage", "description": "金黑条纹、羽毛装饰，适合 1920s/爵士主题",
+      "tags": { "colorScheme": "warm", "mood": "playful", "movement": "art-nouveau", "formality": "medium", "density": "dense", "useCase": "invitation", "fontStyle": "display", "era": "retro" },
+      "variants": { "accentColor": "#c8a040", "bgTint": "#ece0d0" }
+    },
+    {
+      "id": "misc-022", "name": "青花瓷韵", "baseTemplate": "oriental", "description": "青白对比、瓷器纹理，适合中国/古典主题",
+      "tags": { "colorScheme": "cool", "mood": "elegant", "movement": "oriental", "formality": "high", "density": "medium", "useCase": "catalog", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#2a6a8a", "bgTint": "#f0f4f4" }
+    },
+    {
+      "id": "misc-023", "name": "潮湿夏日", "baseTemplate": "realism", "description": "灰绿调、雨雾朦胧，适合雨季/忧郁主题",
+      "tags": { "colorScheme": "cool", "mood": "contemplative", "movement": "realism", "formality": "low", "density": "medium", "useCase": "moodboard", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#5a7a6a", "bgTint": "#e4e8e4" }
+    },
+    {
+      "id": "misc-024", "name": "摇滚现场", "baseTemplate": "street-art", "description": "黑色基底、荧光色爆裂，适合音乐/摇滚主题",
+      "tags": { "colorScheme": "dark", "mood": "energetic", "movement": "contemporary", "formality": "low", "density": "dense", "useCase": "poster", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#e8e030", "bgTint": "#0c0c0c" }
+    },
+    {
+      "id": "misc-025", "name": "静谧禅园", "baseTemplate": "japanese", "description": "枯山水白沙、青苔石组，适合冥想/禅意主题",
+      "tags": { "colorScheme": "neutral", "mood": "peaceful", "movement": "oriental", "formality": "high", "density": "sparse", "useCase": "moodboard", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#6a7a6a", "bgTint": "#f0ece4" }
+    },
+    {
+      "id": "misc-026", "name": "纽约客", "baseTemplate": "graphic", "description": "黑白讽刺漫画、红点缀，适合杂志/城市主题",
+      "tags": { "colorScheme": "monochrome", "mood": "playful", "movement": "contemporary", "formality": "medium", "density": "dense", "useCase": "blog", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#e03030", "bgTint": "#f4f2f0" }
+    },
+    {
+      "id": "misc-027", "name": "太空漫游", "baseTemplate": "digital", "description": "深邃星空、极简科技，适合宇宙/科幻主题",
+      "tags": { "colorScheme": "dark", "mood": "futuristic", "movement": "contemporary", "formality": "medium", "density": "sparse", "useCase": "moodboard", "fontStyle": "monospace", "era": "futuristic" },
+      "variants": { "accentColor": "#3080d0", "bgTint": "#08080c" }
+    },
+    {
+      "id": "misc-028", "name": "秘密花园", "baseTemplate": "naive", "description": "繁花似锦、藤蔓缠绕，适合园艺/童话主题",
+      "tags": { "colorScheme": "vibrant", "mood": "whimsical", "movement": "naive", "formality": "low", "density": "dense", "useCase": "invitation", "fontStyle": "serif", "era": "vintage" },
+      "variants": { "accentColor": "#e0a0b0", "bgTint": "#f8f0ec" }
+    },
+    {
+      "id": "misc-029", "name": "工业革命", "baseTemplate": "bauhaus", "description": "铸铁黑、砖红、齿轮元素，适合工业/蒸汽朋克主题",
+      "tags": { "colorScheme": "dark", "mood": "bold", "movement": "bauhaus", "formality": "high", "density": "dense", "useCase": "report", "fontStyle": "sans-serif", "era": "industrial" },
+      "variants": { "accentColor": "#8a3a2a", "bgTint": "#14100c" }
+    },
+    {
+      "id": "misc-030", "name": "彩虹国度", "baseTemplate": "graphic", "description": "渐变彩虹、快乐色彩，适合多样性/庆祝主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "contemporary", "formality": "low", "density": "medium", "useCase": "poster", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#e04080", "bgTint": "#fcf8f4" }
+    },
+    {
+      "id": "misc-031", "name": "秋日私语", "baseTemplate": "impressionism", "description": "金黄橙红、落叶纷飞，适合秋季/丰收主题",
+      "tags": { "colorScheme": "warm", "mood": "nostalgic", "movement": "impressionism", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#d08040", "bgTint": "#f8f0e4" }
+    },
+    {
+      "id": "misc-032", "name": "午夜巴黎", "baseTemplate": "surrealism", "description": "深蓝夜空、暖黄街灯，适合城市/浪漫主题",
+      "tags": { "colorScheme": "cool", "mood": "romantic", "movement": "surrealism", "formality": "medium", "density": "medium", "useCase": "moodboard", "fontStyle": "serif", "era": "modern" },
+      "variants": { "accentColor": "#d4a030", "bgTint": "#181824" }
+    },
+    {
+      "id": "misc-033", "name": "摩洛哥庭院", "baseTemplate": "vintage", "description": "陶土红、马赛克蓝、异域纹样，适合摩洛哥/异域主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "art-nouveau", "formality": "medium", "density": "dense", "useCase": "catalog", "fontStyle": "serif", "era": "vintage" },
+      "variants": { "accentColor": "#c86040", "bgTint": "#ece0d0" }
+    },
+    {
+      "id": "misc-034", "name": "糖果工厂", "baseTemplate": "pop-art", "description": "彩色糖果、快乐甜腻，适合甜品/儿童主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "pop-art", "formality": "low", "density": "dense", "useCase": "blog", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#e870a0", "bgTint": "#fcf4f8" }
+    },
+    {
+      "id": "misc-035", "name": "冰与火之歌", "baseTemplate": "baroque", "description": "冰蓝烈焰、史诗感，适合奇幻/史诗主题",
+      "tags": { "colorScheme": "cool", "mood": "dramatic", "movement": "baroque", "formality": "high", "density": "dense", "useCase": "presentation", "fontStyle": "serif", "era": "medieval" },
+      "variants": { "accentColor": "#3080c0", "bgTint": "#0c0a12" }
+    },
+    {
+      "id": "misc-036", "name": "云南印象", "baseTemplate": "oriental", "description": "彩云之南、浓郁民族色，适合少数民族/自然主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "oriental", "formality": "medium", "density": "dense", "useCase": "catalog", "fontStyle": "serif", "era": "modern" },
+      "variants": { "accentColor": "#c86060", "bgTint": "#f0e8d8" }
+    },
+    {
+      "id": "misc-037", "name": "钢琴曲", "baseTemplate": "minimalism", "description": "黑白琴键、极简优雅，适合音乐/古典主题",
+      "tags": { "colorScheme": "monochrome", "mood": "elegant", "movement": "minimalism", "formality": "high", "density": "sparse", "useCase": "portfolio", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#1a1a1a", "bgTint": "#f8f6f4" }
+    },
+    {
+      "id": "misc-038", "name": "波西米亚狂想", "baseTemplate": "fauvism", "description": "自由奔放、民族图案，适合波西米亚/自由主题",
+      "tags": { "colorScheme": "vibrant", "mood": "energetic", "movement": "fauvism", "formality": "low", "density": "dense", "useCase": "blog", "fontStyle": "sans-serif", "era": "modern" },
+      "variants": { "accentColor": "#d46060", "bgTint": "#f0e8dc" }
+    },
+    {
+      "id": "misc-039", "name": "银色月光", "baseTemplate": "symbolism", "description": "银灰淡蓝、月光流淌，适合夜晚/神秘主题",
+      "tags": { "colorScheme": "cool", "mood": "mystical", "movement": "symbolism", "formality": "medium", "density": "sparse", "useCase": "moodboard", "fontStyle": "serif", "era": "vintage" },
+      "variants": { "accentColor": "#6a8aaa", "bgTint": "#e8eaf0" }
+    },
+    {
+      "id": "misc-040", "name": "儿童乐园", "baseTemplate": "graphic", "description": "缤纷彩色、圆润可爱，适合儿童/教育主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "contemporary", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#30c0d0", "bgTint": "#fcf8f4" }
+    },
+    {
+      "id": "misc-041", "name": "威尼斯面具", "baseTemplate": "rococo", "description": "华丽面具、金粉装饰，适合狂欢/面具主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "rococo", "formality": "medium", "density": "dense", "useCase": "invitation", "fontStyle": "display", "era": "classic" },
+      "variants": { "accentColor": "#d4a040", "bgTint": "#fcf0e8" }
+    },
+    {
+      "id": "misc-042", "name": "田园交响", "baseTemplate": "realism", "description": "金色麦田、湛蓝天空，适合乡村/和平主题",
+      "tags": { "colorScheme": "warm", "mood": "peaceful", "movement": "realism", "formality": "low", "density": "medium", "useCase": "gallery", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#d4a040", "bgTint": "#ece8e0" }
+    },
+    {
+      "id": "misc-043", "name": "像素冒险", "baseTemplate": "digital", "description": "8-bit 像素、游戏风格，适合游戏/怀旧主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "contemporary", "formality": "low", "density": "dense", "useCase": "blog", "fontStyle": "monospace", "era": "retro" },
+      "variants": { "accentColor": "#30c030", "bgTint": "#101020" }
+    },
+    {
+      "id": "misc-044", "name": "地中海蓝白", "baseTemplate": "minimalism", "description": "圣托里尼蓝白、海岛清新，适合度假/夏天主题",
+      "tags": { "colorScheme": "cool", "mood": "serene", "movement": "minimalism", "formality": "low", "density": "sparse", "useCase": "blog", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#3080a0", "bgTint": "#f8faf8" }
+    },
+    {
+      "id": "misc-045", "name": "东方快车", "baseTemplate": "vintage", "description": "深木色、黄铜质感、旅行感，适合铁路/旅行主题",
+      "tags": { "colorScheme": "warm", "mood": "nostalgic", "movement": "classical", "formality": "high", "density": "dense", "useCase": "catalog", "fontStyle": "serif", "era": "vintage" },
+      "variants": { "accentColor": "#6a4a3a", "bgTint": "#e8ddd0" }
+    },
+    {
+      "id": "misc-046", "name": "花火大会", "baseTemplate": "japanese", "description": "夜空烟花、和服彩绘，适合夏日/庆典主题",
+      "tags": { "colorScheme": "vibrant", "mood": "playful", "movement": "oriental", "formality": "low", "density": "dense", "useCase": "invitation", "fontStyle": "serif", "era": "vintage" },
+      "variants": { "accentColor": "#e06040", "bgTint": "#0c0814" }
+    },
+    {
+      "id": "misc-047", "name": "哥特铁艺", "baseTemplate": "baroque", "description": "黑色铸铁、哥特拱形、暗绿点缀，适合哥特/建筑主题",
+      "tags": { "colorScheme": "dark", "mood": "dramatic", "movement": "baroque", "formality": "high", "density": "dense", "useCase": "portfolio", "fontStyle": "serif", "era": "medieval" },
+      "variants": { "accentColor": "#5a6a5a", "bgTint": "#0c0808" }
+    },
+    {
+      "id": "misc-048", "name": "丝路敦煌", "baseTemplate": "oriental", "description": "土红壁画、飞天飘带，适合丝绸之路主题",
+      "tags": { "colorScheme": "warm", "mood": "mystical", "movement": "oriental", "formality": "high", "density": "dense", "useCase": "catalog", "fontStyle": "serif", "era": "medieval" },
+      "variants": { "accentColor": "#c87040", "bgTint": "#ece0d0" }
+    },
+    {
+      "id": "misc-049", "name": "蒸汽工厂", "baseTemplate": "bauhaus", "description": "铜绿铁锈、管线交错，适合蒸汽朋克/工业主题",
+      "tags": { "colorScheme": "warm", "mood": "rustic", "movement": "bauhaus", "formality": "medium", "density": "dense", "useCase": "report", "fontStyle": "sans-serif", "era": "industrial" },
+      "variants": { "accentColor": "#8a6a4a", "bgTint": "#181410" }
+    },
+    {
+      "id": "misc-050", "name": "冬日仙境", "baseTemplate": "minimalism", "description": "冰雪蓝白、水晶质感，适合冬季/圣诞主题",
+      "tags": { "colorScheme": "cool", "mood": "peaceful", "movement": "minimalism", "formality": "low", "density": "sparse", "useCase": "invitation", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#a0c8e0", "bgTint": "#f4f8fa" }
+    },
+    {
+      "id": "misc-051", "name": "巴厘岛之梦", "baseTemplate": "fauvism", "description": "热带绿植、鸡蛋花香，适合度假/岛屿主题",
+      "tags": { "colorScheme": "vibrant", "mood": "serene", "movement": "fauvism", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "sans-serif", "era": "contemporary" },
+      "variants": { "accentColor": "#40a060", "bgTint": "#f0f4ec" }
+    },
+    {
+      "id": "misc-052", "name": "印象巴黎", "baseTemplate": "impressionism", "description": "紫灰天空、铁塔剪影，适合巴黎/城市主题",
+      "tags": { "colorScheme": "cool", "mood": "romantic", "movement": "impressionism", "formality": "low", "density": "medium", "useCase": "blog", "fontStyle": "display", "era": "vintage" },
+      "variants": { "accentColor": "#6a7a8a", "bgTint": "#eef0f0" }
+    },
+    {
+      "id": "misc-053", "name": "东方夜空", "baseTemplate": "oriental", "description": "深蓝夜空、金色明月，适合中秋/思乡主题",
+      "tags": { "colorScheme": "cool", "mood": "contemplative", "movement": "oriental", "formality": "medium", "density": "sparse", "useCase": "gallery", "fontStyle": "serif", "era": "classic" },
+      "variants": { "accentColor": "#c8a040", "bgTint": "#0c0a18" }
+    }
+  ]
+}

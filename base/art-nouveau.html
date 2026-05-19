@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>装饰艺术 · 穆夏的黄金时代</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8d4a0;
+  --gold-dark: #8a7030;
+  --cream: #faf3e6;
+  --ivory: #fdf8f0;
+  --deep: #1a1410;
+  --warm-brown: #5a4a3a;
+  --soft-rose: #d4a0a0;
+  --sage-green: #8aa88a;
+  --terracotta: #c87850;
+  --shadow: 0 4px 40px rgba(26, 20, 16, 0.12);
+  --slide-w: min(1100px, 92vw);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--ivory);
+  color: var(--deep);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.deck {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  height: 100vh;
+}
+
+.slide {
+  min-width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Art Nouveau decorative border */
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 40px,
+      rgba(201, 168, 76, 0.06) 40px,
+      rgba(201, 168, 76, 0.06) 41px
+    );
+  pointer-events: none;
+}
+
+/* Decorative corner elements */
+.cornerDeco {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.cornerDeco.tl {
+  top: -10px;
+  left: -10px;
+  width: 120px;
+  height: 120px;
+  border-top: 3px solid var(--gold);
+  border-left: 3px solid var(--gold);
+}
+
+.cornerDeco.tr {
+  top: -10px;
+  right: -10px;
+  width: 120px;
+  height: 120px;
+  border-top: 3px solid var(--gold);
+  border-right: 3px solid var(--gold);
+}
+
+.cornerDeco.bl {
+  bottom: -10px;
+  left: -10px;
+  width: 120px;
+  height: 120px;
+  border-bottom: 3px solid var(--gold);
+  border-left: 3px solid var(--gold);
+}
+
+.cornerDeco.br {
+  bottom: -10px;
+  right: -10px;
+  width: 120px;
+  height: 120px;
+  border-bottom: 3px solid var(--gold);
+  border-right: 3px solid var(--gold);
+}
+
+/* Whiplash curve decorative line */
+.whiplash {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.07;
+}
+
+.whiplash.top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background:
+    radial-gradient(ellipse at 20% 100%, var(--gold) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 100%, var(--gold) 0%, transparent 30%),
+    radial-gradient(ellipse at 80% 100%, var(--gold) 0%, transparent 40%);
+}
+
+.whiplash.bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background:
+    radial-gradient(ellipse at 20% 0%, var(--gold) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 0%, var(--gold) 0%, transparent 30%),
+    radial-gradient(ellipse at 80% 0%, var(--gold) 0%, transparent 40%);
+}
+
+.slideInner {
+  position: relative;
+  z-index: 1;
+  width: var(--slide-w);
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+/* Cover */
+.cover {
+  text-align: center;
+}
+
+.cover .ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.cover .ornament .line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.cover .ornament .diamond {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--gold);
+  transform: rotate(45deg);
+  background: var(--gold-light);
+}
+
+.cover h1 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(52px, 9vw, 100px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  color: var(--deep);
+}
+
+.cover h1 .gold {
+  color: var(--gold-dark);
+}
+
+.cover h1 .light {
+  font-weight: 400;
+  font-style: italic;
+}
+
+.cover .subtitle {
+  margin-top: 16px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(18px, 2.4vw, 26px);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--warm-brown);
+}
+
+.cover .ornamentBottom {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.cover .ornamentBottom span {
+  display: block;
+  width: 40px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.cover .ornamentBottom span:nth-child(odd) { background: var(--gold); }
+.cover .ornamentBottom span:nth-child(even) { background: var(--soft-rose); }
+
+/* Content */
+.content {
+  text-align: left;
+}
+
+.content h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.content h2 .accent {
+  color: var(--gold-dark);
+  font-style: italic;
+}
+
+.content p {
+  font-size: clamp(15px, 1.5vw, 19px);
+  line-height: 1.8;
+  color: var(--warm-brown);
+  max-width: 680px;
+  margin-bottom: 14px;
+}
+
+.content .introText {
+  font-size: clamp(17px, 1.7vw, 21px);
+  line-height: 1.75;
+  color: var(--deep);
+  font-weight: 400;
+}
+
+/* Decorative divider */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.divider .seg {
+  width: 30px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+.divider .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.6;
+}
+
+/* Two column */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  margin-top: 12px;
+}
+
+.twoCol .item {
+  padding: 20px;
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.twoCol .item h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--gold-dark);
+}
+
+.twoCol .item p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.gallery .frame {
+  aspect-ratio: 3/4;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery .frame::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  pointer-events: none;
+}
+
+.gallery .frame:nth-child(1) { background: linear-gradient(135deg, #d4c4a8, #c8b898); }
+.gallery .frame:nth-child(2) { background: linear-gradient(135deg, #e0c8b8, #d4b8a8); }
+.gallery .frame:nth-child(3) { background: linear-gradient(135deg, #b8c8b0, #a8b8a0); }
+
+.gallery .frame .label {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--deep);
+  text-align: center;
+  padding: 8px;
+  background: rgba(255, 252, 245, 0.7);
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 24px;
+  margin-top: 16px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+}
+
+.timeline .event {
+  position: relative;
+  padding: 0 0 24px 20px;
+}
+
+.timeline .event::before {
+  content: '';
+  position: absolute;
+  left: -29px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  background: var(--ivory);
+}
+
+.timeline .event .year {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gold-dark);
+  margin-bottom: 4px;
+}
+
+.timeline .event p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Quote */
+.quote {
+  text-align: center;
+}
+
+.quote blockquote {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(26px, 3.8vw, 42px);
+  line-height: 1.35;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--deep);
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.quote blockquote::before {
+  content: '❧';
+  display: block;
+  font-size: 48px;
+  line-height: 0.6;
+  color: var(--gold);
+  opacity: 0.5;
+  margin-bottom: 20px;
+}
+
+.quote cite {
+  display: block;
+  margin-top: 24px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
+  font-style: normal;
+  color: var(--warm-brown);
+}
+
+/* Page number */
+.pageNum {
+  position: absolute;
+  bottom: 28px;
+  right: 40px;
+  font-size: 12px;
+  color: var(--warm-brown);
+  letter-spacing: 0.04em;
+  z-index: 2;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 100;
+  background: rgba(253, 248, 240, 0.88);
+  backdrop-filter: blur(12px);
+  padding: 7px 18px;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  box-shadow: var(--shadow);
+}
+
+.nav button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--deep);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-size: 15px;
+}
+
+.nav button:hover {
+  background: rgba(201, 168, 76, 0.1);
+}
+
+.nav .dots {
+  display: flex;
+  gap: 5px;
+}
+
+.nav .dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(26, 20, 16, 0.12);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.nav .dots span.active {
+  background: var(--gold);
+  width: 20px;
+  border-radius: 1px;
+}
+
+.nav .slideLabel {
+  font-size: 11px;
+  color: var(--warm-brown);
+  min-width: 50px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .slide { padding: 24px; }
+  .twoCol { grid-template-columns: 1fr; gap: 20px; }
+  .gallery { grid-template-columns: 1fr; }
+  .pageNum { right: 24px; bottom: 80px; }
+  .nav { bottom: 16px; }
+  .cornerDeco { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- Slide 1: Cover -->
+<section class="slide cover">
+  <div class="cornerDeco tl"></div>
+  <div class="cornerDeco tr"></div>
+  <div class="cornerDeco bl"></div>
+  <div class="cornerDeco br"></div>
+  <div class="whiplash top"></div>
+  <div class="slideInner">
+    <div class="ornament">
+      <span class="line"></span>
+      <span class="diamond"></span>
+      <span class="line"></span>
+    </div>
+    <h1>装饰<span class="gold">艺术</span><br><span class="light">的黄金时代</span></h1>
+    <p class="subtitle">阿尔丰斯·穆夏与新艺术运动</p>
+    <div class="ornamentBottom">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+  <span class="pageNum">01 / 06</span>
+</section>
+
+<!-- Slide 2: What is Art Nouveau -->
+<section class="slide content">
+  <div class="cornerDeco tl"></div>
+  <div class="cornerDeco br"></div>
+  <div class="slideInner">
+    <h2>新艺术 <span class="accent">Art Nouveau</span></h2>
+    <p class="introText">新艺术运动是 1890 至 1910 年间流行于欧美的一次"装饰艺术革命"，它拒绝历史主义，从自然中寻找灵感，以流动的曲线和有机形态重新定义了设计语言。</p>
+    <p>标志性的"鞭绳曲线"（whiplash curve）贯穿建筑、家具、海报、珠宝和绘画。这一运动的灵魂人物——阿尔丰斯·穆夏（Alphonse Mucha），以他标志性的"穆夏风格"定义了整个时代的美学。</p>
+    <div class="divider">
+      <span class="seg"></span><span class="dot"></span><span class="seg"></span>
+    </div>
+    <p>穆夏的作品将女性形象与花卉装饰完美融合，用黄金般的色调、繁复的镶嵌图案和优雅的线条，创造出一种前所未有的视觉语言。</p>
+  </div>
+  <span class="pageNum">02 / 06</span>
+</section>
+
+<!-- Slide 3: Mucha's Signature Style -->
+<section class="slide content">
+  <div class="cornerDeco tr"></div>
+  <div class="cornerDeco bl"></div>
+  <div class="slideInner">
+    <h2>穆夏的 <span class="accent">标志性风格</span></h2>
+    <div class="twoCol">
+      <div class="item">
+        <h3>环状构图</h3>
+        <p>女性头部后方总有一个圆形或拱形的装饰光环，如同圣像般的象征性光环，使画面具有庄重的装饰感。</p>
+      </div>
+      <div class="item">
+        <h3>自然元素</h3>
+        <p>花卉、藤蔓、叶片以流动的曲线环绕人物，植物形态高度风格化，与人物融为一体。</p>
+      </div>
+      <div class="item">
+        <h3>金色调</h3>
+        <p>大量使用金色、暖黄色和土色系，配合拜占庭式的马赛克纹样，画面具有奢华的手工艺感。</p>
+      </div>
+      <div class="item">
+        <h3>流动线条</h3>
+        <p>发丝、衣褶的线条如同流水般蜿蜒，每一根线条都经过精心设计，充满韵律感。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">03 / 06</span>
+</section>
+
+<!-- Slide 4: Timeline -->
+<section class="slide content">
+  <div class="cornerDeco tl"></div>
+  <div class="cornerDeco br"></div>
+  <div class="slideInner">
+    <h2>新艺术 <span class="accent">时间线</span></h2>
+    <div class="twoCol">
+      <div class="timeline">
+        <div class="event">
+          <div class="year">1894</div>
+          <p>穆夏为莎拉·伯恩哈特创作海报《吉斯蒙达》，一夜成名，开启"穆夏风格"时代。</p>
+        </div>
+        <div class="event">
+          <div class="year">1900</div>
+          <p>巴黎世博会，新艺术运动达到巅峰。穆夏为波黑馆设计大型装饰壁画。</p>
+        </div>
+        <div class="event">
+          <div class="year">1904</div>
+          <p>穆夏访问美国，为多家剧院和杂志创作，新艺术风格风靡全球。</p>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="event">
+          <div class="year">1910</div>
+          <p>穆夏返回捷克，转向创作爱国主义题材的《斯拉夫史诗》系列巨幅油画。</p>
+        </div>
+        <div class="event">
+          <div class="year">1920s</div>
+          <p>新艺术运动逐渐被 Art Deco 取代，但其影响力持续渗透在设计领域。</p>
+        </div>
+        <div class="event">
+          <div class="year">1960s</div>
+          <p>嬉皮士运动重新发现穆夏，新艺术风格在插画、海报和音乐中复兴。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">04 / 06</span>
+</section>
+
+<!-- Slide 5: Gallery -->
+<section class="slide content">
+  <div class="cornerDeco tr"></div>
+  <div class="cornerDeco bl"></div>
+  <div class="slideInner">
+    <h2>经典 <span class="accent">作品</span></h2>
+    <div class="gallery">
+      <div class="frame">
+        <span class="label">吉斯蒙达<br>1894</span>
+      </div>
+      <div class="frame">
+        <span class="label">四季 · 春<br>1896</span>
+      </div>
+      <div class="frame">
+        <span class="label">黄道十二宫<br>1896</span>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">05 / 06</span>
+</section>
+
+<!-- Slide 6: Quote -->
+<section class="slide quote">
+  <div class="whiplash bottom"></div>
+  <div class="slideInner">
+    <blockquote>
+      艺术是一种内心的表达，是灵魂的语言。它不应该只为少数人服务，而应该走进每个人的生活。
+      <cite>—— 阿尔丰斯·穆夏</cite>
+    </blockquote>
+    <p style="margin-top:32px;color:var(--warm-brown);font-size:14px;letter-spacing:0.04em;">
+      Art Nouveau · 流动的黄金线条
+    </p>
+  </div>
+  <span class="pageNum">06 / 06</span>
+</section>
+
+</div>
+
+<nav class="nav" id="nav">
+  <button onclick="prevSlide()" aria-label="上一页">&#8592;</button>
+  <span class="slideLabel" id="slideLabel">1 / 6</span>
+  <div class="dots" id="dots"></div>
+  <button onclick="nextSlide()" aria-label="下一页">&#8594;</button>
+</nav>
+
+<script>
+const deck = document.getElementById('deck');
+const slides = deck.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+const dotsContainer = document.getElementById('dots');
+const slideLabel = document.getElementById('slideLabel');
+
+for (let i = 0; i < total; i++) {
+  const dot = document.createElement('span');
+  dot.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(dot);
+}
+
+function update() {
+  deck.style.transform = `translateX(-${current * 100}vw)`;
+  dotsContainer.querySelectorAll('span').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+  slideLabel.textContent = `${current + 1} / ${total}`;
+}
+
+function goTo(n) {
+  current = Math.max(0, Math.min(n, total - 1));
+  update();
+}
+
+function nextSlide() { goTo(current + 1); }
+function prevSlide() { goTo(current - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+});
+
+update();
+</script>
+</body>
+</html>

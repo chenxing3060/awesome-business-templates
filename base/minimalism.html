@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>极简主义 · 少即是多</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafafa;
+  --text: #1a1a1a;
+  --text-soft: #6a6a6a;
+  --text-muted: #aaaaaa;
+  --line: rgba(26, 26, 26, 0.08);
+  --line-fine: rgba(26, 26, 26, 0.15);
+  --slide-w: min(900px, 88vw);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', 'Noto Serif SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.deck {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  height: 100vh;
+}
+
+.slide {
+  min-width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slideInner {
+  position: relative;
+  z-index: 1;
+  width: var(--slide-w);
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.cover {
+  text-align: center;
+}
+
+.cover h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+.cover h1 .bold {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.cover .divider {
+  width: 40px;
+  height: 1px;
+  background: var(--text);
+  margin: 28px auto;
+}
+
+.cover .subtitle {
+  font-size: clamp(14px, 1.6vw, 18px);
+  font-weight: 300;
+  color: var(--text-soft);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.cover .meta {
+  margin-top: 32px;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.cover .meta span {
+  display: inline-block;
+  padding: 0 12px;
+}
+
+.content {
+  text-align: left;
+}
+
+.content h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.content h2 .cjk {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 300;
+}
+
+.content p {
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.9;
+  font-weight: 300;
+  color: var(--text-soft);
+  max-width: 600px;
+  margin-bottom: 16px;
+}
+
+.content p strong {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.content .lead {
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 1.8;
+  font-weight: 300;
+  color: var(--text);
+}
+
+.content .thinLine {
+  width: 100%;
+  height: 1px;
+  background: var(--line-fine);
+  margin: 24px 0;
+}
+
+.content .pullQuote {
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.5;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text);
+  padding: 16px 0;
+  max-width: 500px;
+}
+
+.content .pullQuote .attribution {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  font-style: normal;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.gridMin {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 16px;
+}
+
+.gridMin .item {
+  padding: 16px 0;
+}
+
+.gridMin .item .num {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.gridMin .item h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.gridMin .item p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.philosList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-top: 12px;
+}
+
+.philosList .entry {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.philosList .entry:nth-last-child(-n+2) {
+  border-bottom: 0;
+}
+
+.philosList .entry .term {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.philosList .entry p {
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.galleryMin {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.galleryMin .item {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+}
+
+.galleryMin .item .lbl {
+  padding: 8px 12px;
+}
+
+.quote {
+  text-align: center;
+}
+
+.quote blockquote {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(22px, 3.5vw, 40px);
+  line-height: 1.35;
+  font-weight: 300;
+  color: var(--text);
+  max-width: 650px;
+  margin: 0 auto;
+  letter-spacing: 0.02em;
+}
+
+.quote blockquote::before {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: var(--text);
+  margin: 0 auto 24px;
+}
+
+.quote cite {
+  display: block;
+  margin-top: 24px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.pageNum {
+  position: absolute;
+  bottom: 28px;
+  right: 40px;
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  font-weight: 300;
+  z-index: 2;
+}
+
+.nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 100;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  background: rgba(250, 250, 250, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+.nav button {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+  font-size: 14px;
+  opacity: 0.3;
+}
+
+.nav button:hover {
+  opacity: 0.7;
+}
+
+.nav .dots {
+  display: flex;
+  gap: 8px;
+}
+
+.nav .dots span {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: all 0.3s;
+  cursor: pointer;
+  opacity: 0.3;
+}
+
+.nav .dots span.active {
+  opacity: 1;
+  background: var(--text);
+  width: 16px;
+  border-radius: 2px;
+}
+
+.nav .slideLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  min-width: 40px;
+  text-align: center;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .slide { padding: 32px 24px; }
+  .gridMin { grid-template-columns: 1fr; gap: 0; }
+  .philosList { grid-template-columns: 1fr; }
+  .philosList .entry:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .philosList .entry:last-child { border-bottom: 0; }
+  .galleryMin { grid-template-columns: 1fr; }
+  .pageNum { right: 24px; bottom: 80px; }
+  .nav { bottom: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<section class="slide cover">
+  <div class="slideInner">
+    <h1>
+      <span class="bold">少</span>即是<span class="bold">多</span>
+    </h1>
+    <div class="divider"></div>
+    <p class="subtitle">极简主义 · 纯粹即自由</p>
+    <p class="meta">
+      <span>Minimalism</span>
+      <span>20 世纪至今</span>
+      <span>本质之美</span>
+    </p>
+  </div>
+  <span class="pageNum">01 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>极简的<span class="cjk">哲学</span></h2>
+    <p class="lead">极简主义不仅是艺术风格，更是一种存在的方式——剔除多余，回归本质。</p>
+    <div class="thinLine"></div>
+    <p>20 世纪 60 年代兴起于纽约的极简主义运动，反对抽象表现主义的情绪泛滥和繁复表达。艺术家们将作品削减到最基本的几何形态、单一色彩和工业材料，让物体本身——而非其象征意义——成为观看的对象。</p>
+    <p><strong>"少即是多"（Less is more）</strong>——路德维希·密斯·凡·德·罗的箴言，不仅是建筑信条，更成为极简主义贯穿各领域的核心精神。</p>
+  </div>
+  <span class="pageNum">02 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>本质的<span class="cjk">语言</span></h2>
+    <div class="gridMin">
+      <div class="item">
+        <div class="num">01</div>
+        <h3>取消叙事</h3>
+        <p>极简艺术拒绝讲故事。没有隐喻，没有象征，没有情感宣泄——只有纯粹的视觉事实：形状、颜色、材料。</p>
+      </div>
+      <div class="item">
+        <div class="num">02</div>
+        <h3>几何秩序</h3>
+        <p>正方形、长方形、直线——极简主义者偏爱最基础的几何形。对称与重复创造出一种冷静而精确的视觉节奏。</p>
+      </div>
+      <div class="item">
+        <div class="num">03</div>
+        <h3>材料诚实</h3>
+        <p>工业钢材、荧光灯管、混凝土——材料不被伪装，不被加工成其他东西的模样，它们诚实地呈现自身。</p>
+      </div>
+      <div class="item">
+        <div class="num">04</div>
+        <h3>空间介入</h3>
+        <p>极简作品与展示空间密不可分。作品与墙壁、地板、光线的关系，成为观看体验的一部分。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">03 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>代表 <span class="cjk">人物</span></h2>
+    <div class="philosList">
+      <div class="entry">
+        <div class="term">唐纳德·贾德</div>
+        <p>以"堆叠"系列闻名，用等距排列的矩形金属盒子探索重复与序列的纯粹美学。</p>
+      </div>
+      <div class="entry">
+        <div class="term">艾格尼丝·马丁</div>
+        <p>用极细的网格和线条在画布上勾勒出近乎隐形的秩序，宁静中蕴含着深沉的哲思。</p>
+      </div>
+      <div class="entry">
+        <div class="term">丹·弗拉文</div>
+        <p>用标准荧光灯管创造空间中的"光之雕塑"，工业材料转化为纯粹的感官体验。</p>
+      </div>
+      <div class="entry">
+        <div class="term">索尔·勒维特</div>
+        <p>观念艺术的先驱，用简单的线条排列和几何结构挑战"艺术何为"的根本问题。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">04 / 06</span>
+</section>
+
+<section class="slide content">
+  <div class="slideInner">
+    <h2>纯粹 <span class="cjk">之美</span></h2>
+    <div class="galleryMin">
+      <div class="item">
+        <span class="lbl">无题 · 贾德</span>
+      </div>
+      <div class="item">
+        <span class="lbl">网格 · 马丁</span>
+      </div>
+      <div class="item">
+        <span class="lbl">纪念碑 · 弗拉文</span>
+      </div>
+    </div>
+    <div class="thinLine"></div>
+    <div class="pullQuote">
+      减少到极致，反而获得了一切。
+      <span class="attribution">极简主义箴言</span>
+    </div>
+  </div>
+  <span class="pageNum">05 / 06</span>
+</section>
+
+<section class="slide quote">
+  <div class="slideInner">
+    <blockquote>
+      少即是多。
+      <cite>—— 路德维希·密斯·凡·德·罗</cite>
+    </blockquote>
+    <p style="margin-top:32px;color:var(--text-muted);font-size:12px;letter-spacing:0.12em;font-weight:300;">
+      极简主义 · 以最少的形式，呈现最多的可能
+    </p>
+  </div>
+  <span class="pageNum">06 / 06</span>
+</section>
+
+</div>
+
+<nav class="nav" id="nav">
+  <button onclick="prevSlide()" aria-label="上一页">&#8592;</button>
+  <span class="slideLabel" id="slideLabel">1 / 6</span>
+  <div class="dots" id="dots"></div>
+  <button onclick="nextSlide()" aria-label="下一页">&#8594;</button>
+</nav>
+
+<script>
+const deck = document.getElementById('deck');
+const slides = deck.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+const dotsContainer = document.getElementById('dots');
+const slideLabel = document.getElementById('slideLabel');
+
+for (let i = 0; i < total; i++) {
+  const dot = document.createElement('span');
+  dot.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(dot);
+}
+
+function update() {
+  deck.style.transform = `translateX(-${current * 100}vw)`;
+  dotsContainer.querySelectorAll('span').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+  slideLabel.textContent = `${current + 1} / ${total}`;
+}
+
+function goTo(n) {
+  current = Math.max(0, Math.min(n, total - 1));
+  update();
+}
+
+function nextSlide() { goTo(current + 1); }
+function prevSlide() { goTo(current - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+});
+
+update();
+</script>
+</body>
+</html>

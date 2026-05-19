@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>波普艺术 · 从沃霍尔到草间弥生</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fcf8f4;
+  --red: #e03030;
+  --red-dark: #b02020;
+  --blue: #30a0c8;
+  --blue-dark: #2080a8;
+  --yellow: #f0c030;
+  --dark: #1a1a1a;
+  --gray: #6a6a6a;
+  --outline: #1a1a1a;
+  --shadow: 0 4px 40px rgba(26, 26, 26, 0.1);
+  --slide-w: min(1100px, 92vw);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.deck {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  height: 100vh;
+}
+
+.slide {
+  min-width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ben-Day dots background */
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(48, 160, 200, 0.06) 1.5px, transparent 1.5px);
+  background-size: 12px 12px;
+  pointer-events: none;
+}
+
+/* Thick outline border */
+.popBorder {
+  position: absolute;
+  pointer-events: none;
+  border: 4px solid var(--outline);
+}
+
+.popBorder.tl {
+  top: 16px;
+  left: 16px;
+  width: 70px;
+  height: 70px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.popBorder.tr {
+  top: 16px;
+  right: 16px;
+  width: 70px;
+  height: 70px;
+  border-left: 0;
+  border-bottom: 0;
+}
+
+.popBorder.bl {
+  bottom: 16px;
+  left: 16px;
+  width: 70px;
+  height: 70px;
+  border-right: 0;
+  border-top: 0;
+}
+
+.popBorder.br {
+  bottom: 16px;
+  right: 16px;
+  width: 70px;
+  height: 70px;
+  border-left: 0;
+  border-top: 0;
+}
+
+/* Color splash */
+.colorSplash {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0.08;
+}
+
+.colorSplash.s1 {
+  width: 250px;
+  height: 250px;
+  background: var(--red);
+  top: -60px;
+  right: -60px;
+}
+
+.colorSplash.s2 {
+  width: 180px;
+  height: 180px;
+  background: var(--blue);
+  bottom: -40px;
+  left: -40px;
+}
+
+.colorSplash.s3 {
+  width: 120px;
+  height: 120px;
+  background: var(--yellow);
+  top: 40%;
+  left: 10%;
+}
+
+.slideInner {
+  position: relative;
+  z-index: 1;
+  width: var(--slide-w);
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+/* Cover */
+.cover {
+  text-align: center;
+}
+
+.cover .popStripes {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 28px;
+}
+
+.cover .popStripes span {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.cover .popStripes span:nth-child(1) { background: var(--red); }
+.cover .popStripes span:nth-child(2) { background: var(--blue); }
+.cover .popStripes span:nth-child(3) { background: var(--yellow); }
+.cover .popStripes span:nth-child(4) { background: var(--red); }
+.cover .popStripes span:nth-child(5) { background: var(--blue); }
+
+.cover h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(60px, 11vw, 120px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--dark);
+}
+
+.cover h1 .red {
+  color: var(--red);
+  display: block;
+}
+
+.cover h1 .blue {
+  color: var(--blue);
+}
+
+.cover .subtitle {
+  margin-top: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(18px, 2.4vw, 26px);
+  font-weight: 600;
+  color: var(--dark);
+  letter-spacing: 0.01em;
+}
+
+.cover .halftoneRow {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.cover .halftoneRow .dotBlock {
+  display: grid;
+  grid-template-columns: repeat(3, 8px);
+  gap: 3px;
+}
+
+.cover .halftoneRow .dotBlock span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.cover .halftoneRow .dotBlock:nth-child(1) span { background: var(--red); }
+.cover .halftoneRow .dotBlock:nth-child(2) span { background: var(--blue); }
+.cover .halftoneRow .dotBlock:nth-child(3) span { background: var(--yellow); }
+
+/* Content */
+.content {
+  text-align: left;
+}
+
+.content h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(34px, 4.8vw, 52px);
+  font-weight: 800;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--dark);
+}
+
+.content h2 .accent {
+  color: var(--red);
+}
+
+.content h2 .blueAccent {
+  color: var(--blue);
+}
+
+.content .leadText {
+  font-size: clamp(17px, 1.8vw, 21px);
+  line-height: 1.7;
+  color: var(--dark);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.content p {
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.8;
+  color: var(--gray);
+  max-width: 680px;
+  margin-bottom: 14px;
+}
+
+/* Thick divider */
+.thickDivider {
+  height: 6px;
+  background: var(--dark);
+  width: 80px;
+  margin: 20px 0;
+}
+
+/* Two column */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  margin-top: 16px;
+  border: 3px solid var(--outline);
+}
+
+.twoCol .card {
+  padding: 20px;
+  background: var(--bg);
+  border: 1px solid rgba(26, 26, 26, 0.08);
+}
+
+.twoCol .card:nth-child(1) { border-top: 4px solid var(--red); }
+.twoCol .card:nth-child(2) { border-top: 4px solid var(--blue); }
+.twoCol .card:nth-child(3) { border-top: 4px solid var(--yellow); }
+.twoCol .card:nth-child(4) { border-top: 4px solid var(--red); }
+
+.twoCol .card h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--dark);
+}
+
+.twoCol .card p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Artist row */
+.artistRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  margin-top: 20px;
+  border: 3px solid var(--outline);
+}
+
+.artistRow .person {
+  padding: 20px;
+  text-align: center;
+  background: var(--bg);
+}
+
+.artistRow .person .portrait {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--outline);
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.artistRow .person:nth-child(1) .portrait { background: var(--red); }
+.artistRow .person:nth-child(2) .portrait { background: var(--blue); }
+.artistRow .person:nth-child(3) .portrait { background: var(--yellow); }
+
+.artistRow .person .portrait .initials {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--bg);
+}
+
+.artistRow .person h4 {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.artistRow .person p {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+/* Comic style speech bubble */
+.speechBubble {
+  position: relative;
+  padding: 20px 24px;
+  margin: 16px 0;
+  background: var(--yellow);
+  border: 3px solid var(--outline);
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--dark);
+}
+
+.speechBubble::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 14px solid var(--outline);
+}
+
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  margin-top: 20px;
+  border: 3px solid var(--outline);
+}
+
+.gallery .piece {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+}
+
+.gallery .piece:nth-child(1) { background: linear-gradient(135deg, #fff0f0, #ffe0e0); }
+.gallery .piece:nth-child(2) { background: linear-gradient(135deg, #f0f8ff, #e0f0ff); }
+.gallery .piece:nth-child(3) { background: linear-gradient(135deg, #fffff0, #fff8e0); }
+
+.gallery .piece .icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.gallery .piece .name {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.gallery .piece .detail {
+  font-size: 11px;
+  color: var(--gray);
+  margin-top: 4px;
+}
+
+/* Quote */
+.quote {
+  text-align: center;
+}
+
+.quote .popQuote {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(28px, 4.2vw, 46px);
+  line-height: 1.25;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--dark);
+  max-width: 800px;
+  margin: 0 auto;
+  letter-spacing: -0.02em;
+}
+
+.quote .popQuote .highlight {
+  color: var(--red);
+}
+
+.quote .popQuote .blueText {
+  color: var(--blue);
+}
+
+.quote cite {
+  display: block;
+  margin-top: 24px;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: normal;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Page number */
+.pageNum {
+  position: absolute;
+  bottom: 28px;
+  right: 40px;
+  font-size: 12px;
+  color: var(--gray);
+  letter-spacing: 0.04em;
+  z-index: 2;
+  font-weight: 600;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 100;
+  background: var(--bg);
+  backdrop-filter: blur(12px);
+  padding: 7px 18px;
+  border: 2px solid var(--outline);
+  box-shadow: var(--shadow);
+}
+
+.nav button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: var(--dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.nav button:hover {
+  background: var(--yellow);
+}
+
+.nav .dots {
+  display: flex;
+  gap: 5px;
+}
+
+.nav .dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--dark);
+  background: transparent;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.nav .dots span.active {
+  background: var(--red);
+  border-color: var(--red);
+  width: 24px;
+  border-radius: 2px;
+}
+
+.nav .slideLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dark);
+  min-width: 50px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .slide { padding: 24px; }
+  .twoCol { grid-template-columns: 1fr; }
+  .artistRow { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr; }
+  .pageNum { right: 24px; bottom: 80px; }
+  .nav { bottom: 16px; }
+  .popBorder { display: none; }
+  .colorSplash { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- Slide 1: Cover -->
+<section class="slide cover">
+  <div class="popBorder tl"></div>
+  <div class="popBorder tr"></div>
+  <div class="popBorder bl"></div>
+  <div class="popBorder br"></div>
+  <div class="colorSplash s1"></div>
+  <div class="colorSplash s2"></div>
+  <div class="slideInner">
+    <div class="popStripes">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <h1><span class="red">POP</span> ART</h1>
+    <p class="subtitle">安迪·沃霍尔到草间弥生 · 消费时代的视觉狂欢</p>
+    <div class="halftoneRow">
+      <div class="dotBlock"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="dotBlock"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="dotBlock"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+  </div>
+  <span class="pageNum">01 / 06</span>
+</section>
+
+<!-- Slide 2: What is Pop Art -->
+<section class="slide content">
+  <div class="popBorder tl"></div>
+  <div class="popBorder br"></div>
+  <div class="colorSplash s3"></div>
+  <div class="slideInner">
+    <h2>WELCOME TO THE <span class="accent">POP</span> WORLD</h2>
+    <p class="leadText">波普艺术诞生于 1950 年代的英国，在 1960 年代的纽约达到巅峰。它是第一场真正拥抱大众消费文化的艺术运动——把超市货架、漫画书和好莱坞明星请进了美术馆。</p>
+    <p>安迪·沃霍尔的金宝汤罐头、罗伊·利希滕斯坦的漫画格子、草间弥生的无限波点……波普艺术家们用最通俗的视觉语言，消解了"高雅艺术"与"通俗文化"之间的界线。</p>
+    <div class="thickDivider"></div>
+    <p>他们的画布上充满了复制、重复和夸张的色彩——正如沃霍尔所说："艺术应该是可以被所有人理解的。"</p>
+  </div>
+  <span class="pageNum">02 / 06</span>
+</section>
+
+<!-- Slide 3: Icons -->
+<section class="slide content">
+  <div class="popBorder tr"></div>
+  <div class="popBorder bl"></div>
+  <div class="colorSplash s1"></div>
+  <div class="slideInner">
+    <h2>POP <span class="blueAccent">ICONS</span></h2>
+    <div class="artistRow">
+      <div class="person">
+        <div class="portrait"><span class="initials">AW</span></div>
+        <h4>安迪·沃霍尔</h4>
+        <p>波普艺术的代名词。他的丝网印刷作品将玛丽莲·梦露和金宝汤罐头变成了时代的圣像。</p>
+      </div>
+      <div class="person">
+        <div class="portrait"><span class="initials">RL</span></div>
+        <h4>利希滕斯坦</h4>
+        <p>用漫画风格的网点和大胆的黑白轮廓线创作，将"廉价"的漫画语言升华为艺术语言。</p>
+      </div>
+      <div class="person">
+        <div class="portrait"><span class="initials">YK</span></div>
+        <h4>草间弥生</h4>
+        <p>无限波点的女王。她用重复的圆点和迷宫般的镜屋创造了一种沉浸式的幻觉体验。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">03 / 06</span>
+</section>
+
+<!-- Slide 4: Characteristics -->
+<section class="slide content">
+  <div class="popBorder tl"></div>
+  <div class="popBorder br"></div>
+  <div class="colorSplash s2"></div>
+  <div class="slideInner">
+    <h2>POP <span class="accent">STYLE</span></h2>
+    <div class="speechBubble">
+      WOW! 艺术也可以这样玩？
+    </div>
+    <div class="twoCol">
+      <div class="card">
+        <h3>重复 & 复制</h3>
+        <p>同一图像以网格形式大量重复出现——沃霍尔的玛丽莲·梦露、坎贝尔汤罐——机械复制的视觉冲击力。</p>
+      </div>
+      <div class="card">
+        <h3>鲜艳原色</h3>
+        <p>大红、亮蓝、明黄——平涂的饱和色彩没有阴影和过渡，如同广告牌般直接而响亮。</p>
+      </div>
+      <div class="card">
+        <h3>粗轮廓线</h3>
+        <p>利希滕斯坦式的黑色粗线框，模仿漫画书的印刷效果，让画面具有强烈的平面感和图形感。</p>
+      </div>
+      <div class="card">
+        <h3>日常主题</h3>
+        <p>超市商品、漫画格子、名人照片、快餐食品——艺术不再是高高在上的神殿，而是你身边的每一样东西。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">04 / 06</span>
+</section>
+
+<!-- Slide 5: Masterpieces -->
+<section class="slide content">
+  <div class="popBorder tr"></div>
+  <div class="popBorder bl"></div>
+  <div class="colorSplash s1"></div>
+  <div class="slideInner">
+    <h2>POP <span class="blueAccent">MASTERPIECES</span></h2>
+    <div class="gallery">
+      <div class="piece">
+        <div class="icon">&#127828;</div>
+        <div class="name">金宝汤罐头</div>
+        <div class="detail">沃霍尔 · 1962</div>
+      </div>
+      <div class="piece">
+        <div class="icon">&#128247;</div>
+        <div class="name">玛丽莲双联画</div>
+        <div class="detail">沃霍尔 · 1962</div>
+      </div>
+      <div class="piece">
+        <div class="icon">&#128163;</div>
+        <div class="name">Whaam!</div>
+        <div class="detail">利希滕斯坦 · 1963</div>
+      </div>
+    </div>
+    <p style="margin-top:24px;font-size:14px;color:var(--gray);">
+      这些作品定义了波普艺术的视觉语言——直接、大胆、充满挑衅而又令人愉悦。
+    </p>
+  </div>
+  <span class="pageNum">05 / 06</span>
+</section>
+
+<!-- Slide 6: Quote -->
+<section class="slide quote">
+  <div class="slideInner">
+    <div class="popQuote">
+      In the future,<br>
+      everyone will be<br>
+      <span class="highlight">world-famous</span><br>
+      for <span class="blueText">15 minutes</span>.
+      <cite>—— Andy Warhol</cite>
+    </div>
+    <p style="margin-top:32px;color:var(--gray);font-size:14px;letter-spacing:0.04em;font-weight:600;text-transform:uppercase;">
+      Pop Art · 每个人都是十五分钟的名人
+    </p>
+  </div>
+  <span class="pageNum">06 / 06</span>
+</section>
+
+</div>
+
+<nav class="nav" id="nav">
+  <button onclick="prevSlide()" aria-label="上一页">&#8592;</button>
+  <span class="slideLabel" id="slideLabel">1 / 6</span>
+  <div class="dots" id="dots"></div>
+  <button onclick="nextSlide()" aria-label="下一页">&#8594;</button>
+</nav>
+
+<script>
+const deck = document.getElementById('deck');
+const slides = deck.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+const dotsContainer = document.getElementById('dots');
+const slideLabel = document.getElementById('slideLabel');
+
+for (let i = 0; i < total; i++) {
+  const dot = document.createElement('span');
+  dot.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(dot);
+}
+
+function update() {
+  deck.style.transform = `translateX(-${current * 100}vw)`;
+  dotsContainer.querySelectorAll('span').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+  slideLabel.textContent = `${current + 1} / ${total}`;
+}
+
+function goTo(n) {
+  current = Math.max(0, Math.min(n, total - 1));
+  update();
+}
+
+function nextSlide() { goTo(current + 1); }
+function prevSlide() { goTo(current - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+});
+
+update();
+</script>
+</body>
+</html>

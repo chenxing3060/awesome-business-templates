@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qiaomu Artist Style · 200 套风格模板库</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1d1a16; --muted: #6d675f; --paper: #f6f0e6;
+  --paper-deep: #e8ddce; --line: rgba(41,35,26,0.16);
+  --red: #a83b2d; --green: #2f6f5e; --blue: #355c7d;
+  --shadow: 0 18px 60px rgba(54,43,26,0.14);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', 'Noto Serif SC', sans-serif;
+  background: var(--paper); color: var(--ink);
+  background: linear-gradient(rgba(29,26,22,0.035) 1px,transparent 1px), linear-gradient(90deg,rgba(29,26,22,0.025) 1px,transparent 1px), var(--paper);
+  background-size: 34px 34px;
+}
+.container { max-width: 1280px; margin: 0 auto; padding: 36px 24px; }
+
+/* Header */
+header { border-bottom: 1px solid var(--line); padding-bottom: 24px; margin-bottom: 28px; }
+.eyebrow { color: var(--red); font-family: ui-monospace,monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+h1 { font-family: 'DM Serif Display',Georgia,serif; font-size: clamp(32px,4.5vw,48px); font-weight: 400; line-height: 1.05; margin: 6px 0 10px; }
+.lede { color: var(--muted); font-size: clamp(14px,1.3vw,17px); line-height: 1.6; max-width: 660px; }
+.headerStats { display: flex; gap: 20px; margin-top: 14px; flex-wrap: wrap; }
+.headerStats span { font-size: 12px; color: var(--muted); font-family: ui-monospace,monospace; }
+.headerStats strong { color: var(--ink); font-weight: 600; }
+
+/* Filter Bar */
+.filterBar {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  padding: 14px 0; margin-bottom: 8px;
+  position: sticky; top: 0; z-index: 30;
+  background: color-mix(in srgb, var(--paper), transparent 8%);
+  backdrop-filter: blur(14px);
+}
+.filterBar .searchBox {
+  display: flex; min-height: 40px; align-items: center; gap: 8px;
+  padding: 0 12px; border: 1px solid var(--line);
+  background: rgba(255,250,241,0.82); flex: 1; min-width: 200px;
+}
+.filterBar .searchBox input { width: 100%; border: 0; outline: 0; background: transparent; font-size: 14px; color: var(--ink); }
+.filterGroup { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.filterGroup label { font-size: 11px; font-family: ui-monospace,monospace; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.filterBtn {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border: 1px solid var(--line); font-size: 12px;
+  background: rgba(255,250,241,0.6); cursor: pointer; white-space: nowrap;
+  transition: all 0.15s; color: var(--muted);
+}
+.filterBtn:hover { border-color: var(--muted); color: var(--ink); }
+.filterBtn.active { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.clearBtn { font-size: 11px; color: var(--red); cursor: pointer; border: 0; background: none; font-family: ui-monospace,monospace; text-decoration: underline; padding: 4px 8px; }
+
+/* AI Matcher */
+.matcherPanel {
+  margin: 16px 0; padding: 20px; border: 1px solid var(--line);
+  background: rgba(255,250,241,0.68);
+}
+.matcherPanel .title { font-family: 'DM Serif Display',Georgia,serif; font-size: 18px; margin-bottom: 10px; }
+.matcherPanel .title small { font-family: 'Inter',sans-serif; font-size: 12px; color: var(--muted); }
+.matcherRow { display: flex; gap: 10px; flex-wrap: wrap; }
+.matcherRow textarea {
+  flex: 2; min-width: 240px; min-height: 52px; padding: 10px; border: 1px solid var(--line);
+  background: rgba(255,255,255,0.5); font-size: 14px; font-family: inherit; color: var(--ink); resize: vertical;
+}
+.matcherRow select {
+  padding: 6px 10px; border: 1px solid var(--line); background: rgba(255,255,255,0.5);
+  font-size: 12px; font-family: ui-monospace,monospace; color: var(--ink); min-width: 110px;
+}
+.matcherBtn {
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px;
+  border: 1px solid var(--green); background: var(--green); color: white;
+  font-size: 13px; font-family: ui-monospace,monospace; cursor: pointer; white-space: nowrap;
+}
+.matcherBtn:hover { background: #1f5a4a; }
+
+/* Results */
+.resultsMeta { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; flex-wrap: wrap; gap: 8px; }
+.resultsMeta .count { font-size: 12px; color: var(--muted); font-family: ui-monospace,monospace; }
+.resultsMeta .sortGroup { display: flex; gap: 6px; align-items: center; }
+
+.templateGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.templateCard {
+  display: grid; gap: 0; border: 1px solid var(--line);
+  background: rgba(255,250,241,0.68);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset;
+  overflow: hidden; transition: box-shadow 0.25s;
+}
+.templateCard:hover { box-shadow: var(--shadow); }
+.templateCard.match-highlight { border-color: var(--green); box-shadow: 0 0 0 1px var(--green), var(--shadow); }
+.templateCard .matchScore {
+  position: absolute; top: 8px; right: 8px;
+  background: var(--green); color: white; font-size: 10px;
+  font-family: ui-monospace,monospace; padding: 2px 6px; border-radius: 2px;
+  z-index: 2;
+}
+.previewWrap { position: relative; height: 160px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.previewWrap .overlay {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  opacity: 0; background: rgba(29,26,22,0.6); transition: opacity 0.25s;
+  color: white; font-size: 13px; font-family: ui-monospace,monospace; text-decoration: none;
+}
+.templateCard:hover .overlay { opacity: 1; }
+.previewWrap .previewTitle { font-size: 12px; color: inherit; text-align: center; padding: 8px; pointer-events: none; }
+.previewWrap .previewColor { font-size: 10px; font-family: ui-monospace,monospace; opacity: 0.6; }
+
+/* Color-coded preview backgrounds */
+.previewScheme-light { background: linear-gradient(135deg,#f8f6f4,#e8e6e4); color: #2a2a2a; }
+.previewScheme-dark { background: linear-gradient(135deg,#1a1512,#2a2420); color: #e8ddd0; }
+.previewScheme-warm { background: linear-gradient(135deg,#fce4d6,#f5d0c0); color: #2c2420; }
+.previewScheme-cool { background: linear-gradient(135deg,#d4e5f7,#b8d4e8); color: #1a2a3a; }
+.previewScheme-vibrant { background: linear-gradient(135deg,#ffe0b0,#f0c0d0); color: #2a1a2a; }
+.previewScheme-neutral { background: linear-gradient(135deg,#ece8e0,#e4e0d8); color: #2a2a22; }
+.previewScheme-monochrome { background: linear-gradient(135deg,#d0cec8,#b8b6b0); color: #1a1a1a; }
+.previewScheme-pastel { background: linear-gradient(135deg,#fce8f0,#e8f0f8); color: #3a2a3a; }
+.previewScheme-earth { background: linear-gradient(135deg,#d4c8b0,#c8b8a0); color: #2a2218; }
+.previewScheme-jewel { background: linear-gradient(135deg,#2a4a4a,#3a2a4a); color: #e8e0d8; }
+
+.info { padding: 14px; display: grid; gap: 8px; }
+.info .nameRow { display: flex; justify-content: space-between; align-items: start; gap: 8px; }
+.info h2 { font-size: 17px; font-weight: 500; line-height: 1.15; }
+.info .namelatin { color: var(--muted); font-size: 11px; font-family: ui-monospace,monospace; }
+.info .desc { color: var(--muted); font-size: 13px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.info .tags { display: flex; flex-wrap: wrap; gap: 3px; }
+.info .tags span {
+  display: inline-block; padding: 2px 6px; font-size: 10px; font-family: ui-monospace,monospace;
+  border: 1px solid var(--line); background: rgba(255,250,241,0.4); border-radius: 1px;
+  line-height: 1.4;
+}
+.info .tags .tag-movement { border-color: var(--red); color: var(--red); }
+.info .tags .tag-mood { border-color: var(--blue); color: var(--blue); }
+.info .tags .tag-scheme { border-color: var(--green); color: var(--green); }
+.info .tags .tag-use { border-color: #8a7a5a; color: #8a7a5a; }
+.info .action {
+  display: inline-flex; align-items: center; gap: 4px; padding: 5px 12px; margin-top: 2px;
+  border: 1px solid var(--ink); background: var(--ink); color: var(--paper);
+  font-size: 11px; font-family: ui-monospace,monospace; text-decoration: none; cursor: pointer; width: fit-content;
+}
+.info .action:hover { background: #3a3228; }
+
+/* Empty state */
+.emptyState { grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--muted); }
+.emptyState p { font-size: 14px; margin-top: 6px; }
+
+/* Pagination */
+.pagination { display: flex; justify-content: center; gap: 6px; margin-top: 28px; padding: 12px 0; }
+.pagination button {
+  padding: 6px 12px; border: 1px solid var(--line); background: rgba(255,250,241,0.6);
+  font-size: 12px; cursor: pointer; font-family: ui-monospace,monospace;
+}
+.pagination button:hover { border-color: var(--muted); }
+.pagination button.active { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+
+footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+footer a { color: var(--blue); }
+
+@media (max-width: 720px) {
+  .container { padding: 20px 14px; }
+  .templateGrid { grid-template-columns: 1fr; }
+  .filterBar { position: static; }
+  .matcherRow textarea { min-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <p class="eyebrow">Qiaomu Artist Style</p>
+    <h1>风格模板库</h1>
+    <p class="lede">200 套艺术风格演示模板，覆盖 20+ 流派。支持多维度筛选和 AI 智能匹配。</p>
+    <div class="headerStats">
+      <span>模板总数: <strong id="totalCount">--</strong></span>
+      <span>基座风格: <strong id="baseCount">--</strong></span>
+      <span>流派: <strong id="movementCount">--</strong></span>
+    </div>
+  </header>
+
+  <!-- Filter Bar -->
+  <div class="filterBar" id="filterBar">
+    <div class="searchBox">
+      <input id="searchInput" placeholder="搜索模板名称、描述..." oninput="applyFilters()">
+    </div>
+    <div class="filterGroup" id="movementFilters"></div>
+    <div class="filterGroup" id="moodFilters"></div>
+    <div class="filterGroup" id="colorFilters"></div>
+    <div class="filterGroup" id="useCaseFilters"></div>
+    <button class="clearBtn" onclick="clearAllFilters()">清除筛选</button>
+  </div>
+
+  <!-- AI Matcher -->
+  <div class="matcherPanel">
+    <div class="title">智能匹配 <small>输入内容描述，AI 推荐最合适的模板</small></div>
+    <div class="matcherRow">
+      <textarea id="matchInput" placeholder="描述你的内容主题，例如：一场关于春天花卉的摄影展，温暖浪漫的氛围..."></textarea>
+      <select id="matchMood"><option value="">自动检测情绪</option><option value="serene">宁静</option><option value="dramatic">戏剧</option><option value="playful">活泼</option><option value="elegant">优雅</option><option value="romantic">浪漫</option><option value="minimal">极简</option><option value="bold">大胆</option><option value="academic">学术</option><option value="mystical">神秘</option><option value="energetic">活力</option></select>
+      <select id="matchUseCase"><option value="">自动检测场景</option><option value="presentation">演示汇报</option><option value="portfolio">作品集</option><option value="gallery">画廊展览</option><option value="poster">海报</option><option value="invitation">邀请函</option><option value="blog">博客</option></select>
+      <button class="matcherBtn" onclick="runMatch()">✨ 智能推荐</button>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="resultsMeta">
+    <span class="count" id="resultCount"></span>
+    <div class="sortGroup"></div>
+  </div>
+
+  <div class="templateGrid" id="templateGrid"></div>
+  <div class="pagination" id="pagination"></div>
+
+  <footer>
+    <p>基于 <a href="https://github.com/joeseesun/qiaomu-artist-style" target="_blank">qiaomu-artist-style</a> 项目 · <strong>awesome-business-templates</strong> · 使用 <a href="template-matcher.js">TemplateMatcher</a> 智能匹配引擎 · 共 205 套模板</p>
+  </footer>
+</div>
+
+<script src="template-matcher.js"></script>
+<script>
+let allTemplates = [];
+let matcher = null;
+let currentFilters = { movement: null, mood: null, colorScheme: null, useCase: null, query: '' };
+let currentPage = 1;
+const PER_PAGE = 24;
+
+const COLOR_NAMES = { light:'浅色', dark:'深色', warm:'暖调', cool:'冷调', vibrant:'鲜艳', neutral:'中性', monochrome:'黑白', pastel:'粉彩', earth:'大地', jewel:'宝石' };
+const MOOD_NAMES = { serene:'宁静', dramatic:'戏剧', playful:'活泼', elegant:'优雅', rustic:'质朴', futuristic:'未来', romantic:'浪漫', minimal:'极简', bold:'大胆', academic:'学术', mystical:'神秘', nostalgic:'怀旧', energetic:'活力', peaceful:'平和', luxurious:'奢华', whimsical:'奇幻', contemplative:'沉思' };
+const MOVEMENT_NAMES = { impressionism:'印象派', oriental:'东方美学', 'art-nouveau':'新艺术', classical:'古典', modernism:'现代主义', surrealism:'超现实', 'pop-art':'波普', abstract:'抽象', baroque:'巴洛克', renaissance:'文艺复兴', romanticism:'浪漫主义', realism:'写实', fauvism:'野兽派', minimalism:'极简', cubism:'立体主义', bauhaus:'包豪斯', expressionism:'表现', rococo:'洛可可', symbolism:'象征', ukiyo_e:'浮世绘', 'post-impressionism':'后印象派', contemporary:'当代', naive:'稚拙派' };
+const USECASE_NAMES = { presentation:'演示', portfolio:'作品集', gallery:'画廊', blog:'博客', poster:'海报', resume:'简历', pitch:'路演', report:'报告', invitation:'邀请', catalog:'目录', slideshow:'幻灯', moodboard:'情绪板', lookbook:'画册', manifesto:'宣言', yearbook:'年鉴' };
+const FORMALITY_NAMES = { high:'正式', medium:'适中', low:'轻松' };
+
+function getPreviewClass(cs) { return 'previewScheme-' + (cs || 'light'); }
+
+function escapeHtml(s) {
+  var d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function buildTagHtml(tags) {
+  var parts = [];
+  if (tags.movement) parts.push('<span class="tag-movement">' + escapeHtml(MOVEMENT_NAMES[tags.movement] || tags.movement) + '</span>');
+  if (tags.mood) parts.push('<span class="tag-mood">' + escapeHtml(MOOD_NAMES[tags.mood] || tags.mood) + '</span>');
+  if (tags.colorScheme) parts.push('<span class="tag-scheme">' + escapeHtml(COLOR_NAMES[tags.colorScheme] || tags.colorScheme) + '</span>');
+  if (tags.useCase) parts.push('<span class="tag-use">' + escapeHtml(USECASE_NAMES[tags.useCase] || tags.useCase) + '</span>');
+  if (tags.formality) parts.push('<span>' + escapeHtml(FORMALITY_NAMES[tags.formality] || tags.formality) + '</span>');
+  return parts.join('');
+}
+
+function getBaseHref(t) {
+  var base = t.baseTemplate || 'minimalism';
+  var knownBases = ['impressionism','oriental','art-nouveau','classical','modernism','pop-art','surrealism','abstract','baroque','romanticism','realism','fauvism','minimalism','cubism','expressionism','rococo','symbolism','post-impressionism','renaissance','contemporary','bauhaus','naive','street-art','graphic','digital','vintage','japanese','luxury'];
+  if (knownBases.indexOf(base) !== -1) {
+    return 'base/' + base + '.html';
+  }
+  return 'base/minimalism.html';
+}
+
+function renderCard(t, matchScore) {
+  var tags = t.tags || {};
+  var cs = tags.colorScheme || 'light';
+  var baseHref = getBaseHref(t);
+  var scoreHtml = matchScore !== undefined ? '<div class="matchScore">' + Math.round(matchScore * 100) + '%</div>' : '';
+  return '<div class="templateCard' + (matchScore !== undefined ? ' match-highlight' : '') + '">' +
+    '<div class="previewWrap ' + getPreviewClass(cs) + '">' +
+    scoreHtml +
+    '<span class="previewTitle">' + escapeHtml(t.name) + '</span>' +
+    '<br><span class="previewColor">' + escapeHtml(USECASE_NAMES[tags.useCase] || '') + '</span>' +
+    '<a class="overlay" href="' + baseHref + '" target="_blank">打开模板 →</a></div>' +
+    '<div class="info">' +
+    '<div class="nameRow"><h2>' + escapeHtml(t.name) + '</h2></div>' +
+    '<div class="namelatin">' + escapeHtml(t.id) + '</div>' +
+    '<div class="desc">' + escapeHtml(t.description) + '</div>' +
+    '<div class="tags">' + buildTagHtml(tags) + '</div>' +
+    '<a class="action" href="' + baseHref + '" target="_blank">打开模板</a>' +
+    '</div></div>';
+}
+
+function renderGrid(templates, scores) {
+  var grid = document.getElementById('templateGrid');
+  if (!templates.length) {
+    grid.innerHTML = '<div class="emptyState"><strong>无匹配结果</strong><p>尝试调整筛选条件或使用智能匹配</p></div>';
+    document.getElementById('resultCount').textContent = '0 个模板';
+    return;
+  }
+  var html = '';
+  templates.forEach(function(t, i) {
+    html += renderCard(t, scores ? scores[i] : undefined);
+  });
+  grid.innerHTML = html;
+  document.getElementById('resultCount').textContent = templates.length + ' 个模板';
+}
+
+function applyFilters() {
+  currentFilters.query = document.getElementById('searchInput').value;
+  var filtered = matcher.filter({
+    movement: currentFilters.movement,
+    mood: currentFilters.mood,
+    colorScheme: currentFilters.colorScheme,
+    useCase: currentFilters.useCase,
+    query: currentFilters.query
+  });
+  currentPage = 1;
+  renderGrid(filtered);
+  updateFilterButtons();
+}
+
+function clearAllFilters() {
+  currentFilters = { movement: null, mood: null, colorScheme: null, useCase: null, query: '' };
+  document.getElementById('searchInput').value = '';
+  document.querySelectorAll('.filterBtn').forEach(function(b) { b.classList.remove('active'); });
+  applyFilters();
+}
+
+function updateFilterButtons() {
+  document.querySelectorAll('.filterBtn').forEach(function(b) {
+    var type = b.dataset.type;
+    var val = b.dataset.value;
+    b.classList.toggle('active', currentFilters[type] === val);
+  });
+}
+
+function setFilter(type, value) {
+  if (currentFilters[type] === value) {
+    currentFilters[type] = null;
+  } else {
+    currentFilters[type] = value;
+  }
+  applyFilters();
+}
+
+function runMatch() {
+  var text = document.getElementById('matchInput').value.trim();
+  var mood = document.getElementById('matchMood').value;
+  var useCase = document.getElementById('matchUseCase').value;
+
+  if (!text && !mood && !useCase) {
+    document.getElementById('matchInput').focus();
+    return;
+  }
+
+  var input = {};
+  if (text) input.text = text;
+  if (mood) input.mood = [mood];
+  if (useCase) input.useCase = useCase;
+
+  var result = matcher.recommend(input);
+  var templates = result.results.map(function(r) { return r.template; });
+  var scores = result.results.map(function(r) { return r.score; });
+
+  document.getElementById('matchMood').value = '';
+  document.getElementById('matchUseCase').value = '';
+  currentFilters = { movement: null, mood: null, colorScheme: null, useCase: null, query: '' };
+  document.getElementById('searchInput').value = '';
+  updateFilterButtons();
+
+  renderGrid(templates, scores);
+  document.getElementById('resultCount').textContent = '智能推荐: ' + templates.length + ' 个匹配结果 (共 ' + result.total + ' 个候选)';
+}
+
+function initFilterGroup(containerId, nameKey, values, namesMap) {
+  var container = document.getElementById(containerId);
+  var html = '<label>' + nameKey + '</label>';
+  values.forEach(function(v) {
+    var label = namesMap[v] || v;
+    html += '<button class="filterBtn" data-type="' + nameKey + '" data-value="' + v + '" onclick="setFilter(\'' + nameKey + '\',\'' + v + '\')">' + label + '</button>';
+  });
+  container.innerHTML = html;
+}
+
+fetch('templates.json')
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    allTemplates = data.templates;
+    matcher = new TemplateMatcher(data);
+
+    document.getElementById('totalCount').textContent = allTemplates.length;
+
+    var movements = {}, moods = {}, colors = {}, useCases = {};
+    allTemplates.forEach(function(t) {
+      var tags = t.tags || {};
+      if (tags.movement) movements[tags.movement] = true;
+      if (tags.mood) moods[tags.mood] = true;
+      if (tags.colorScheme) colors[tags.colorScheme] = true;
+      if (tags.useCase) useCases[tags.useCase] = true;
+    });
+
+    document.getElementById('movementCount').textContent = Object.keys(movements).length;
+    document.getElementById('baseCount').textContent = '24';
+
+    var movValues = Object.keys(movements).sort();
+    initFilterGroup('movementFilters', 'movement', movValues, MOVEMENT_NAMES);
+    initFilterGroup('moodFilters', 'mood', Object.keys(moods).sort(), MOOD_NAMES);
+    initFilterGroup('colorFilters', 'colorScheme', Object.keys(colors).sort(), COLOR_NAMES);
+    initFilterGroup('useCaseFilters', 'useCase', Object.keys(useCases).sort(), USECASE_NAMES);
+
+    renderGrid(allTemplates);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>后印象派 · 色彩革命</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter','system-ui',sans-serif;background:#ece8e0;color:#3a3a2a;overflow:hidden;height:100vh}
+    .deck{position:relative;width:100%;height:100vh;overflow:hidden}
+    .slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4rem 6rem;opacity:0;transition:opacity .6s ease;pointer-events:none;text-align:center}
+    .slide.active{opacity:1;pointer-events:auto;z-index:2}
+    .slide.exit{opacity:0;z-index:1}
+
+    .swirl{position:absolute;pointer-events:none;opacity:.07}
+    .swirl svg{width:200px;height:200px}
+    .dot-pattern{position:absolute;pointer-events:none;opacity:.05}
+    .dot-pattern svg{width:100%;height:100%}
+
+    .brush-border{position:absolute;bottom:0;left:0;width:100%;height:6px;background:linear-gradient(90deg,#e8c030 0%,#6a8a7a 50%,#e8c030 100%);opacity:.3}
+    .brush-stroke{position:absolute;pointer-events:none;opacity:.08}
+    .brush-stroke svg{width:160px;height:40px}
+
+    .slide h1{font-family:'DM Serif Display','Georgia',serif;font-weight:400;font-size:4rem;color:#4a3a1a;margin-bottom:.5rem;position:relative;z-index:2}
+    .slide h1 .yellow{color:#e8c030}
+    .slide h2{font-family:'DM Serif Display','Georgia',serif;font-weight:400;font-size:2.4rem;color:#4a3a1a;margin-bottom:.3rem}
+    .slide p{font-weight:300;font-size:1.15rem;line-height:1.7;color:#5a5a4a;max-width:680px;position:relative;z-index:2}
+    .slide .sub{font-family:'DM Serif Display','Georgia',serif;font-style:italic;font-size:1.3rem;color:#6a8a7a;margin-bottom:.5rem}
+    .badge{display:inline-block;border:1px solid #e8c030;color:#8a7a3a;padding:.2rem 1rem;border-radius:2px;font-size:.85rem;letter-spacing:.06em;margin-top:1.5rem;background:rgba(232,192,48,.08)}
+
+    .nav-bar{position:fixed;bottom:0;left:0;width:100%;height:56px;background:rgba(236,232,224,.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;gap:12px;z-index:100;border-top:1px solid rgba(106,138,122,.2)}
+    .nav-bar .dot{width:28px;height:4px;border-radius:2px;background:#c8c4b8;cursor:pointer;transition:all .3s;border:none}
+    .nav-bar .dot.active{background:#e8c030;width:40px}
+    .nav-bar .dot:hover{background:#6a8a7a}
+    .nav-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:101;width:48px;height:48px;border-radius:0;border:2px solid #6a8a7a;background:rgba(236,232,224,.85);backdrop-filter:blur(4px);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;color:#6a8a7a;font-size:1.2rem;font-weight:600}
+    .nav-arrow:hover{background:#e8c030;color:#fff;border-color:#e8c030}
+    .nav-arrow.prev{left:20px}
+    .nav-arrow.next{right:20px}
+    .nav-arrow.hidden{opacity:0;pointer-events:none}
+
+    .col3{display:flex;gap:2rem;align-items:stretch;justify-content:center;flex-wrap:wrap;position:relative;z-index:2;width:100%;max-width:900px}
+    .col3 .card{flex:1;min-width:180px;max-width:280px;padding:1.5rem;border-left:4px solid #e8c030;text-align:left}
+    .col3 .card h3{font-family:'DM Serif Display','Georgia',serif;font-weight:400;font-size:1.3rem;color:#4a3a1a;margin-bottom:.2rem}
+    .col3 .card .yr{font-size:.8rem;color:#8a8a7a;font-weight:300}
+    .col3 .card p{font-size:.9rem;line-height:1.5;margin-top:.3rem}
+
+    .brush-corner{position:absolute;pointer-events:none}
+    .brush-corner svg{width:120px;height:120px}
+
+    .brush-stroke-h{position:absolute;width:80%;height:40px;pointer-events:none;opacity:.04}
+    .brush-stroke-h svg{width:100%;height:100%}
+
+    @media(max-width:768px){
+      .slide{padding:2.5rem 1.5rem}
+      .slide h1{font-size:2.6rem}
+      .slide h2{font-size:1.7rem}
+      .slide p{font-size:1rem;max-width:100%}
+      .col3 .card{padding:1rem;min-width:140px}
+      .nav-arrow{width:36px;height:36px;font-size:.9rem}
+      .nav-arrow.prev{left:8px}
+      .nav-arrow.next{right:8px}
+    }
+    @media(max-width:480px){
+      .slide h1{font-size:2rem}
+      .slide h2{font-size:1.4rem}
+      .slide .sub{font-size:1.1rem}
+      .col3{flex-direction:column;align-items:center}
+      .col3 .card{max-width:100%}
+    }
+  </style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- Slide 1: Title -->
+  <div class="slide active">
+    <div class="dot-pattern" style="top:0;left:0;width:100%;height:100%">
+      <svg viewBox="0 0 1200 800"><defs><pattern id="dots1" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="2" fill="#e8c030"/></pattern></defs><rect width="100%" height="100%" fill="url(#dots1)"/></svg>
+    </div>
+    <h1>后印象派</h1>
+    <p class="sub">Post-Impressionism · 色彩革命</p>
+    <p>印象派之后，艺术不再只是捕捉光影。<br>梵高的星空在旋转，高更的塔希提在呼吸——<br>画家开始表达内心，而非仅仅描绘眼睛所见。</p>
+    <span class="badge">1880s — 1900s</span>
+    <div class="brush-border"></div>
+  </div>
+
+  <!-- Slide 2: 梵高 -->
+  <div class="slide">
+    <div class="swirl" style="top:5%;right:8%"><svg viewBox="0 0 200 200"><path d="M100,10 Q140,40 120,80 Q100,120 140,150 Q180,180 160,200" stroke="#e8c030" stroke-width="3" fill="none"/><path d="M60,30 Q30,60 50,100 Q70,140 30,170" stroke="#6a8a7a" stroke-width="2" fill="none"/></svg></div>
+    <div class="swirl" style="bottom:10%;left:5%"><svg viewBox="0 0 200 200"><path d="M100,10 Q60,40 80,80 Q100,120 60,150 Q20,180 40,200" stroke="#e8c030" stroke-width="2" fill="none"/></svg></div>
+    <h2>文森特·梵高</h2>
+    <p class="sub">Vincent van Gogh · 1853 — 1890</p>
+    <p>他用旋转的笔触和燃烧的色彩，将内心的风暴凝固在画布上。<br>《星月夜》中，天空变成了涡旋的海洋；<br>《向日葵》里，黄色爆发出生命的最强音。</p>
+    <span class="badge">"我想用色彩震撼人们"</span>
+    <div class="brush-corner tr"><svg viewBox="0 0 120 120"><path d="M90,20 Q100,40 95,60 Q90,80 100,100" stroke="#e8c030" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M100,30 Q110,50 105,70" stroke="#6a8a7a" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div>
+  </div>
+
+  <!-- Slide 3: 高更 & 塞尚 -->
+  <div class="slide">
+    <div class="brush-stroke-h" style="top:15%;left:10%"><svg viewBox="0 0 800 40"><path d="M0,20 Q100,5 200,20 Q300,35 400,20 Q500,5 600,20 Q700,35 800,20" stroke="#6a8a7a" stroke-width="4" fill="none" opacity=".5"/></svg></div>
+    <h2>高更 · 塞尚</h2>
+    <p class="sub">Gauguin & Cézanne</p>
+    <div class="col3">
+      <div class="card">
+        <h3>保罗·高更</h3>
+        <span class="yr">1848 — 1903</span>
+        <p>抛弃欧洲文明，远赴塔希提。他用平涂的色彩和原始的力量，创造了一个充满象征与神秘的热带伊甸园。</p>
+      </div>
+      <div class="card" style="border-left-color:#6a8a7a">
+        <h3>保罗·塞尚</h3>
+        <span class="yr">1839 — 1906</span>
+        <p>"用圆柱体、球体、锥体处理自然"。他是现代艺术之父，为立体主义铺平了道路。</p>
+      </div>
+    </div>
+    <span class="badge">两种方向，同样伟大</span>
+    <div class="brush-stroke-h" style="bottom:20%;right:10%"><svg viewBox="0 0 800 40"><path d="M0,20 Q100,35 200,20 Q300,5 400,20 Q500,35 600,20 Q700,5 800,20" stroke="#e8c030" stroke-width="4" fill="none" opacity=".5"/></svg></div>
+  </div>
+
+  <!-- Slide 4: 修拉 -->
+  <div class="slide">
+    <div class="dot-pattern" style="top:20%;left:10%;width:200px;height:200px">
+      <svg viewBox="0 0 200 200"><defs><pattern id="dotss" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="3" fill="#e8c030"/></pattern></defs><rect width="100%" height="100%" fill="url(#dotss)"/></svg>
+    </div>
+    <div class="dot-pattern" style="bottom:15%;right:10%;width:150px;height:150px">
+      <svg viewBox="0 0 150 150"><defs><pattern id="dotsm" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="2.5" fill="#6a8a7a"/></pattern></defs><rect width="100%" height="100%" fill="url(#dotsm)"/></svg>
+    </div>
+    <h2>乔治·修拉</h2>
+    <p class="sub">Georges Seurat · 1859 — 1891</p>
+    <p>点彩派的创始人。他用无数细小的色点构建画面——<br>《大碗岛上的星期天》是一场色彩科学的盛宴。<br>在修拉的世界里，光被分解为粒子，又重新组合成诗。</p>
+    <span class="badge">科学入画 · 点彩成诗</span>
+  </div>
+
+  <!-- Slide 5: 后印象的遗产 -->
+  <div class="slide">
+    <div class="swirl" style="top:8%;left:12%"><svg viewBox="0 0 200 200"><path d="M100,10 Q140,40 120,80 Q100,120 140,150" stroke="#e8c030" stroke-width="2" fill="none"/></svg></div>
+    <h2>色彩的未来</h2>
+    <p class="sub">后印象派的深远回响</p>
+    <p>后印象派摧毁了"画得像"的教条，<br>打开了现代艺术的大门——<br>从野兽派的狂野色彩，到表现主义的情感宣泄，<br>再到抽象艺术的精神探索，<br>都源于这群敢于让内心发声的画家。</p>
+    <span class="badge">从印象到表现 · 从看到感</span>
+    <div class="brush-border"></div>
+  </div>
+
+  <!-- Slide 6: 结语 -->
+  <div class="slide">
+    <div class="dot-pattern" style="top:0;left:0;width:100%;height:100%">
+      <svg viewBox="0 0 1200 800"><defs><pattern id="dotsend" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="#e8c030"/></pattern></defs><rect width="100%" height="100%" fill="url(#dotsend)"/></svg>
+    </div>
+    <h1>燃烧吧，色彩</h1>
+    <p class="sub">Let the colors burn</p>
+    <p>后印象派告诉我们：<br>艺术的终极目的不是再现世界，<br>而是创造世界——<br>用你的眼睛，你的心，你的全部生命。</p>
+    <span class="badge">色彩即情感 · 笔触即灵魂</span>
+    <div class="brush-border"></div>
+  </div>
+
+</div>
+
+<button class="nav-arrow prev" id="prevBtn">‹</button>
+<button class="nav-arrow next" id="nextBtn">›</button>
+
+<div class="nav-bar" id="navBar"></div>
+
+<script>
+  (function(){var slides=document.querySelectorAll('.slide'),navBar=document.getElementById('navBar'),prevBtn=document.getElementById('prevBtn'),nextBtn=document.getElementById('nextBtn'),current=0;
+  function buildNav(){for(var i=0;i<slides.length;i++){var dot=document.createElement('button');dot.className='dot';dot.dataset.index=i;dot.addEventListener('click',function(){goTo(parseInt(this.dataset.index))});navBar.appendChild(dot)}}
+  function goTo(n){if(n===current)return;slides[current].classList.remove('active');slides[current].classList.add('exit');setTimeout(function(){slides[current].classList.remove('exit')},600);current=n;slides[current].classList.add('active');updateNav();updateArrows()}
+  function updateNav(){var dots=navBar.querySelectorAll('.dot');dots.forEach(function(d,i){d.classList.toggle('active',i===current)})}
+  function updateArrows(){prevBtn.classList.toggle('hidden',current===0);nextBtn.classList.toggle('hidden',current===slides.length-1)}
+  prevBtn.addEventListener('click',function(){if(current>0)goTo(current-1)});
+  nextBtn.addEventListener('click',function(){if(current<slides.length-1)goTo(current+1)});
+  document.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'&&current>0)goTo(current-1);if(e.key==='ArrowRight'&&current<slides.length-1)goTo(current+1)});
+  buildNav();updateNav();updateArrows()})();
+</script>
+</body>
+</html>

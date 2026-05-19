@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数字艺术 · 赛博纪元</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0a0a14; color: #e0e0e0; overflow: hidden; height: 100vh; width: 100vw; }
+  .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+  .slides { display: flex; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); height: 100%; }
+  .slide { min-width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 40px; position: relative; overflow: hidden; background: #0a0a14; }
+
+  /* 网格背景 */
+  .grid-bg { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(48,192,48,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(48,192,48,0.04) 1px, transparent 1px); background-size: 40px 40px; }
+  .grid-bg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, transparent 40%, #0a0a14 80%); }
+
+  /* 扫光线 */
+  .scanline { position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(48,192,48,0.15), transparent); pointer-events: none; animation: scan 8s linear infinite; }
+  @keyframes scan { 0% { top: -2px; } 100% { top: 100%; } }
+
+  /* 发光边框 */
+  .glow-border { position: relative; padding: 3px; border-radius: 4px; max-width: 90%; }
+  .glow-border::before { content: ''; position: absolute; inset: 0; border-radius: 4px; padding: 1px; background: linear-gradient(135deg, #30c030, #d040d0); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+  .glow-border-inner { padding: 8px; }
+
+  .slide-content { position: relative; z-index: 2; text-align: center; max-width: 820px; width: 100%; }
+
+  .tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; padding: 8px 16px; border: 1px solid rgba(48,192,48,0.4); margin-bottom: 24px; color: #30c030; text-shadow: 0 0 8px rgba(48,192,48,0.3); }
+  .tag-pink { border-color: rgba(208,64,208,0.4); color: #d040d0; text-shadow: 0 0 8px rgba(208,64,208,0.3); }
+
+  .slide h1 { font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; color: #e0e0e0; }
+  .slide h1 .highlight-green { color: #30c030; text-shadow: 0 0 20px rgba(48,192,48,0.4); }
+  .slide h1 .highlight-pink { color: #d040d0; text-shadow: 0 0 20px rgba(208,64,208,0.4); }
+  .slide h2 { font-size: clamp(1.6rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .slide h2 .highlight-green { color: #30c030; text-shadow: 0 0 15px rgba(48,192,48,0.3); }
+  .slide h2 .highlight-pink { color: #d040d0; text-shadow: 0 0 15px rgba(208,64,208,0.3); }
+  .slide p { font-size: clamp(0.95rem, 2vw, 1.2rem); line-height: 1.7; color: rgba(224,224,224,0.65); max-width: 660px; margin: 0 auto 20px; }
+  .slide p.lead { font-size: clamp(1rem, 2.5vw, 1.35rem); color: rgba(224,224,224,0.85); font-weight: 300; }
+  .slide .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: rgba(224,224,224,0.3); margin-top: 12px; letter-spacing: 0.1em; }
+
+  /* 霓虹分割线 */
+  .neon-line { width: 80px; height: 2px; margin: 16px auto; position: relative; }
+  .neon-line-green { background: #30c030; box-shadow: 0 0 10px rgba(48,192,48,0.5), 0 0 20px rgba(48,192,48,0.2); }
+  .neon-line-pink { background: #d040d0; box-shadow: 0 0 10px rgba(208,64,208,0.5), 0 0 20px rgba(208,64,208,0.2); }
+
+  /* 发光 dot */
+  .glow-dot { position: absolute; pointer-events: none; }
+  .glow-dot span { position: absolute; border-radius: 50%; }
+  .glow-dot .g1 { width: 4px; height: 4px; background: #30c030; box-shadow: 0 0 6px #30c030; top: 30%; left: 20%; }
+  .glow-dot .g2 { width: 3px; height: 3px; background: #d040d0; box-shadow: 0 0 6px #d040d0; top: 60%; left: 80%; }
+  .glow-dot .g3 { width: 5px; height: 5px; background: #30c030; box-shadow: 0 0 8px #30c030; top: 80%; left: 30%; }
+  .glow-dot .g4 { width: 3px; height: 3px; background: #d040d0; box-shadow: 0 0 6px #d040d0; top: 15%; left: 70%; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; margin-top: 24px; max-width: 700px; margin-left: auto; margin-right: auto; }
+  .grid-2 .card { padding: 20px; border: 1px solid rgba(48,192,48,0.15); border-radius: 4px; background: rgba(48,192,48,0.03); position: relative; }
+  .grid-2 .card::before { content: '>'; font-family: 'JetBrains Mono', monospace; position: absolute; top: 8px; right: 12px; font-size: 0.8rem; color: rgba(48,192,48,0.2); }
+  .grid-2 .card h3 { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 400; color: #30c030; margin-bottom: 6px; }
+  .grid-2 .card p { font-size: 0.85rem; margin: 0; color: rgba(224,224,224,0.5); }
+
+  .slide-light { background: #12121e; }
+  .slide-pink-bg { background: #140a18; }
+  .slide-green-bg { background: #0a140a; }
+
+  .quote-block { font-family: 'JetBrains Mono', monospace; font-size: clamp(0.95rem, 2.5vw, 1.5rem); font-weight: 300; line-height: 1.6; padding: 30px; border: 1px solid rgba(208,64,208,0.2); max-width: 700px; margin: 0 auto; position: relative; background: rgba(208,64,208,0.03); }
+  .quote-block .attribution { font-size: 0.8rem; color: rgba(224,224,224,0.3); margin-top: 16px; font-family: 'Inter', sans-serif; }
+
+  /* 导航 */
+  .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: center; align-items: center; gap: 12px; padding: 18px 24px; background: rgba(10,10,20,0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-top: 1px solid rgba(48,192,48,0.1); }
+  .nav-bar .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(224,224,224,0.1); border: 1px solid rgba(48,192,48,0.2); cursor: pointer; transition: all 0.3s; }
+  .nav-bar .dot.active { background: #30c030; border-color: #30c030; box-shadow: 0 0 8px rgba(48,192,48,0.5); transform: scale(1.3); }
+  .nav-bar .dot:hover { background: rgba(48,192,48,0.3); }
+  .nav-bar .page-info { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: rgba(224,224,224,0.3); margin-left: 4px; letter-spacing: 0.15em; }
+
+  @media (max-width: 640px) {
+    .slide { padding: 40px 20px; }
+    .grid-2 { grid-template-columns: 1fr; gap: 14px; }
+    .nav-bar { padding: 12px 16px; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+  <div class="slides" id="slides">
+
+    <!-- Slide 1: 封面 -->
+    <div class="slide">
+      <div class="grid-bg"></div>
+      <div class="scanline"></div>
+      <div class="glow-dot"><span class="g1"></span><span class="g2"></span><span class="g3"></span><span class="g4"></span></div>
+      <div class="slide-content">
+        <div class="tag">// DIGITAL ERA</div>
+        <div class="glow-border">
+          <div class="glow-border-inner">
+            <h1>数字<span class="highlight-green">艺术</span></h1>
+          </div>
+        </div>
+        <div class="neon-line neon-line-green"></div>
+        <p class="lead">像素、代码与算法 — 赛博空间中的创造力革命</p>
+        <p class="meta">DIGITAL ART · 1960s — PRESENT</p>
+      </div>
+    </div>
+
+    <!-- Slide 2: 计算机艺术起源 -->
+    <div class="slide slide-light">
+      <div class="grid-bg"></div>
+      <div class="slide-content">
+        <div class="tag">// ORIGINS</div>
+        <h2>代码与<span class="highlight-pink">画布</span></h2>
+        <div class="neon-line neon-line-pink"></div>
+        <p class="lead">1960年代，工程师与艺术家开始在计算机上创作。早期的数字艺术受限于技术，却开创了全新的艺术维度。</p>
+        <p>弗里德·纳克（Frieder Nake）和乔治·尼斯（Georg Nees）用绘图仪创作了最早的算法艺术。他们的"随机多边形"——看似简单，却埋下了生成式艺术的种子。</p>
+        <div class="meta">plotter art · 算法美学 · 1965</div>
+      </div>
+    </div>
+
+    <!-- Slide 3: 像素艺术 -->
+    <div class="slide slide-pink-bg">
+      <div class="grid-bg" style="background-image:linear-gradient(rgba(208,64,208,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(208,64,208,0.04) 1px, transparent 1px);"></div>
+      <div class="scanline"></div>
+      <div class="slide-content">
+        <div class="tag tag-pink">// PIXEL ART</div>
+        <h2>点的<span class="highlight-green">诗篇</span></h2>
+        <div class="neon-line neon-line-green"></div>
+        <p class="lead">像素是数字艺术的最小单位。从8位游戏机的约束中诞生的像素艺术，以其独特的复古美学征服了当代视觉文化。</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>8-bit美学</h3>
+            <p>有限的色彩调色板与低分辨率成为风格本身，唤起一代人的数字记忆。</p>
+          </div>
+          <div class="card">
+            <h3>当代像素</h3>
+            <p>数字艺术家在NFT和社交媒体上重新发掘像素表达的当代可能性。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: 生成式艺术与AI -->
+    <div class="slide slide-green-bg">
+      <div class="grid-bg" style="background-image:linear-gradient(rgba(48,192,48,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(48,192,48,0.06) 1px, transparent 1px);"></div>
+      <div class="scanline" style="animation-delay:3s;"></div>
+      <div class="slide-content">
+        <div class="tag">// GENERATIVE AI</div>
+        <h2>算法的<span class="highlight-pink">想象力</span></h2>
+        <div class="neon-line neon-line-pink"></div>
+        <p class="lead">生成式对抗网络（GAN）、扩散模型——人工智能不仅能分析艺术，更能创造艺术。Midjourney、DALL·E、Stable Diffusion让每个人都能成为数字创作者。</p>
+        <p>算法不再是冰冷的数学公式，而是拥有"想象力"的创作伙伴。人类提供灵感，AI将其视觉化。这是一场关于创造力本质的重新定义。</p>
+        <div class="meta">GAN · diffusion models · 人机共创</div>
+      </div>
+    </div>
+
+    <!-- Slide 5: NFT与加密艺术 -->
+    <div class="slide slide-light">
+      <div class="grid-bg"></div>
+      <div class="slide-content">
+        <div class="tag">// NFT</div>
+        <h2>加密的<span class="highlight-green">确权</span></h2>
+        <div class="neon-line neon-line-green"></div>
+        <p class="lead">NFT（非同质化代币）为数字艺术提供了稀缺性和所有权证明。2021年，Beeple的《Everydays》以6900万美元成交，宣告数字艺术进入主流。</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>数字稀缺性</h3>
+            <p>区块链技术让数字作品可以像实体艺术品一样拥有唯一性。</p>
+          </div>
+          <div class="card">
+            <h3>创作者经济</h3>
+            <p>智能合约让艺术家在作品每次转售中持续获得版税收入。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: 结语 -->
+    <div class="slide slide-pink-bg">
+      <div class="grid-bg" style="background-image:linear-gradient(rgba(208,64,208,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(208,64,208,0.04) 1px, transparent 1px);"></div>
+      <div class="scanline" style="animation-delay:5s;"></div>
+      <div class="glow-dot"><span class="g1"></span><span class="g2"></span><span class="g3"></span><span class="g4"></span></div>
+      <div class="slide-content">
+        <div class="tag tag-pink">// FINAL</div>
+        <h2>未来已<span class="highlight-green">来</span></h2>
+        <div class="neon-line neon-line-green"></div>
+        <div class="quote-block">
+          数字艺术不是媒介的替代，而是人类想象力的延伸。
+          <div class="attribution">—— 赛博空间的创造宣言</div>
+        </div>
+        <p style="margin-top:24px;color:rgba(224,224,224,0.65);">从绘图仪的机械臂到AI的神经网络，从像素方块到区块链上的永恒存在——数字艺术不断突破着"什么是艺术"的边界。比特与字节之间，是人类永不枯竭的创造力。</p>
+        <div class="meta">// 01000100 01001001 01000111 01001001 01010100 01000001 01001100</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="nav-bar" id="navBar">
+    <button class="dot active" data-index="0"></button>
+    <button class="dot" data-index="1"></button>
+    <button class="dot" data-index="2"></button>
+    <button class="dot" data-index="3"></button>
+    <button class="dot" data-index="4"></button>
+    <button class="dot" data-index="5"></button>
+    <span class="page-info" id="pageInfo">01 / 06</span>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const slides = document.getElementById('slides');
+    const dots = document.querySelectorAll('.nav-bar .dot');
+    const pageInfo = document.getElementById('pageInfo');
+    const total = dots.length;
+    let current = 0;
+
+    function goTo(index) {
+      if (index < 0) index = 0;
+      if (index >= total) index = total - 1;
+      if (index === current) return;
+      current = index;
+      slides.style.transform = 'translateX(-' + (current * 100) + 'vw)';
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      pageInfo.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', function() {
+        goTo(parseInt(this.dataset.index));
+      });
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
+    });
+
+    let touchStartX = 0;
+    document.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; });
+    document.addEventListener('touchend', function(e) {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+    });
+  })();
+</script>
+</body>
+</html>

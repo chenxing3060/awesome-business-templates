@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>印象派 · 光与色的诗篇</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sky: #d4e5f7;
+  --lavender: #e8d5f0;
+  --peach: #fce4d6;
+  --cream: #fef9f0;
+  --rose: #e8a0b4;
+  --sage: #b5c9b7;
+  --ink: #2c2420;
+  --warm-gray: #7a7068;
+  --light: #fffcf5;
+  --shadow: 0 4px 30px rgba(44, 36, 32, 0.10);
+  --slide-w: min(1200px, 94vw);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow: hidden;
+  height: 100vh;
+}
+
+.deck {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  height: 100vh;
+}
+
+.slide {
+  min-width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(212, 229, 247, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(232, 213, 240, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(252, 228, 214, 0.3) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Brush stroke decorative elements */
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(44, 36, 32, 0.015) 3px,
+      rgba(44, 36, 32, 0.015) 4px
+    );
+  pointer-events: none;
+}
+
+.slideInner {
+  position: relative;
+  z-index: 1;
+  width: var(--slide-w);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Cover Slide */
+.cover {
+  text-align: center;
+}
+
+.cover .brushStrokes {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 40px;
+}
+
+.cover .brushStrokes span {
+  display: block;
+  width: 60px;
+  height: 8px;
+  border-radius: 4px;
+  opacity: 0.7;
+}
+
+.cover .brushStrokes span:nth-child(1) { background: var(--sky); width: 40px; }
+.cover .brushStrokes span:nth-child(2) { background: var(--lavender); width: 70px; }
+.cover .brushStrokes span:nth-child(3) { background: var(--peach); width: 50px; }
+.cover .brushStrokes span:nth-child(4) { background: var(--rose); width: 80px; }
+.cover .brushStrokes span:nth-child(5) { background: var(--sage); width: 45px; }
+
+.cover h1 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.cover h1 em {
+  font-style: italic;
+  color: var(--rose);
+}
+
+.cover .subtitle {
+  margin-top: 20px;
+  font-size: clamp(18px, 2.4vw, 28px);
+  font-weight: 300;
+  color: var(--warm-gray);
+  letter-spacing: 0.04em;
+}
+
+.cover .meta {
+  margin-top: 48px;
+  font-size: 14px;
+  color: var(--warm-gray);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cover .meta span {
+  display: inline-block;
+  padding: 0 16px;
+  border-left: 1px solid rgba(122, 112, 104, 0.3);
+}
+
+.cover .meta span:first-child {
+  border-left: 0;
+}
+
+/* Content Slide */
+.content {
+  text-align: left;
+}
+
+.content h2 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 400;
+  line-height: 1.12;
+  margin-bottom: 24px;
+}
+
+.content h2 .accent {
+  color: var(--rose);
+}
+
+.content p {
+  font-size: clamp(16px, 1.6vw, 21px);
+  line-height: 1.7;
+  color: var(--warm-gray);
+  max-width: 720px;
+  margin-bottom: 16px;
+}
+
+.content .highlight {
+  display: inline-block;
+  padding: 2px 8px;
+  background: linear-gradient(135deg, var(--peach), var(--cream));
+  border-radius: 3px;
+}
+
+/* Two-column layout */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.twoCol h2 {
+  font-size: clamp(28px, 4vw, 44px);
+}
+
+.twoCol p {
+  font-size: clamp(15px, 1.4vw, 18px);
+}
+
+/* Image + text layout */
+.imgText {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.imgText .imgFrame {
+  aspect-ratio: 4/3;
+  border-radius: 4px;
+  background: linear-gradient(135deg, var(--sky), var(--lavender), var(--peach));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.imgText .imgFrame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255,255,255,0.3) 0%, transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(212,229,247,0.3) 0%, transparent 40%);
+}
+
+.imgText .imgFrame .placeholder {
+  position: relative;
+  z-index: 1;
+  color: var(--warm-gray);
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* Quote slide */
+.quote {
+  text-align: center;
+}
+
+.quote blockquote {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.3;
+  font-style: italic;
+  color: var(--ink);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.quote blockquote::before {
+  content: '"';
+  display: block;
+  font-size: clamp(60px, 8vw, 100px);
+  line-height: 0.5;
+  color: var(--rose);
+  opacity: 0.4;
+  margin-bottom: 20px;
+}
+
+.quote cite {
+  display: block;
+  margin-top: 28px;
+  font-size: 16px;
+  font-style: normal;
+  color: var(--warm-gray);
+  letter-spacing: 0.04em;
+}
+
+/* Gallery slide */
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.galleryGrid .galleryItem {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--warm-gray);
+  position: relative;
+  overflow: hidden;
+}
+
+.galleryGrid .galleryItem:nth-child(1) { background: linear-gradient(135deg, #d4e5f7, #b8d4e8); }
+.galleryGrid .galleryItem:nth-child(2) { background: linear-gradient(135deg, #fce4d6, #f5d0c0); }
+.galleryGrid .galleryItem:nth-child(3) { background: linear-gradient(135deg, #e8d5f0, #dcc4e8); }
+
+.galleryGrid .galleryItem .label {
+  position: relative;
+  z-index: 1;
+  background: rgba(255,252,245,0.7);
+  padding: 6px 14px;
+  border-radius: 2px;
+}
+
+/* Page number */
+.pageNum {
+  position: absolute;
+  bottom: 28px;
+  right: 40px;
+  font-size: 13px;
+  color: var(--warm-gray);
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  z-index: 2;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 100;
+  background: rgba(255,252,245,0.85);
+  backdrop-filter: blur(12px);
+  padding: 8px 18px;
+  border-radius: 30px;
+  border: 1px solid rgba(44,36,32,0.10);
+  box-shadow: var(--shadow);
+}
+
+.nav button {
+  width: 38px;
+  height: 38px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  font-size: 16px;
+}
+
+.nav button:hover {
+  background: rgba(44,36,32,0.06);
+}
+
+.nav .dots {
+  display: flex;
+  gap: 6px;
+}
+
+.nav .dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(44,36,32,0.15);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.nav .dots span.active {
+  background: var(--rose);
+  width: 22px;
+  border-radius: 4px;
+}
+
+.nav .slideLabel {
+  font-size: 12px;
+  color: var(--warm-gray);
+  min-width: 60px;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .slide { padding: 24px; }
+  .twoCol, .imgText { grid-template-columns: 1fr; gap: 24px; }
+  .galleryGrid { grid-template-columns: 1fr; }
+  .pageNum { right: 24px; bottom: 80px; }
+  .nav { bottom: 16px; padding: 6px 14px; gap: 10px; }
+  .cover .brushStrokes span { height: 6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- Slide 1: Cover -->
+<section class="slide cover">
+  <div class="slideInner">
+    <div class="brushStrokes">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <h1>光与色的<em>诗篇</em></h1>
+    <p class="subtitle">印象派绘画风格鉴赏 · 从莫奈到雷诺阿</p>
+    <p class="meta">
+      <span>Impressionism</span>
+      <span>19 世纪法国</span>
+      <span>光色革命</span>
+    </p>
+  </div>
+  <span class="pageNum">01 / 06</span>
+</section>
+
+<!-- Slide 2: What is Impressionism -->
+<section class="slide content">
+  <div class="slideInner">
+    <h2>什么是<span class="accent">印象派</span></h2>
+    <p>印象派（Impressionism）是 19 世纪后半期兴起于法国的一个艺术运动，<span class="highlight">颠覆了古典绘画的教条</span>，将创作从画室带到户外。</p>
+    <p>画家们捕捉光影在瞬间的变化，用可见的笔触和明亮的色彩直接记录视觉感受。莫奈的《日出·印象》为该流派奠定了名称。</p>
+    <p>印象派强调<span class="highlight">"所见即所画"</span>——不是画物体本身，而是画光线落在物体上的那一刻。</p>
+  </div>
+  <span class="pageNum">02 / 06</span>
+</section>
+
+<!-- Slide 3: Key Artists -->
+<section class="slide content">
+  <div class="slideInner">
+    <h2>代表<em>画家</em></h2>
+    <div class="twoCol">
+      <div>
+        <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:24px;font-weight:400;margin-bottom:8px;color:var(--rose);">克劳德·莫奈</h3>
+        <p>印象派之父，毕生追求光的变化。代表作《睡莲》系列、《干草堆》系列，同一主题在不同时间反复描绘。</p>
+      </div>
+      <div>
+        <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:24px;font-weight:400;margin-bottom:8px;color:var(--rose);">皮埃尔-奥古斯特·雷诺阿</h3>
+        <p>以描绘日常生活和女性之美著称，画风温暖明媚。代表作《煎饼磨坊的舞会》、《船上的午宴》。</p>
+      </div>
+      <div>
+        <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:24px;font-weight:400;margin-bottom:8px;color:var(--rose);">埃德加·德加</h3>
+        <p>以芭蕾舞女和赛马题材闻名，构图受摄影和浮世绘影响，捕捉人物运动的瞬间动态。</p>
+      </div>
+      <div>
+        <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:24px;font-weight:400;margin-bottom:8px;color:var(--rose);">卡米耶·毕沙罗</h3>
+        <p>印象派中唯一参加过全部八次展览的画家，擅长田园风景和城市街景，笔触质朴而温暖。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">03 / 06</span>
+</section>
+
+<!-- Slide 4: Techniques -->
+<section class="slide content">
+  <div class="slideInner">
+    <h2>技法与<em>特征</em></h2>
+    <div class="twoCol">
+      <div>
+        <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;margin-bottom:12px;">可见笔触</h3>
+        <p>用小而明显的笔触并列涂抹，远看形成整体形象，近看是纯粹的颜料肌理。</p>
+      </div>
+      <div>
+        <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;margin-bottom:12px;">纯色并置</h3>
+        <p>将纯色直接涂在画布上，让观者的眼睛在视觉上混合颜色，比调色板混合更明亮。</p>
+      </div>
+      <div>
+        <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;margin-bottom:12px;">户外写生</h3>
+        <p>走出画室，在自然光下直接作画，捕捉天气、季节和一天中不同时刻的光线变化。</p>
+      </div>
+      <div>
+        <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:22px;font-weight:400;margin-bottom:12px;">取消黑色</h3>
+        <p>阴影不是黑色或棕色，而是由蓝色、紫色和绿色的互补色混合构成，赋予画面通透感。</p>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">04 / 06</span>
+</section>
+
+<!-- Slide 5: Gallery -->
+<section class="slide content">
+  <div class="slideInner">
+    <h2>经典<em>作品</em></h2>
+    <div class="galleryGrid" style="margin-top:20px;">
+      <div class="galleryItem" style="background:linear-gradient(135deg,#a8c8e8,#7baad4);">
+        <span class="label">睡莲 · 莫奈</span>
+      </div>
+      <div class="galleryItem" style="background:linear-gradient(135deg,#e8c8a8,#d4a87b);">
+        <span class="label">煎饼磨坊的舞会 · 雷诺阿</span>
+      </div>
+      <div class="galleryItem" style="background:linear-gradient(135deg,#c8d8b8,#a8c8a0);">
+        <span class="label">芭蕾舞女 · 德加</span>
+      </div>
+    </div>
+  </div>
+  <span class="pageNum">05 / 06</span>
+</section>
+
+<!-- Slide 6: Quote -->
+<section class="slide quote">
+  <div class="slideInner">
+    <blockquote>
+      色彩是我终日的痴迷、欢乐和折磨。
+      <cite>—— 克劳德·莫奈</cite>
+    </blockquote>
+    <p style="margin-top:40px;color:var(--warm-gray);font-size:15px;letter-spacing:0.04em;">
+      印象派 · 一场关于光的革命
+    </p>
+  </div>
+  <span class="pageNum">06 / 06</span>
+</section>
+
+</div>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <button onclick="prevSlide()" aria-label="上一页">&#8592;</button>
+  <span class="slideLabel" id="slideLabel">1 / 6</span>
+  <div class="dots" id="dots"></div>
+  <button onclick="nextSlide()" aria-label="下一页">&#8594;</button>
+</nav>
+
+<script>
+const deck = document.getElementById('deck');
+const slides = deck.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+const dotsContainer = document.getElementById('dots');
+const slideLabel = document.getElementById('slideLabel');
+
+for (let i = 0; i < total; i++) {
+  const dot = document.createElement('span');
+  dot.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(dot);
+}
+
+function update() {
+  deck.style.transform = `translateX(-${current * 100}vw)`;
+  dotsContainer.querySelectorAll('span').forEach((d, i) => {
+    d.classList.toggle('active', i === current);
+  });
+  slideLabel.textContent = `${current + 1} / ${total}`;
+}
+
+function goTo(n) {
+  current = Math.max(0, Math.min(n, total - 1));
+  update();
+}
+
+function nextSlide() { goTo(current + 1); }
+function prevSlide() { goTo(current - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+});
+
+update();
+</script>
+</body>
+</html>
